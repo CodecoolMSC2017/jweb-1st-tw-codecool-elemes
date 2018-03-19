@@ -15,7 +15,7 @@ public final class WebappContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        Database database = Database.createInstance();
+        Database database = Database.getInstance();
         ServletContext ctx = sce.getServletContext();
         sce.getServletContext().addFilter("SetCharacterEncodingFilter", "org.apache.catalina.filters.SetCharacterEncodingFilter");
     }
