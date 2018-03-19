@@ -1,6 +1,6 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.model.User;
+import com.codecool.elemes.model.User;
 import com.codecool.web.service.GreetingService;
 
 import javax.servlet.ServletException;
