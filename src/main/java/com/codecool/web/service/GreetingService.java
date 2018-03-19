@@ -1,7 +1,8 @@
 package com.codecool.web.service;
 
-import com.codecool.web.model.Role;
-import com.codecool.web.model.User;
+import com.codecool.elemes.model.Role;
+import com.codecool.elemes.model.User;
+
 
 public final class GreetingService {
 
