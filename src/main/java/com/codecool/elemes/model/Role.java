@@ -1,4 +1,4 @@
-package com.codecool.web.model;
+package com.codecool.elemes.model;
 
 public enum Role {
     MENTOR,

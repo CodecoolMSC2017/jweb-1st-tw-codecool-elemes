@@ -1,19 +1,19 @@
-package com.codecool.web.model;
+package com.codecool.elemes.model;
 
-import com.codecool.web.exceptions.NoSuchUserException;
+import com.codecool.elemes.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBase implements UserDataBase {
+public class Database implements UserDataBase {
 
-    private static DataBase instance = DataBase.createInstance();
+    private static Database instance = Database.createInstance();
 
     private List<User> users = new ArrayList<User>();
 
-    private DataBase(){};
+    private Database(){}
 
-    public static DataBase createInstance() {
+    public static Database createInstance() {
         return instance;
     }
 

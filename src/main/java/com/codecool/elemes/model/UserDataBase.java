@@ -1,6 +1,6 @@
-package com.codecool.web.model;
+package com.codecool.elemes.model;
 
-import com.codecool.web.exceptions.NoSuchUserException;
+import com.codecool.elemes.exceptions.NoSuchUserException;
 
 import java.util.List;
 
