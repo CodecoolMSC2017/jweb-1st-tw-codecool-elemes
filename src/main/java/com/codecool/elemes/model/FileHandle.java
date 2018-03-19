@@ -13,7 +13,7 @@ public class FileHandle {
     public Database getDatabase() {
         return database;
     }
-
+/*
     public void saveDb() {
         try {
             String filepath = new File("").getAbsolutePath();
@@ -49,5 +49,6 @@ public class FileHandle {
         }
 
     }
+    */
 }
 
