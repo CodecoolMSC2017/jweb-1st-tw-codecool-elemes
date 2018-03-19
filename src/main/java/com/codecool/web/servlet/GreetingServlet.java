@@ -1,6 +1,6 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.model.Greeting;
+import com.codecool.web.model.User;
 import com.codecool.web.service.GreetingService;
 
 import javax.servlet.ServletException;
@@ -17,10 +17,10 @@ public class GreetingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Greeting greeting = service.getGreeting();
+        User user = service.getGreeting();
 
-        req.setAttribute("greeting", greeting);
+        req.setAttribute("user", user);
 
-        req.getRequestDispatcher("greeting.jsp").forward(req, resp);
+        req.getRequestDispatcher("user.jsp").forward(req, resp);
     }
 }
