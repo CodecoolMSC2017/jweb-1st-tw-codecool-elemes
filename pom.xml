@@ -40,6 +40,11 @@
             <version>9.0.6</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
     </dependencies>
 
@@ -72,8 +77,6 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <server>TomcatServer</server>
-                    <path>/webapp</path>
                     <username>admin</username>
                     <password>password</password>
                 </configuration>
