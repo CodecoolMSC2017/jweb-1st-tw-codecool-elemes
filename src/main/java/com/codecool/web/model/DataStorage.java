@@ -2,7 +2,6 @@ package com.codecool.web.model;
 
 import com.codecool.web.exceptions.NoSuchUserException;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class DataStorage implements UserDataBase {
     public void deleteUser(String email) throws NoSuchUserException {
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            if (user.getEmail.equals(email)) {
+            if (user.geteMail().equals(email)) {
                 users.remove(i);
                 return;
             }
@@ -44,7 +43,7 @@ public class DataStorage implements UserDataBase {
     public User getUser(String email) throws NoSuchUserException {
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            if (user.getEmail.equals(email)) {
+            if (user.geteMail().equals(email)) {
                 return user;
             }
         }

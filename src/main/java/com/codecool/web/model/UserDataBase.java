@@ -2,6 +2,8 @@ package com.codecool.web.model;
 
 import com.codecool.web.exceptions.NoSuchUserException;
 
+import java.util.List;
+
 public interface UserDataBase {
 
     void add(User user);
