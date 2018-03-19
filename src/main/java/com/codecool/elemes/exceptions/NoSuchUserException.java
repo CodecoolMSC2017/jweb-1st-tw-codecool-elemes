@@ -1,4 +1,4 @@
-package com.codecool.web.exceptions;
+package com.codecool.elemes.exceptions;
 
 public class NoSuchUserException extends Exception {
 }
