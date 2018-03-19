@@ -1,10 +1,10 @@
 package com.codecool.web.service;
 
-import com.codecool.web.model.Greeting;
+import com.codecool.web.model.User;
 
 public final class GreetingService {
 
-    public Greeting getGreeting() {
-        return new Greeting("Hi there traveller!");
+    public User getGreeting() {
+        return new User("Hi there traveller!");
     }
 }
