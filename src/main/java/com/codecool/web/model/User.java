@@ -4,9 +4,6 @@ public class User {
 
     private final String eMail;
     private  Role role;
-
-
-
     private  String name;
 
     public User(String name, String eMail, Role role) {

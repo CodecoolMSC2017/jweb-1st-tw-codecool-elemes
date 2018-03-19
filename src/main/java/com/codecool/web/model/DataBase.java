@@ -5,15 +5,15 @@ import com.codecool.web.exceptions.NoSuchUserException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataStorage implements UserDataBase {
+public class DataBase implements UserDataBase {
 
-    private static DataStorage instance = DataStorage.createInstance();
+    private static DataBase instance = DataBase.createInstance();
 
     private List<User> users = new ArrayList<User>();
 
-    private DataStorage(){};
+    private DataBase(){};
 
-    public static DataStorage createInstance() {
+    public static DataBase createInstance() {
         return instance;
     }
 
