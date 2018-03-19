@@ -10,14 +10,16 @@
 </head>
 <body>
     elemes<br>
-    <form action="register" method="post">
+    <h1>Registration form</h1><br>
+    <form action="registration" method="post">
 		Name:<br>
-		<input type="text" name="userName"><br>
+		<input type="text" name="name"><br>
 		E-mail address:<br>
 		<input type="text" name="email"><br>
-		<input type="radio" name="Student" value="STUDENT" checked> Student<br>
-		<input type="radio" name="Mentor" value="MENTOR"> Mentor<br>
+		<input type="radio" name="role" value="STUDENT" checked> Student<br>
+		<input type="radio" name="role" value="MENTOR"> Mentor<br>
 		<input type="submit" value="Register">
 	</form>
+	<p>${message}</p>
 </body>
 </html>
