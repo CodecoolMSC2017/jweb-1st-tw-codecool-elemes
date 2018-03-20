@@ -22,7 +22,13 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("homepage.jsp");
         } else {
             req.setAttribute("message", "Invalid login data, please check.");
-            req.getRequestDispatcher("index.jsp").include(req, resp);
+            req.getRequestDispatcher("/index.jsp").include(req, resp);
+            try{
+                req.getRequestDispatcher("/footer.jsp").include(req, resp);
+            }catch (ServletException e){
+                e.printStackTrace();
+            }
+
         }
     }
 }
