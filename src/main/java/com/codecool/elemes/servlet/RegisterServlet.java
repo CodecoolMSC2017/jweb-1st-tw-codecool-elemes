@@ -22,6 +22,6 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(name, email, Role.valueOf(role));
         Database.getInstance().add(user);
         req.setAttribute("user", user);
-        resp.sendRedirect("homepage");
+        resp.sendRedirect("homepage.jsp");
     }
 }

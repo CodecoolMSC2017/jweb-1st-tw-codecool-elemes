@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>${user.name}</p>'s homepage.
+    <p class = "rert"">${user.name}</p>'s homepage.
     <<a href="index.jsp">Logout</a>
 </body>
 </html>

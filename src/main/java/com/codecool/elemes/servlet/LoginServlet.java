@@ -19,10 +19,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (loginService.isRegistered(req)) {
             req.setAttribute("user", req.getParameter("user"));
-            resp.sendRedirect("homepage");
+            resp.sendRedirect("homepage.jsp");
         } else {
             req.setAttribute("message", "Invalid login data, please check.");
-            req.getRequestDispatcher("index").include(req, resp);
+            req.getRequestDispatcher("index.jsp").include(req, resp);
         }
     }
 }
