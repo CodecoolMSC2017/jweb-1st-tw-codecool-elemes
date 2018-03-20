@@ -1,14 +1,15 @@
 package com.codecool.elemes.service;
 
-import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.Role;
-import com.codecool.elemes.model.Text;
-import com.codecool.elemes.model.User;
+import com.codecool.elemes.model.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class PageService {
+
+    TextDatabase database = Database.getInstance();
+
     public List<Text> getTexts(User user) {
         Database database = Database.getInstance();
         List<Text> texts = new ArrayList<>();
@@ -22,5 +23,27 @@ public final class PageService {
             texts = database.getTexts();
         }
         return texts;
+    }
+
+    public String getPage(User user) {
+        if (user.getRole().equals(Role.STUDENT)) {
+            return "pages.jsp";
+        }
+        return "mentorPages.jsp";
+    }
+
+    public void handlePublish(HttpServletRequest req) {
+        String condition;
+       for (Text text :database.getTexts()) {
+           if (req.getParameter(text.getText())!= null) {
+                condition = req.getParameter(text.getText());
+                if (condition.equals("true")) {
+                    text.publish();
+                }
+                else {
+                    text.unPublish();
+                }
+           }
+       }
     }
 }
