@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="index.jsp">Logout</a>
+    <a href="logout">Logout</a>
     <ul>
         <li><a href = "assignment">ASSIGNMENTS</li>
         <li><a href = "pages">PAGES</li>
