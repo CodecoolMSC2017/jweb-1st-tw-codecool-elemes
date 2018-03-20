@@ -9,11 +9,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="index.jsp">Logout</a>
-    <ul>
-        <li><a href = "assignment.jsp">ASSIGNMENTS</li>
-        <li><a href = "pages.jsp">PAGES</li>
-        <li><a href = "userlist.jsp">USERLIST</li>
-    </ul>
 </body>
+<footer>
+    <p>Copyr</p>
+</footer>
 </html>
