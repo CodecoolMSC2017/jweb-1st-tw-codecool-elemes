@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Database implements UserDataBase {
 
-    private static Database instance = Database.createInstance();
+    private static Database instance = new Database();
 
     private List<User> users = new ArrayList<User>();
 
     private Database(){}
 
-    public static Database createInstance() {
+    public static Database getInstance() {
         return instance;
     }
 
