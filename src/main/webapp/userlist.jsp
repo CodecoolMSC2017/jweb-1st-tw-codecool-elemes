@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>users</h1>
-<a href="homepage.jsp">Go back to the homepage</a>
+<a href="userpage">Go back to the homepage</a>
 <c:forEach var="u" items="${users}">
     <p><c:out value="${u.name}"/>: <c:out value="${u.role}"/><p>
 </c:forEach>
