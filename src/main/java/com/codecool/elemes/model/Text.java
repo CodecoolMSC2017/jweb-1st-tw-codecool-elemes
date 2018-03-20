@@ -20,4 +20,12 @@ public class Text {
     public String getText() {
         return text;
     }
+
+    public boolean getisPublished() {
+        return isPublished;
+    }
+
+    public void unPublish() {
+        isPublished = false;
+    }
 }
