@@ -1,15 +1,21 @@
 package com.codecool.elemes.model;
 
+import com.codecool.elemes.exceptions.NoSuchAssignmentException;
+import com.codecool.elemes.exceptions.NoSuchTextException;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database implements UserDataBase {
+public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
 
     private static Database instance = new Database();
 
     private List<User> users = new ArrayList<User>();
+
+    private List<Text> texts = new ArrayList<>();
+
+    private List<Assignment> assignments = new ArrayList<>();
 
     private Database(){}
 
@@ -48,5 +54,47 @@ public class Database implements UserDataBase {
             }
         }
         throw new NoSuchUserException();
+    }
+
+    @Override
+    public List<Text> getTexts() {
+        return texts;
+    }
+
+    @Override
+    public void addText(Text text) {
+        texts.add(text);
+    }
+
+    @Override
+    public void deleteText(Text text) throws NoSuchTextException {
+        for (Text textInDatabase: texts) {
+            if (text.getText().equals(textInDatabase.getText())) {
+                texts.remove(textInDatabase);
+                return;
+            }
+        }
+        throw new NoSuchTextException();
+    }
+
+    @Override
+    public List<Assignment> getAllAssignments() {
+        return assignments;
+    }
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment assignment) throws NoSuchAssignmentException {
+        for (Assignment assignmentInDatabase: assignments) {
+            if (assignment.getQuestion().equals(assignmentInDatabase.getQuestion())) {
+                texts.remove(assignmentInDatabase);
+                return;
+            }
+        }
+        throw new NoSuchAssignmentException();
     }
 }
