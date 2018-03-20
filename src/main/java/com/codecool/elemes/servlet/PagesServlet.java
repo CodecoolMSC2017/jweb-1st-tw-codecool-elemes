@@ -14,13 +14,24 @@ import java.io.IOException;
 @WebServlet("/pages")
 public class PagesServlet extends HttpServlet {
     private PageService pageService = new PageService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("loggedin");
 
         req.setAttribute("texts",pageService.getTexts(user));
-        req.getRequestDispatcher("pages.jsp").forward(req, resp);
+        req.getRequestDispatcher(pageService.getPage(user)).forward(req, resp);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("loggedin");
+
+        pageService.handlePublish(req);
+
+        req.setAttribute("texts",pageService.getTexts(user));
+        req.getRequestDispatcher(pageService.getPage(user)).forward(req, resp);
     }
 }
