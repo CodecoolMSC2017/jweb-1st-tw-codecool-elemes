@@ -15,6 +15,11 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("registration.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("userName");
         String email = req.getParameter("email");
@@ -22,6 +27,6 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(name, email, Role.valueOf(role));
         Database.getInstance().add(user);
         req.setAttribute("user", user);
-        resp.sendRedirect("homepage.jsp");
+        resp.sendRedirect("userpage.jsp");
     }
 }
