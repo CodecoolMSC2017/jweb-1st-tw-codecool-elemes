@@ -5,5 +5,5 @@
 <c:forEach var="t" items="${texts}">
     <p><c:out value="${t.text}"/></p>
 </c:forEach>
-<a href="homepage.jsp">Go back to the <em>homepage</em> page.</a>
+<a href="userpage">Go back to the <em>homepage</em> page.</a>
 </body>
