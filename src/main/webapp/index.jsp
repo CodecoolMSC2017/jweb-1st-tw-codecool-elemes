@@ -12,8 +12,6 @@
     elemes<br>
     <h1>Login</h1><br>
     <form action="login" method="post">
-		Name:<br>
-		<input type="text" name="name"><br>
 		E-mail address:<br>
 		<input type="text" name="email"><br>
 		<input type="submit" value="Login">
