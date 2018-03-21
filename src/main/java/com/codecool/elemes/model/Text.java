@@ -3,6 +3,7 @@ package com.codecool.elemes.model;
 public class Text {
     private String text;
     private boolean isPublished;
+    private String content;
 
     public Text(String text, boolean isPublished) {
         this.text = text;
@@ -27,5 +28,13 @@ public class Text {
 
     public void unPublish() {
         isPublished = false;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
     }
 }
