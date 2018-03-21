@@ -6,7 +6,7 @@
 <ul>
 <c:forEach var="t" items="${texts}">
     <li>
-    <a href="content"><c:out value="${t.text}"/></a>
+    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.text}"/></a>
     <form action="pages" method="post">
     <input type="radio" name="${t.text}" value="true" <c:if test = "${t.isPublished}">
                                                                   checked

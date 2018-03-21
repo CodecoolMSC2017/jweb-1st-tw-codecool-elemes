@@ -1,6 +1,7 @@
 package com.codecool.elemes.model;
 
 import com.codecool.elemes.exceptions.NoSuchTextException;
+import com.codecool.elemes.exceptions.TextNotFoundException;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface TextDatabase {
     void addText(Text text);
 
     void deleteText(Text text) throws NoSuchTextException;
+
+    Text getText(int id) throws TextNotFoundException;
 }

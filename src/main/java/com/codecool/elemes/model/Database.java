@@ -3,6 +3,7 @@ package com.codecool.elemes.model;
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
 import com.codecool.elemes.exceptions.NoSuchTextException;
 import com.codecool.elemes.exceptions.NoSuchUserException;
+import com.codecool.elemes.exceptions.TextNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,16 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
             }
         }
         throw new NoSuchTextException();
+    }
+
+    @Override
+    public Text getText(int id) throws TextNotFoundException {
+        for (Text text: texts) {
+            if(text.getId() == id) {
+                return text;
+            }
+        }
+        throw new TextNotFoundException();
     }
 
     @Override
