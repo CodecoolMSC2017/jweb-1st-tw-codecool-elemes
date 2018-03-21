@@ -17,4 +17,11 @@ public final class LoginService {
         }
         return false;
     }
+
+    public User createUser(HttpServletRequest req) {
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String role = req.getParameter("role");
+        return new User(name, email, Role.valueOf(role));
+    }
 }
