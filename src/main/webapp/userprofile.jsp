@@ -8,8 +8,19 @@
     <title>UserList</title>
 </head>
 <body>
-<h1>Profile</h1>
+<h1>User Profile</h1>
 <a href="userpage">Go back to the homepage</a>
+<p>Current profile<p>
 <p><c:out value="${user.name}"/>: <c:out value="${user.eMail}"/> <c:out value="${user.role}"/><p>
+
+<form action="registration" method="post">
+		Name:<br>
+		<input type="text" name="name"><br>
+		Role:<br>
+		<input type="radio" name="role" value="STUDENT" checked> Student<br>
+		<input type="radio" name="role" value="MENTOR"> Mentor<br>
+		<input type="submit" value="Save">
+	</form>
+	<p>${message}</p>
 </body>
 </html>
