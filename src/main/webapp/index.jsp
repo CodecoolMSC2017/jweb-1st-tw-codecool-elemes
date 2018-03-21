@@ -12,6 +12,7 @@
 <body>
     elemes<br>
     <h1>Login</h1><br>
+    <p>${login_error}</p>
     <form action="login" method="post">
 		E-mail address:<br>
 		<input type="text" name="email"><br>
@@ -19,7 +20,7 @@
 	</form>
 	<p>${message}</p><br>
 	<p>If you don't own an account yet, and would like to register, please
-        <a href="registration.jsp">click here</a></p>
+        <a href="registration">click here</a></p>
     <%@ include file = "footer.jsp" %>
 </body>
 </html>
