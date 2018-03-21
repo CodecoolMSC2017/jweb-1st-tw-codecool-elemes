@@ -35,8 +35,8 @@ public final class PageService {
     public void handlePublish(HttpServletRequest req) {
         String condition;
        for (Text text :database.getTexts()) {
-           if (req.getParameter(text.getText())!= null) {
-                condition = req.getParameter(text.getText());
+           if (req.getParameter(text.getTitle())!= null) {
+                condition = req.getParameter(text.getTitle());
                 if (condition.equals("true")) {
                     text.publish();
                 }

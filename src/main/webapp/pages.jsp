@@ -5,7 +5,7 @@
 <ul>
 <c:forEach var="t" items="${texts}">
     <li>
-    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.text}"/></a>
+    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a>
     </li>
 </c:forEach>
 <p>

@@ -12,7 +12,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
 
     private static Database instance = new Database();
 
-    private List<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<>();
 
     private List<Text> texts = new ArrayList<>();
 
@@ -48,8 +48,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
 
     @Override
     public User getUser(String email) throws NoSuchUserException {
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
+        for (User user : users) {
             if (user.geteMail().equals(email)) {
                 return user;
             }
@@ -68,9 +67,9 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
     }
 
     @Override
-    public void deleteText(Text text) throws NoSuchTextException {
+    public void deleteText(Text title) throws NoSuchTextException {
         for (Text textInDatabase: texts) {
-            if (text.getText().equals(textInDatabase.getText())) {
+            if (title.getTitle().equals(textInDatabase.getTitle())) {
                 texts.remove(textInDatabase);
                 return;
             }
@@ -102,7 +101,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
     public void deleteAssignment(Assignment assignment) throws NoSuchAssignmentException {
         for (Assignment assignmentInDatabase: assignments) {
             if (assignment.getQuestion().equals(assignmentInDatabase.getQuestion())) {
-                texts.remove(assignmentInDatabase);
+                assignments.remove(assignmentInDatabase);
                 return;
             }
         }

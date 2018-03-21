@@ -3,13 +3,13 @@ package com.codecool.elemes.model;
 import java.util.Random;
 
 public class Text {
-    private String text;
+    private String title;
     private boolean isPublished;
     private String content;
     private int id;
 
-    public Text(String text, boolean isPublished) {
-        this.text = text;
+    public Text(String title, boolean isPublished) {
+        this.title = title;
         this.isPublished = isPublished;
         Random random = new Random();
         id = random.nextInt(1000000);
@@ -24,8 +24,8 @@ public class Text {
         return isPublished;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
     public boolean getisPublished() {
