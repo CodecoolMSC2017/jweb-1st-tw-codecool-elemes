@@ -11,7 +11,7 @@
 <h1>User Profile</h1>
 <a href="userpage">Go back to the homepage</a>
 <p>Current profile<p>
-<p><c:out value="${user.name}"/>: <c:out value="${user.eMail}"/> <c:out value="${user.role}"/><p>
+<p>Name: <c:out value="${user.name}"/><br>Email: <c:out value="${user.eMail}"/><br>Role: <c:out value="${user.role}"/><p>
 
 <form action="registration" method="post">
 		Name:<br>
