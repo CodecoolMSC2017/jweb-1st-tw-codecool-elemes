@@ -25,10 +25,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!loginService.isRegistered(req)) {
-            String name = req.getParameter("name");
-            String email = req.getParameter("email");
-            String role = req.getParameter("role");
-            User user = new User(name, email, Role.valueOf(role));
+            User user = loginService.createUser(req);
             Database.getInstance().add(user);
             HttpSession session = req.getSession();
             session.setAttribute("loggedin", user );
