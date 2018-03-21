@@ -11,7 +11,7 @@
 <body>
     elemes<br>
     <h1>Registration form</h1><br>
-    <form action="registration" method="post">
+    <form action="register" method="post">
 		Name:<br>
 		<input type="text" name="name"><br>
 		E-mail address:<br>
@@ -19,7 +19,9 @@
 		<input type="radio" name="role" value="STUDENT" checked> Student<br>
 		<input type="radio" name="role" value="MENTOR"> Mentor<br>
 		<input type="submit" value="Register">
-	</form>
+	</form><br>
 	<p>${message}</p>
+	<p>${error}</p>
+	<a href="login">Login page</a>
 </body>
 </html>

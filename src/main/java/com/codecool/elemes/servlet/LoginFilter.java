@@ -1,6 +1,4 @@
 package com.codecool.elemes.servlet;
-
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/login";
         String uri = request.getRequestURI();
-        if (("/codecool-lms/login".equals(uri)) || ("/codecool-lms/registration".equals(uri))) {
+        if (("/codecool-lms/login".equals(uri)) || ("/codecool-lms/register".equals(uri))) {
             chain.doFilter(req, resp);
         } else {
             boolean loggedIn = session != null && session.getAttribute("loggedin") != null;

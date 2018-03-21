@@ -20,7 +20,7 @@
 	</form>
 	<p>${message}</p><br>
 	<p>If you don't own an account yet, and would like to register, please
-        <a href="registration">click here</a></p>
+        <a href="register">click here</a></p>
     <%@ include file = "footer.jsp" %>
 </body>
 </html>
