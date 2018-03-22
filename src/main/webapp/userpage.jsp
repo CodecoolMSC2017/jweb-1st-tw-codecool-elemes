@@ -17,5 +17,6 @@
         <li><a href = "userlist">USERLIST</li>
         <li><a href = "attendance">ATTENDANCE</li>
     </ul>
+    <%@ include file = "sidebar.jsp" %>
 </body>
 </html>
