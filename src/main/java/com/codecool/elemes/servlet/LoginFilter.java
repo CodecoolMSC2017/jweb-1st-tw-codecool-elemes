@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         String loginURI = request.getContextPath() + "/login";
         String uri = request.getRequestURI();
 
-        if ("/codecool-lms/login".equals(uri) || "/codecool-lms/register".equals(uri) || ("/codecool-lms/style.css".equals(uri))) {
+        if ("/codecool-lms/login".equals(uri) || "/codecool-lms/register".equals(uri) || "/codecool-lms/style.css".equals(uri) || "/codecool-lms/*.png".equals(uri)) {
             chain.doFilter(request, response);
         } else {
             boolean loggedIn = session != null && session.getAttribute("loggedin") != null;
