@@ -1,7 +1,8 @@
 /*REGISTER SITE*/
 body{
     background-color:#f9f9f9;
-    overflow:auto;
+    height:100%
+    min-height:100%
 }
 
 header{
@@ -128,8 +129,7 @@ input[type=text]{
  /*SIDEBAR*/
 
 .sidenav {
-
-    position: fixed;
+    position:absolute;
     z-index: 1;
     top:10%;
     left: 10px;
@@ -171,6 +171,7 @@ padding: 10px;
 }
 
 #logo{
+margin-top:8px;
 float:center;
 margin-left : 45%;
 }
@@ -190,4 +191,28 @@ float:right
     margin-bottom : 5px;
 
 
+}
+textarea {
+    width :300px;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+
+/*CONTENT*/
+.textbox{
+    padding-bottom:70%;
+    border:1px solid #ccc;
+    background-color:white;
+    text-align : center;
+    margin-top:5%;
+    align:center;
+    margin-left:10%;
+    margin-right:10%;
 }

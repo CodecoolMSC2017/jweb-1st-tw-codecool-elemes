@@ -34,10 +34,8 @@
 </div>
 <form action="addcontent" method="post">
     <p>Add content</p>
-    <p>Title:<p>
-    <input type="text" name ="title"><br>
-    Content:<br>
-    <input type="text" name ="content"><br>
+    <input type="text" name ="title" placeholder = "Title"><br><br>
+    <textarea name = "message" rows = "20" cols = "100" placeholder = "Write here..."></textarea><br>
     <input type="submit" value="Submit">
     </form>
     <p><c:out value="${message}" /></p>

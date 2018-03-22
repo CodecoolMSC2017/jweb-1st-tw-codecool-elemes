@@ -22,7 +22,7 @@
 </c:forEach>
 
 </div>
-<p>
-<a href="userpage">Go back to the <em>homepage</em> page.</a>
-</p>
+<form method="get" action= "userpage">
+    <input type = "submit" value = "Go back" style = "width:8%;">
+</form>
 </body>
