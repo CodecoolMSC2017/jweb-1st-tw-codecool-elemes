@@ -12,21 +12,26 @@
 </head>
 
 <body>
-<div class = "register">
-        <header><h1><img src = "cclogo.png" width = "40px" height = "40px">LMS</h1></header>
-    <form action="register" method="post">
-        <input type="text" name="name" placeholder = "Username"><br>
-        <input type="text" name="email" placeholder = "Email"><br>
-        <input type="radio" name="role" value="STUDENT" checked> Student
-        <input type="radio" name="role" value="MENTOR"> Mentor<br>
-        <input type="submit" value="Sign up">
-    </form><br>
-    <p>${message}</p>
-    <p>${error}</p>
-    <p id = "terms&policy">By signing up, you agree to our <strong>Terms & Privacy Policy</strong>.</p>
-</div>
-<div class = "backtologin">
-    <p>Have an account?
-	<a href="login">Login page</a></p>
+    <div class = "register">
+        <header>
+            <h1>
+                <img src = "cclogo.png" width = "40px" height = "40px">LMS
+            </h1>
+        </header>
+            <form action="register" method="post">
+                <input type="text" name="name" placeholder = "Username"><br>
+                <input type="text" name="email" placeholder = "Email"><br>
+                <input type="radio" name="role" value="STUDENT" checked> Student
+                <input type="radio" name="role" value="MENTOR"> Mentor<br>
+                <input type="submit" value="Sign up">
+            </form><br>
+        <p>${message}</p>
+        <p>${error}</p>
+        <p id = "terms&policy">By signing up, you agree to our <strong>Terms & Privacy Policy</strong>.</p>
+    </div>
+    <div class = "backtologin">
+        <p>Have an account?
+        <a href="login">Login page</a></p>
+    </div>
 </body>
 </html>
