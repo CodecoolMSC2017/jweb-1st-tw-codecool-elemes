@@ -27,9 +27,9 @@ public final class PageService {
 
     public String getPage(User user) {
         if (user.getRole().equals(Role.STUDENT)) {
-            return "pages.jsp";
+            return "app/pages.jsp";
         }
-        return "mentorPages.jsp";
+        return "app/mentorPages.jsp";
     }
 
     public void handlePublish(HttpServletRequest req) {

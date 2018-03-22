@@ -18,6 +18,6 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("loggedin");
         req.setAttribute("user",user);
-        req.getRequestDispatcher("userprofile.jsp").forward(req, resp);
+        req.getRequestDispatcher("app/userprofile.jsp").forward(req, resp);
     }
 }
