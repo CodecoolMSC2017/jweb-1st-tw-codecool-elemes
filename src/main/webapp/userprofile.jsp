@@ -9,11 +9,11 @@
 </head>
 <body>
 <h1>User Profile</h1>
-<a href="userpage">Go back to the homepage</a>
+<a href="userpage">Go back</a>
 <p>Current profile<p>
 <p>Name: <c:out value="${user.name}"/><br>Email: <c:out value="${user.eMail}"/><br>Role: <c:out value="${user.role}"/><p>
 
-<form action="userprofile" method="post">
+    <form action="userprofile" method="post">
 		Name:<br>
 		<input type="text" name="name"><br>
 		Role:<br>
@@ -21,6 +21,8 @@
 		<input type="radio" name="role" value="MENTOR"> Mentor<br>
 		<input type="submit" value="Save">
 	</form>
+	<a href = "logout">LogOut</a>
 	<p>${message}</p>
+	<a href="logout">Logout</a>
 </body>
 </html>

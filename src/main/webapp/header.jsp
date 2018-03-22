@@ -21,6 +21,5 @@
     </div>
 </header>
 <body>
-<body>
 </body>
 </html>

@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>elemes</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-    <a href="logout">Logout</a>
-    <ul>
-        <li><a href = "userprofile">USERPROFILE</li>
-        <li><a href = "assignment">ASSIGNMENTS</li>
-        <li><a href = "pages">PAGES</li>
-        <li><a href = "userlist">USERLIST</li>
-        <li><a href = "attendance">ATTENDANCE</li>
-    </ul>
-    <%@ include file = "sidebar.jsp" %>
+    <div class="sidenav">
+        <a href="userprofile">PROFILE</a>
+        <a href="assigments">ASSIGMENTS</a>
+        <a href="pages">PAGES</a>
+        <a href="userlists">USERS</a>
+        <a href="attendance">ATTENDANCE</a>
+    </div>
 </body>
 </html>
