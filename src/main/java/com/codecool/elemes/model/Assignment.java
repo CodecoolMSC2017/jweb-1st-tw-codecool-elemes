@@ -2,6 +2,8 @@ package com.codecool.elemes.model;
 
 import com.codecool.elemes.exceptions.NotGradedYetException;
 
+import java.util.Random;
+
 public class Assignment {
     private Boolean isComplete;
     private Boolean isCorrected;
@@ -9,6 +11,7 @@ public class Assignment {
     private String question;
     private String answear;
     private Integer grade;
+    private int id;
 
     public Assignment(String question) {
         this.question = question;
@@ -16,6 +19,8 @@ public class Assignment {
         isCorrected = false;
         isPublished = false;
         grade = null;
+        Random random = new Random();
+        id = random.nextInt(1000000);
     }
 
     public String getAnswear() {
@@ -57,5 +62,17 @@ public class Assignment {
 
     public void publish() {
         isPublished = true;
+    }
+
+    public void unPublish() {
+        isPublished = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean getisPublished() {
+        return isPublished;
     }
 }
