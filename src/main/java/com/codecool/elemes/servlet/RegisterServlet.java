@@ -1,7 +1,6 @@
 package com.codecool.elemes.servlet;
 
 import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.LoginService;
 import javax.servlet.ServletException;

@@ -4,7 +4,6 @@ import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.LoginService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -35,7 +33,6 @@ public class LoginServlet extends HttpServlet {
             } catch (NoSuchUserException e) {
                 e.printStackTrace();
             }
-
         } else {
             req.setAttribute("message", "Invalid login data, please check.");
             req.getRequestDispatcher("/index.jsp").include(req, resp);

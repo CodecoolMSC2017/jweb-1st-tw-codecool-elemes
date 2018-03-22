@@ -11,6 +11,6 @@
 <body>
 </body>
 <footer>
-    <p>Copyr</p>
+    <p>Copyright</p>
 </footer>
 </html>

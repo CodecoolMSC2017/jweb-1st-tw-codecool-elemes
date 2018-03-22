@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/*")
+@WebFilter("/app/*")
 public class LoginFilter implements Filter {
 
     @Override
@@ -20,17 +20,14 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/login";
         String uri = request.getRequestURI();
-        if (("/codecool-lms/login".equals(uri)) || ("/codecool-lms/register".equals(uri))) {
-            chain.doFilter(req, resp);
-        } else {
-            boolean loggedIn = session != null && session.getAttribute("loggedin") != null;
+
+        boolean loggedIn = session != null && session.getAttribute("loggedin") != null;
             boolean loginRequest = request.getRequestURI().equals(loginURI);
 
-            if (loggedIn || loginRequest) {
-                chain.doFilter(request, response);
-            } else {
-                response.sendRedirect(loginURI);
-            }
+        if (loggedIn || loginRequest) {
+            chain.doFilter(request, response);
+        } else {
+            response.sendRedirect(loginURI);
         }
     }
 
