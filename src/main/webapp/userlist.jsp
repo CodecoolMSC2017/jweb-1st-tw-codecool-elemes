@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<h1>users</h1>
+<h1>Users</h1>
 <a href="userpage">Go back</a>
 <c:forEach var="u" items="${users}">
     <div class = "users">

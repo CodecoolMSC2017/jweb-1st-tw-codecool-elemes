@@ -14,9 +14,9 @@
 <p>Name: <c:out value="${user.name}"/><br>Email: <c:out value="${user.eMail}"/><br>Role: <c:out value="${user.role}"/><p>
 
     <form action="userprofile" method="post">
-		Name:<br>
+		Change name or role:<br>
 		<input type="text" name="name"><br>
-		Role:<br>
+		<br>
 		<input type="radio" name="role" value="STUDENT" checked> Student<br>
 		<input type="radio" name="role" value="MENTOR"> Mentor<br>
 		<input type="submit" value="Save">

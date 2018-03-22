@@ -13,6 +13,11 @@
 </head>
 <body>
     <div class = "login">
+        <header>
+            <h1>
+                <img src = "cclogo.png" width = "40px" height = "40px">elemes kenvesz
+            </h1>
+        </header>
         <p>${login_error}</p>
         <form action="login" method="post">
             <input type="text" name="email" placeholder = "e-mail" size ="20"><br>

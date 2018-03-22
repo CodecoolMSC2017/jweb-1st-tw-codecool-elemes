@@ -15,7 +15,7 @@
     <div class = "register">
         <header>
             <h1>
-                <img src = "cclogo.png" width = "40px" height = "40px">LMS
+                <img src = "cclogo.png" width = "40px" height = "40px">elemes kenvesz
             </h1>
         </header>
             <form action="register" method="post">
