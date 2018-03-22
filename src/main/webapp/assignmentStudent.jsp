@@ -9,6 +9,6 @@
     </li>
 </c:forEach>
 <p>
-<a href="userpage">Go back to the <em>homepage</em> page.</a>
+<a href="userpage">Go back</a>
 </p>
 </body>

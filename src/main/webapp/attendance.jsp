@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Attendance</h1>
-<a href="userpage">Go back to the homepage</a>
+<a href="userpage">Go back</a>
     <table>
         <tr><th>Name</th><th>attendance</th></tr>
         <c:forEach var="u" items="${users}">

@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UserList</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<h1>users</h1>
+<h1>Users</h1>
 <a href="userpage">Go back</a>
 <c:forEach var="u" items="${users}">
-    <p>Name: <c:out value="${u.name}"/><br>Email: <c:out value="${u.eMail}"/><br>Role: <c:out value="${u.role}"/><p>
+    <div class = "users">
+        <p>Name: <c:out value="${u.name}"/><br>Email: <c:out value="${u.eMail}"/><br>Role: <c:out value="${u.role}"/><p>
+    </div>
 </c:forEach>
 </body>
 </html>

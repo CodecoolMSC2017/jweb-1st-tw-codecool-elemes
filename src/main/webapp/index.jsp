@@ -11,26 +11,25 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
 </head>
-<style>
-    }
-
-</style>
 <body>
-<div class = "login">
-    <header><h1><img src = "cclogo.png" width = "40px" height = "40px">elemes</h1></header>
-    <p>${login_error}</p>
-    <form action="login" method="post">
-		<input type="text" name="email" placeholder = "e-mail" size ="20"><br>
-		<input type="submit" value="Login" style = "width:150px;">
-	</form>
-	<p>${message}</p><br>
+    <div class = "login">
+        <header>
+            <h1>
+                <img src = "cclogo.png" width = "40px" height = "40px">elemes kenvesz
+            </h1>
+        </header>
+        <p>${login_error}</p>
+        <form action="login" method="post">
+            <input type="text" name="email" placeholder = "e-mail" size ="20"><br>
+            <input type="submit" value="Login" style = "width:150px;">
+        </form>
+        <p>${message}</p><br>
 
-   </div>
-   <div class = "signup">
-   	<p>Don't have an account?
-    <a href="register">Sign up</a></p>
-   </div>
-
-    <%@ include file = "footer.jsp" %>
+    </div>
+    <div class = "signup">
+        <p>Don't have an account?
+        <a href="register">Sign up</a></p>
+    </div>
+   <%@ include file = "footer.jsp" %>
 </body>
 </html>

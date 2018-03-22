@@ -14,6 +14,7 @@ public final class WebappContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         Database database = Database.getInstance();
         database.add(new User("Laci", "laci@gmail.ch", Role.MENTOR));
+        database.add(new User("Imi", "imi@gmail.ch", Role.MENTOR));
         database.add(new User("Peter", "peter@gmail.ch", Role.STUDENT));
         database.add(new User("Lili", "lili@live.it", Role.STUDENT));
         database.addText(new Text("Hello World is Python", true));

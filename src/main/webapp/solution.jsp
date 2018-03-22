@@ -2,7 +2,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <body>
 <h1>Solution Page</h1>
-<a href="assignment">Go back to the <em>assignment</em> page.</a>
+<a href="assignment">Go back</a>
 <ul>
 <p>
     <c:out value="${question}"/>
