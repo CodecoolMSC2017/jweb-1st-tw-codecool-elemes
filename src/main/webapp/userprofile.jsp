@@ -21,6 +21,7 @@
 		<input type="radio" name="role" value="MENTOR"> Mentor<br>
 		<input type="submit" value="Save">
 	</form>
+	<a href = "logout">LogOut</a>
 	<p>${message}</p>
 </body>
 </html>
