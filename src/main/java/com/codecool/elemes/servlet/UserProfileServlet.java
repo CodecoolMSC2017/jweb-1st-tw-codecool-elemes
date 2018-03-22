@@ -1,6 +1,8 @@
 package com.codecool.elemes.servlet;
 
+import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
+import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 
 import javax.servlet.ServletException;
@@ -19,5 +21,22 @@ public class UserProfileServlet extends HttpServlet {
         User user = (User)session.getAttribute("loggedin");
         req.setAttribute("user",user);
         req.getRequestDispatcher("app/userprofile.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String name = req.getParameter("name");
+        String role = req.getParameter("role");
+        HttpSession session = req.getSession();
+        User user =(User) session.getAttribute("loggedin");
+
+
+        try {
+            Database.getInstance().getUser(user.geteMail()).setName(name);
+            Database.getInstance().getUser(user.geteMail()).setRole(Role.valueOf(role));
+        } catch (NoSuchUserException e) {
+            e.printStackTrace();
+        }
+        resp.sendRedirect("userprofile");
     }
 }

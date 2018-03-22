@@ -13,7 +13,7 @@
 <p>Current profile<p>
 <p>Name: <c:out value="${user.name}"/><br>Email: <c:out value="${user.eMail}"/><br>Role: <c:out value="${user.role}"/><p>
 
-<form action="registration" method="post">
+<form action="userprofile" method="post">
 		Name:<br>
 		<input type="text" name="name"><br>
 		Role:<br>
