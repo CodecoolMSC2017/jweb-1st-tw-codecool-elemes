@@ -15,8 +15,17 @@
         <c:forEach var="u" items="${users}">
                     tr>
                         <td><c:out value = "${u.name}"/><p></td>
-                        <td><c:out value = "${user.email}"/><p></td>
-                        <td><c:out value = "${user.role}"/><p></td>
+                        <td><form action="pages" method="post">
+                                                        <input type="radio" name="${t.title}" value="true" <c:if test = "${t.isPublished}">
+                                                                                                                      checked
+                                                                                                                   </c:if> > Publish<br>
+                                                        <input type="radio" name="${t.title}" value="false" <c:if test = "${!t.isPublished}">
+                                                                                                                     checked
+                                                                                                                    </c:if> > Unpublish<br>
+                                                        <input type="submit" value="Submit">
+                                                        </form></td>
+
+
 
                     </tr>
         </c:forEach>
