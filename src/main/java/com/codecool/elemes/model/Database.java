@@ -107,4 +107,14 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
         }
         throw new NoSuchAssignmentException();
     }
+
+    @Override
+    public Assignment getAssignment(int id) throws NoSuchAssignmentException {
+        for (Assignment assignment: assignments) {
+            if(assignment.getId()== id) {
+                return assignment;
+            }
+        }
+        throw new NoSuchAssignmentException();
+    }
 }
