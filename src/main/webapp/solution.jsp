@@ -8,8 +8,10 @@
     <c:out value="${question}"/>
         <form action="solution" method="post">
             <input type = "text" name="answer">
+            <input type="hidden" name="question" value="${question}">
             <input type="submit" value="submit">
         </form>
 
 </p>
+<p><c:out value="${backmessage}"/></p>
 </body>
