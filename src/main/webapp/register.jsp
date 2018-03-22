@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>elemes</title>
     <link rel="stylesheet" href="style.css" type = "text/css" media = "screen">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
 </head>
 
 <body>
-<div id = "register">
-    <header><h1>Sign up</h1></header>
+<div class = "register">
+    <header font-family: 'Roboto', sans-serif align  ="center"><h1>Sign up</h1></header>
     <form action="register" method="post">
         <input type="text" name="name" placeholder = "Username"><br>
         <input type="text" name="email" placeholder = "Email"><br>
@@ -23,9 +23,10 @@
     </form><br>
     <p>${message}</p>
     <p>${error}</p>
-    <p>By signing up, you agree to our <strong>Terms & Privacy Policy</strong>.</p>
-<div>
-
-	<a href="login">Login page</a>
+    <p id = "terms&policy">By signing up, you agree to our <strong>Terms & Privacy Policy</strong>.</p>
+</div>
+<div class = "backtologin">
+    <p>Have an account?
+	<a href="login">Login page</a></p>
 </body>
 </html>

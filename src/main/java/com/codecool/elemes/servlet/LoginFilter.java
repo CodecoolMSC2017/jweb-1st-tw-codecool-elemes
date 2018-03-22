@@ -20,7 +20,9 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/login";
         String uri = request.getRequestURI();
-
+        if ("/codecool-lms/*.css".equals(uri)) {
+            chain.doFilter(request, response);
+        }
         boolean loggedIn = session != null && session.getAttribute("loggedin") != null;
             boolean loginRequest = request.getRequestURI().equals(loginURI);
 

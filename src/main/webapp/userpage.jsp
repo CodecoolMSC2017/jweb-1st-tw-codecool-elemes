@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="logout">Logout</a>
-    <ul>
-        <li><a href = "userprofile">USERPROFILE</li>
-        <li><a href = "assignment">ASSIGNMENTS</li>
-        <li><a href = "pages">PAGES</li>
-        <li><a href = "userlist">USERLIST</li>
-    </ul>
+    <%@ include file = "sidebar.jsp" %>
 </body>
 </html>

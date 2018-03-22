@@ -11,9 +11,9 @@ public class AssignmentService {
 
     public String getPage(User user) {
         if (user.getRole().equals(Role.STUDENT)) {
-            return "app/assignmentStudent.jsp";
+            return "assignmentStudent.jsp";
         }
-        return "app/assignmentMentor.jsp";
+        return "assignmentMentor.jsp";
     }
 
     public List<Assignment> getAssigments(User user) {

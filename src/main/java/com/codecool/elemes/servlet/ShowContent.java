@@ -19,6 +19,6 @@ public class ShowContent extends HttpServlet {
         String content = contentShowService.getContent(id);
         System.out.println(content);
         req.setAttribute("content",content);
-        req.getRequestDispatcher("app/content.jsp").forward(req, resp);
+        req.getRequestDispatcher("content.jsp").forward(req, resp);
     }
 }
