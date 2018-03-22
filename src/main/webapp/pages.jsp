@@ -11,17 +11,18 @@
 </head>
 
 <body>
-    <h1>Pages</h1>
-        <div class = "sidenav">
-            <ul>
-                <c:forEach var="t" items="${texts}">
-                    <li>
-                    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-    <p>
-    <a href="userpage">Go back</a>
-    </p>
+<h1>Pages</h1>
+<div class = "sidenav">
+
+<ul>
+<c:forEach var="t" items="${texts}">
+    <li>
+    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a>
+    </li>
+</c:forEach>
+
+</div>
+<form method="get" action= "userpage">
+    <input type = "submit" value = "Go back" style = "width:8%;">
+</form>
 </body>
