@@ -1,14 +1,11 @@
 package com.codecool.elemes.model;
 
-import com.codecool.elemes.exceptions.NoSuchAssignmentException;
-import com.codecool.elemes.exceptions.NoSuchTextException;
-import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.exceptions.TextNotFoundException;
+import com.codecool.elemes.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
+public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, SolutionDatabase {
 
     private static Database instance = new Database();
 
@@ -17,6 +14,8 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
     private List<Text> texts = new ArrayList<>();
 
     private List<Assignment> assignments = new ArrayList<>();
+
+    private List<Solution> solutions = new ArrayList<>();
 
     private Database(){}
 
@@ -106,6 +105,26 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase {
             }
         }
         throw new NoSuchAssignmentException();
+    }
+
+    @Override
+    public List<Solution> getAllSolutions() {
+        return solutions;
+    }
+
+    @Override
+    public Solution getSolution(int id) throws NoSuchSolutionException {
+        for(Solution solution: solutions) {
+            if (solution.getId() == id) {
+                return solution;
+            }
+        }
+        throw new NoSuchSolutionException();
+    }
+
+    @Override
+    public void addSolution(Solution solution) {
+        solutions.add(solution);
     }
 
     @Override
