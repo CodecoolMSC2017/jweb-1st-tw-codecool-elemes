@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/attendace")
-public class Attendance extends HttpServlet{
+@WebServlet("/attendance")
+public class AttendanceServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Database database = Database.getInstance();
         req.setAttribute("users",database.getAllUser());
-        req.getRequestDispatcher("app/userlist").forward(req, resp);
+        req.getRequestDispatcher("attendance.jsp").forward(req, resp);
     }
 }
