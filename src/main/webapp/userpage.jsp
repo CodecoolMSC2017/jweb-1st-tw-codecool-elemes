@@ -12,7 +12,7 @@
 <body>
     <div class="sidenav">
         <a href="userprofile">PROFILE</a>
-        <a href="assignment">ASSIGMENTS</a>
+        <a href="assignment">ASSIGNMENTS</a>
         <a href="pages">PAGES</a>
         <a href="userlists">USERS</a>
         <a href="attendance">ATTENDANCE</a>
