@@ -15,6 +15,7 @@
         <li><a href = "assignment">ASSIGNMENTS</li>
         <li><a href = "pages">PAGES</li>
         <li><a href = "userlist">USERLIST</li>
+        <li><a href = "attendance">ATTENDANCE</li>
     </ul>
 </body>
 </html>
