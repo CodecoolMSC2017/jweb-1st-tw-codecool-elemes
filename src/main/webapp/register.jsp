@@ -13,7 +13,7 @@
 
 <body>
 <div class = "register">
-    <header font-family: 'Roboto', sans-serif align  ="center"><h1>Sign up</h1></header>
+        <header><h1><img src = "cclogo.png" width = "40px" height = "40px">LMS</h1></header>
     <form action="register" method="post">
         <input type="text" name="name" placeholder = "Username"><br>
         <input type="text" name="email" placeholder = "Email"><br>
