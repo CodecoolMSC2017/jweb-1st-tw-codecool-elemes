@@ -1,6 +1,7 @@
 /*REGISTER SITE*/
 body{
     background-color:#f9f9f9;
+    overflow:auto;
 }
 
 header{
@@ -130,7 +131,7 @@ input[type=text]{
 
     position: fixed;
     z-index: 1;
-    top: 20px;
+    top:10%;
     left: 10px;
     background: white;
     overflow-x: hidden;
@@ -151,3 +152,42 @@ input[type=text]{
     color: black;
 }
 
+/*HEADER*/
+div{
+background-color:#939393;
+}
+ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+
+}
+li {
+display: inline;
+
+}
+li a {
+padding: 10px;
+}
+
+#logo{
+float:center;
+margin-left : 45%;
+}
+#logout{
+
+float:right
+
+}
+
+/*USERLIST*/
+
+
+.users{
+    border:1px solid #ccc;
+    background-color: #b1e0ed;
+    width:200px;
+    margin-bottom : 5px;
+
+
+}

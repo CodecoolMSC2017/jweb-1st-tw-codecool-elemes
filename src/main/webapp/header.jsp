@@ -9,15 +9,10 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
-<style>
-
-</style>
 <header>
-    <div class="sidenav">
-        <a href="#userprofile">PROFILE</a>
-        <a href="#assigments">ASSIGMENTS</a>
-        <a href="#pages">PAGES</a>
-        <a href="#userlists">USERS</a>
+    <div class = "header">
+        <ul>
+            <li id ="logo"><a href = "userpage"><img src = "cclogo.png" height ="50px" width = "50px"></a></li>        </ul>
     </div>
 </header>
 <body>

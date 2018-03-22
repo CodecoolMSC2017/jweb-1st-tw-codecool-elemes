@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+
+    <%@ include file = "header.jsp" %>
     <div class="sidenav">
         <a href="userprofile">PROFILE</a>
         <a href="assigments">ASSIGMENTS</a>
         <a href="pages">PAGES</a>
-        <a href="userlists">USERS</a>
+        <a href="userlist">USERS</a>
         <a href="attendance">ATTENDANCE</a>
     </div>
 </body>

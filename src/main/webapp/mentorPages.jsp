@@ -1,8 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>elemes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
 <body>
 <h1>Pages</h1>
 <a href="userpage">Go back to the <em>homepage</em> page.</a>
+<div class = "sidenav">
+
+
 <ul>
 <c:forEach var="t" items="${texts}">
     <li>
@@ -18,6 +30,8 @@
     </form>
     </li>
 </c:forEach>
+
+</div>
 <form action="addcontent" method="post">
     <p>Add content</p>
     <p>Title:<p>
