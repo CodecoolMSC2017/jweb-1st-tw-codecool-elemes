@@ -6,7 +6,7 @@
 <ul>
 <c:forEach var="t" items="${assignments}">
     <li>
-    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.question}"/></a>
+    <a href="listsolutions?id=<c:out value='${t.id}'/>"><c:out value="${t.question}"/></a>
     <form action="assignment" method="post">
     <input type="radio" name="${t.question}" value="true" <c:if test = "${t.isPublished}">
                                                                   checked
