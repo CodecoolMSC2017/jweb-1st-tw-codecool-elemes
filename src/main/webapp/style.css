@@ -128,7 +128,7 @@
      color: black;
 }
 /*HEADER*/
- div{
+    .header{
      background-color:#939393;
 }
  ul{
@@ -190,5 +190,5 @@ textarea {
 .goBack{
     align:left;
     margin:5px;
-    background-color:#f9f9f9;
+
 }
