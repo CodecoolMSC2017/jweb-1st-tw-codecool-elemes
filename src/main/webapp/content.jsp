@@ -15,7 +15,11 @@
 </form>
 
 <div class = "textbox">
-   <p><c:out value="${content}"/></p>
+   <p>
+   <c:forEach var="t" items="${content}">
+        <c:out value="${t}"/><br>
+   </c:forEach>
+   </p>
 </div>
 
 </body>

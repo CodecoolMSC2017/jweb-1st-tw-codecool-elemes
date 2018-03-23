@@ -33,7 +33,7 @@
 <form class="addcontent" action="addcontent" method="post">
     <p>Add content</p>
     <input type="text" name ="title" placeholder = "Title"><br><br>
-    <textarea name = "message" rows = "20" cols = "100" placeholder = "Write here..."></textarea><br>
+    <textarea name = "content"  rows = "20" cols = "100" wrap="hard" placeholder = "Write here..."></textarea><br>
     <input type="submit" value="Submit">
 </form>
     <p><c:out value="${message}" /></p>
