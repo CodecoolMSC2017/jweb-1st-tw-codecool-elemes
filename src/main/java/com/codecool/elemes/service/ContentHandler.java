@@ -6,7 +6,7 @@ import com.codecool.elemes.model.Text;
 import com.codecool.elemes.model.TextDatabase;
 
 public class ContentHandler {
-    private TextDatabase database = Database.getInstance();
+    private Database database = Database.getInstance();
 
     public void addNewTextContent(String title, String content) throws InvalidInputException {
         if (title == "" || content == "") {

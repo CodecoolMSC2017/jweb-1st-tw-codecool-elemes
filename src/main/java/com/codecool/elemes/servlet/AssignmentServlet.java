@@ -22,7 +22,8 @@ public class AssignmentServlet extends HttpServlet {
         User user = (User)session.getAttribute("loggedin");
 
         req.setAttribute("assignments",assignmentService.getAssigments(user));
-        req.getRequestDispatcher(assignmentService.getPage(user)).forward(req, resp);
+        req.getRequestDispatcher(assignmentService.getPage(user)).include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 
     @Override
@@ -33,6 +34,7 @@ public class AssignmentServlet extends HttpServlet {
         assignmentService.handlePublish(req);
 
         req.setAttribute("assignments",assignmentService.getAssigments(user));
-        req.getRequestDispatcher(assignmentService.getPage(user)).forward(req, resp);
+        req.getRequestDispatcher(assignmentService.getPage(user)).include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

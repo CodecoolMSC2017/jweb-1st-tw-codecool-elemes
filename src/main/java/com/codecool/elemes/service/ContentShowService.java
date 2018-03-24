@@ -7,7 +7,7 @@ import com.codecool.elemes.model.TextDatabase;
 
 public final class ContentShowService {
 
-    TextDatabase database = Database.getInstance();
+    Database database = Database.getInstance();
 
     public String getContent(int textId) {
         Text text;

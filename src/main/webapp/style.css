@@ -151,10 +151,10 @@
 }
 /*USERLIST*/
  .users{
-     border:1px solid #ccc;
-     background-color: #b1e0ed;
-     width:200px;
-     margin-bottom : 5px;
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
 }
 .addcontent {
     position: fixed;

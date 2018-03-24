@@ -19,6 +19,7 @@ public class ListSolutionsServlet extends HttpServlet {
         List<Solution> solutions = database.getAllSolutions();
 
         req.setAttribute("solutions", solutions);
-        req.getRequestDispatcher("listSolutions.jsp").forward(req,resp);
+        req.getRequestDispatcher("listSolutions.jsp").include(req,resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

@@ -16,6 +16,7 @@ public class AttendanceServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Database database = Database.getInstance();
         req.setAttribute("users",database.getAllUser());
-        req.getRequestDispatcher("attendance.jsp").forward(req, resp);
+        req.getRequestDispatcher("attendance.jsp").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

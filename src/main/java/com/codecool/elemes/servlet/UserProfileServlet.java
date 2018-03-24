@@ -20,7 +20,8 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("loggedin");
         req.setAttribute("user",user);
-        req.getRequestDispatcher("userprofile.jsp").forward(req, resp);
+        req.getRequestDispatcher("userprofile.jsp").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 
     @Override
@@ -37,6 +38,7 @@ public class UserProfileServlet extends HttpServlet {
         } catch (NoSuchUserException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("userprofile");
+        req.getRequestDispatcher("userprofile.jsp").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

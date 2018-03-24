@@ -5,135 +5,97 @@ import com.codecool.elemes.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, SolutionDatabase {
+public class Database {
 
     private static Database instance = new Database();
 
-    private List<User> users = new ArrayList<>();
-
-    private List<Text> texts = new ArrayList<>();
-
-    private List<Assignment> assignments = new ArrayList<>();
-
-    private List<Solution> solutions = new ArrayList<>();
+    private AssigmentDatabase assigmentDatabase = Singleton.getInstance();
+    private SolutionDatabase solutionDatabase = Singleton.getInstance();
+    private TextDatabase textDatabase = Singleton.getInstance();
+    private UserDataBase userDataBase = Singleton.getInstance();
 
     private Database(){}
+
+    public void setAssigmentDatabase(AssigmentDatabase assigmentDatabase) {
+        this.assigmentDatabase = assigmentDatabase;
+    }
+
+    public void setSolutionDatabase(SolutionDatabase solutionDatabase) {
+        this.solutionDatabase = solutionDatabase;
+    }
+
+    public void setTextDatabase(TextDatabase textDatabase) {
+        this.textDatabase = textDatabase;
+    }
+
+    public void setUserDataBase(UserDataBase userDataBase) {
+        this.userDataBase = userDataBase;
+    }
 
     public static Database getInstance() {
         return instance;
     }
 
-    @Override
     public void add(User user) {
-        users.add(user);
+        userDataBase.add(user);
     }
 
-    @Override
+
     public List<User> getAllUser() {
-        return users;
+        return userDataBase.getAllUser();
     }
 
-    @Override
+
     public void deleteUser(String email) throws NoSuchUserException {
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (user.geteMail().equals(email)) {
-                users.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchUserException();
+        userDataBase.deleteUser(email);
     }
 
-    @Override
     public User getUser(String email) throws NoSuchUserException {
-        for (User user : users) {
-            if (user.geteMail().equals(email)) {
-                return user;
-            }
-        }
-        throw new NoSuchUserException();
+        return userDataBase.getUser(email);
     }
 
-    @Override
     public List<Text> getTexts() {
-        return texts;
+        return textDatabase.getTexts();
     }
 
-    @Override
     public void addText(Text text) {
-        texts.add(text);
+        textDatabase.addText(text);
     }
 
-    @Override
     public void deleteText(Text title) throws NoSuchTextException {
-        for (Text textInDatabase: texts) {
-            if (title.getTitle().equals(textInDatabase.getTitle())) {
-                texts.remove(textInDatabase);
-                return;
-            }
-        }
-        throw new NoSuchTextException();
+        textDatabase.deleteText(title);
     }
 
-    @Override
     public Text getText(int id) throws TextNotFoundException {
-        for (Text text: texts) {
-            if(text.getId() == id) {
-                return text;
-            }
-        }
-        throw new TextNotFoundException();
+       return textDatabase.getText(id);
     }
 
-    @Override
+
     public List<Assignment> getAllAssignments() {
-        return assignments;
+        return assigmentDatabase.getAllAssignments();
     }
 
-    @Override
     public void addAssignment(Assignment assignment) {
-        assignments.add(assignment);
+        assigmentDatabase.addAssignment(assignment);
     }
 
-    @Override
     public void deleteAssignment(Assignment assignment) throws NoSuchAssignmentException {
-        for (Assignment assignmentInDatabase: assignments) {
-            if (assignment.getQuestion().equals(assignmentInDatabase.getQuestion())) {
-                assignments.remove(assignmentInDatabase);
-                return;
-            }
-        }
-        throw new NoSuchAssignmentException();
+        assigmentDatabase.deleteAssignment(assignment);
     }
 
-    @Override
     public List<Solution> getAllSolutions() {
-        return solutions;
+        return solutionDatabase.getAllSolutions();
     }
 
-    @Override
     public Solution getSolution(int id) throws NoSuchSolutionException {
-        for(Solution solution: solutions) {
-            if (solution.getId() == id) {
-                return solution;
-            }
-        }
-        throw new NoSuchSolutionException();
+        return solutionDatabase.getSolution(id);
     }
 
-    @Override
     public void addSolution(Solution solution) {
-        solutions.add(solution);
+        solutionDatabase.addSolution(solution);
     }
 
-    @Override
     public Assignment getAssignment(int id) throws NoSuchAssignmentException {
-        for (Assignment assignment: assignments) {
-            if(assignment.getId()== id) {
-                return assignment;
-            }
-        }
-        throw new NoSuchAssignmentException();
+       return assigmentDatabase.getAssignment(id);
     }
 }

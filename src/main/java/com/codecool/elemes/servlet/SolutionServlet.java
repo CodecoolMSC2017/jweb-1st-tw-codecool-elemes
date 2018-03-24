@@ -26,7 +26,8 @@ public class SolutionServlet extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("question",assignment.getQuestion() );
-        req.getRequestDispatcher("solution.jsp").forward(req,resp);
+        req.getRequestDispatcher("solution.jsp").include(req,resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 
     @Override
@@ -49,7 +50,8 @@ public class SolutionServlet extends HttpServlet {
         database.addSolution(solution);
 
         req.setAttribute("backmessage", "Answer recorded, thanks bazdmeg!");
-        req.getRequestDispatcher("solution.jsp").forward(req, resp);
+        req.getRequestDispatcher("solution.jsp").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
 
     }
 }

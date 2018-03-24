@@ -22,6 +22,7 @@ public class ShowContent extends HttpServlet {
         String[] asd;
         asd = content.split("\n");
         req.setAttribute("content",asd);
-        req.getRequestDispatcher("content.jsp").forward(req, resp);
+        req.getRequestDispatcher("content.jsp").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

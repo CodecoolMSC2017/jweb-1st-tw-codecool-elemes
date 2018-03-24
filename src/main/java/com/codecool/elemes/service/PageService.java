@@ -8,7 +8,7 @@ import java.util.List;
 
 public final class PageService {
 
-    TextDatabase database = Database.getInstance();
+    Database database = Database.getInstance();
 
     public List<Text> getTexts(User user) {
         Database database = Database.getInstance();

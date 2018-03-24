@@ -21,7 +21,8 @@ public class PagesServlet extends HttpServlet {
         User user = (User)session.getAttribute("loggedin");
 
         req.setAttribute("texts",pageService.getTexts(user));
-        req.getRequestDispatcher(pageService.getPage(user)).forward(req, resp);
+        req.getRequestDispatcher(pageService.getPage(user)).include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 
     @Override

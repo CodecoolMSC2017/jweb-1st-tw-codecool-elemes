@@ -24,8 +24,10 @@ public class AddContent extends HttpServlet {
         } catch (InvalidInputException e) {
             req.setAttribute("message", "Invalid input");
             req.getRequestDispatcher("pages").include(req, resp);
+            req.getRequestDispatcher("userpage.jsp").include(req, resp);
         }
         req.setAttribute("message", "Text added");
         req.getRequestDispatcher("pages").include(req, resp);
+        req.getRequestDispatcher("userpage.jsp").include(req, resp);
     }
 }

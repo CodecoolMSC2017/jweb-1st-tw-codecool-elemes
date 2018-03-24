@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentService {
-    private AssigmentDatabase database = Database.getInstance();
+    private Database database = Database.getInstance();
 
     public String getPage(User user) {
         if (user.getRole().equals(Role.STUDENT)) {
