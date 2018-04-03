@@ -43,7 +43,6 @@ public class Assignment {
     }
 
     public void grade(int grade) {
-        isCorrected = true;
         this.grade = grade;
     }
 
