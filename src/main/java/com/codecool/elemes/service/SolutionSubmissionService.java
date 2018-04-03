@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 
 public class SolutionSubmissionService {
 
-    public void handleSubmission(HttpServletRequest req, HttpServletResponse resp) throws SubmissionAlreadyAddedException {
-        String answer = req.getParameter("answer");
-        String question = req.getParameter("question");
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("loggedin");
+    public void handleSubmission(String question, String answer, User user) throws SubmissionAlreadyAddedException {
+
         Database database = Database.getInstance();
         Assignment ass = null;
         for (Assignment assignment: database.getAllAssignments()) {
@@ -24,8 +21,9 @@ public class SolutionSubmissionService {
                 ass = assignment;
             }
         }
-        ass.setAnswear(answer);
-        Solution solution = new Solution(ass, user);
+        Assignment assignment = new Assignment(ass.getQuestion());
+        assignment.setAnswear(answer);
+        Solution solution = new Solution(assignment, user);
         for (Solution solution1: database.getAllSolutions()) {
             if (solution.equals(solution1)) {
                 throw new SubmissionAlreadyAddedException();

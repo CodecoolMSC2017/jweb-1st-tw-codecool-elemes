@@ -36,8 +36,12 @@ public class SolutionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String backMessage;
+        String answer = req.getParameter("answer");
+        String question = req.getParameter("question");
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("loggedin");
         try {
-            solutionSubmissionService.handleSubmission(req, resp);
+            solutionSubmissionService.handleSubmission(question, answer, user);
             backMessage = "Answer recorded.";
 
         } catch (SubmissionAlreadyAddedException e) {
