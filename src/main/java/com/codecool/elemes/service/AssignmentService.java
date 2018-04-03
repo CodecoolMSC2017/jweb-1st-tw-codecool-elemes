@@ -44,4 +44,12 @@ public class AssignmentService {
             }
         }
     }
+
+    public Assignment createAssignment(String question, int maxScore) {
+        return new Assignment(question, maxScore);
+
+    }
+    public void addAssignment(Assignment assignment) {
+        database.addAssignment(assignment);
+    }
 }

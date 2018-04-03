@@ -18,7 +18,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
 
     private Map<Date,List<User>> rollCallAttendance = new HashMap<>();
 
-    private Database(){}
+    public Database(){}
 
     public static Database getInstance() {
         return instance;

@@ -13,8 +13,6 @@ public interface UserDataBase {
     void deleteUser(String email) throws NoSuchUserException;
 
     User getUser(String email) throws NoSuchUserException;
-
     List<User> getOnlyStudents(List<User> users);
-
-    User getUserByEmail(String eMail)throws NoSuchUserException;
+    User getUserByEmail(String eMail) throws NoSuchUserException;
 }

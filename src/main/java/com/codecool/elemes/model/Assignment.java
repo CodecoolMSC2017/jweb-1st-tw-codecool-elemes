@@ -12,8 +12,9 @@ public class Assignment {
     private String answear;
     private Integer grade;
     private int id;
+    private int maxScore;
 
-    public Assignment(String question) {
+    public Assignment(String question, int maxScore) {
         this.question = question;
         isComplete = false;
         isCorrected = false;
@@ -21,6 +22,7 @@ public class Assignment {
         grade = null;
         Random random = new Random();
         id = random.nextInt(1000000);
+        this.maxScore = maxScore;
     }
 
     public String getAnswear() {
@@ -41,7 +43,6 @@ public class Assignment {
     }
 
     public void grade(int grade) {
-        isCorrected = true;
         this.grade = grade;
     }
 
