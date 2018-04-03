@@ -4,14 +4,15 @@
 <h1>Solution Page</h1>
 <a href="assignment">Go back</a>
 <ul>
-<p>
-    <c:out value="${question}"/>
-        <form action="solution" method="post">
-            <input type = "text" name="answer">
-            <input type="hidden" name="question" value="${question}">
-            <input type="submit" value="submit">
-        </form>
-
-</p>
+<c:if test="${not empty question}">
+   <p>
+       <c:out value="${question}"/>
+           <form action="solution" method="post">
+               <input type = "text" name="answer">
+               <input type="hidden" name="question" value="${question}">
+               <input type="submit" value="submit">
+           </form>
+   </p>
+</c:if>
 <p><c:out value="${backmessage}"/></p>
 </body>
