@@ -17,7 +17,10 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
 
     private List<Solution> solutions = new ArrayList<>();
 
-    private Database(){}
+
+    // visible for testing
+    public Database(){}
+
 
     public static Database getInstance() {
         return instance;
