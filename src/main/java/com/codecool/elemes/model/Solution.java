@@ -35,4 +35,12 @@ public class Solution {
     public void setResult(int result) {
         this.result = result;
     }
+
+
+    public boolean equals(Solution solution) {
+        if (solution.getAssignment().getQuestion().equals(this.getAssignment().getQuestion()) && solution.getUser().getName().equals(this.getUser().getName())) {
+            return true;
+        }
+        return false;
+    }
 }
