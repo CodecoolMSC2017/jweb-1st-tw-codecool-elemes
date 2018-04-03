@@ -21,7 +21,7 @@ public class SolutionSubmissionService {
                 ass = assignment;
             }
         }
-        Assignment assignment = new Assignment(ass.getQuestion());
+        Assignment assignment = new Assignment(ass.getQuestion(), ass.getMaxScore());
         assignment.setAnswear(answer);
         Solution solution = new Solution(assignment, user);
         for (Solution solution1: database.getAllSolutions()) {

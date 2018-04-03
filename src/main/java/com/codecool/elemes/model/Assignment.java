@@ -77,4 +77,8 @@ public class Assignment {
     public boolean getisPublished() {
         return isPublished;
     }
+
+    public int getMaxScore() {
+        return maxScore;
+    }
 }

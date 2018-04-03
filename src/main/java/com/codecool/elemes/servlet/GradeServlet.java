@@ -36,6 +36,9 @@ public class GradeServlet extends HttpServlet {
             solution = database.getSolution(Integer.parseInt(id));
             int grade = Integer.parseInt(req.getParameter("grade"));
             solution.getAssignment().grade(grade);
+            if (solution.getAssignment().getMaxScore() < grade) {
+                throw  new NumberFormatException();
+            }
             req.setAttribute("solution", solution);
             req.setAttribute("message", "Grade saved");
         } catch (NoSuchSolutionException e) {

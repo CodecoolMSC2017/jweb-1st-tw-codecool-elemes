@@ -12,6 +12,7 @@
 
 <body>
 <p><c:out value="${solution.assignment.question}"/></p>
+<p>Max Score: <c:out value="${solution.assignment.maxScore}"/></p>
 <p>Answer: <c:out value="${solution.assignment.answear}"/>
 <form action="grade" method="post">
   <input type = "text" name="grade">

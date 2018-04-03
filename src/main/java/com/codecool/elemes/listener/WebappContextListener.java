@@ -20,8 +20,8 @@ public final class WebappContextListener implements ServletContextListener {
         database.addText(new Text("Hello World is Python", true));
         database.addText(new Text("Conditional Statements or Selection Statements", false));
         database.addText(new Text("Functions or Methods", false));
-        database.addAssignment(new Assignment("How many times a cow poo in a day?"));
-        database.addAssignment(new Assignment("Do you like programming?"));
+        database.addAssignment(new Assignment("How many times a cow poo in a day?", 20));
+        database.addAssignment(new Assignment("Do you like programming?", 20));
         ServletContext ctx = sce.getServletContext();
         sce.getServletContext().addFilter("SetCharacterEncodingFilter", "org.apache.catalina.filters.SetCharacterEncodingFilter");
     }
