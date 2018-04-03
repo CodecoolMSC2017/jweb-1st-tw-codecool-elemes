@@ -45,11 +45,11 @@ public class AssignmentService {
         }
     }
 
-    public void addAssignment(HttpServletRequest req) {
-        String question = req.getParameter("question");
-        int score = Integer.parseInt(req.getParameter("score"));
-        Assignment assignment = new Assignment(question, score);
+    public Assignment createAssignment(String question, int maxScore) {
+        return new Assignment(question, maxScore);
 
-
+    }
+    public void addAssignment(Assignment assignment) {
+        database.addAssignment(assignment);
     }
 }

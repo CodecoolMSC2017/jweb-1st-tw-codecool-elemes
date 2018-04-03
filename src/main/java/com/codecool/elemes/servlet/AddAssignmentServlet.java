@@ -1,5 +1,6 @@
 package com.codecool.elemes.servlet;
 
+import com.codecool.elemes.model.Assignment;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.AssignmentService;
 
@@ -20,8 +21,11 @@ public class AddAssignmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("loggedin");
+        String question = req.getParameter("question");
+        int maxScore = Integer.parseInt(req.getParameter("score"));
 
-        assignmentService.addAssignment(req);
+        Assignment assignment = assignmentService.createAssignment(question, maxScore);
+        assignmentService.addAssignment(assignment);
 
         req.setAttribute("assignments",assignmentService.getAssigments(user));
         req.getRequestDispatcher(assignmentService.getPage(user)).forward(req, resp);
