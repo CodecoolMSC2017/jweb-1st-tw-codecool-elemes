@@ -2,10 +2,9 @@ package com.codecool.elemes.model;
 
 import com.codecool.elemes.exceptions.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, SolutionDatabase {
+public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, SolutionDatabase, AttendanceDatabase {
 
     private static Database instance = new Database();
 
@@ -16,6 +15,8 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     private List<Assignment> assignments = new ArrayList<>();
 
     private List<Solution> solutions = new ArrayList<>();
+
+    private Map<Date,List<User>> rollCallAttendance = new HashMap<>();
 
     private Database(){}
 
@@ -54,6 +55,28 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         }
         throw new NoSuchUserException();
     }
+
+    @Override
+    public List<User> getOnlyStudents(List<User> users) {
+        List<User> students = new ArrayList<>();
+        for (User user:users) {
+            if((user.getRole() == Role.STUDENT)){
+                students.add(user);
+            }
+        }
+        return students;
+    }
+
+    @Override
+    public User getUserByEmail(String eMail) throws NoSuchUserException {
+        for(User user: getAllUser()){
+            if(user.geteMail().equals(eMail)){
+                return user;
+            }
+        }
+        throw new NoSuchUserException();
+    }
+
 
     @Override
     public List<Text> getTexts() {
@@ -136,4 +159,27 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         }
         throw new NoSuchAssignmentException();
     }
+
+    @Override
+    public Map<Date, List<User>> getAttendanceMap() {
+        return rollCallAttendance;
+    }
+
+    @Override
+    public List<Date> getMissedDays(String eMail) throws NoSuchUserException {
+        List<Date> missedDates = new ArrayList<>();
+        for(User user:getOnlyStudents(getAllUser())){
+            if(user.geteMail().equals(eMail)){
+                for(Map.Entry<Date,List<User>> entry : rollCallAttendance.entrySet()){
+                    for(User loggedInUser:entry.getValue()){
+                        if(loggedInUser.geteMail().equals(eMail)){
+                            missedDates.add(entry.getKey());
+                        }
+                    }
+                }
+            }
+        }
+        return missedDates;
+    }
+
 }
