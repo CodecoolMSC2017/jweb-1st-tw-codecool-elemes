@@ -11,21 +11,21 @@ import java.util.*;
 
 public final class AttendanceService {
 
-    UserDataBase database = Database.getInstance();
-    AttendanceDatabase attendanceDatabase = Database.getInstance();
-    Map<User, Boolean> todaysAttendance = new HashMap<>();
-    Map<Date, List<User>> rollCallAttendance = attendanceDatabase.getAttendanceMap();
+    private UserDataBase database = Database.getInstance();
+    private AttendanceDatabase attendanceDatabase = Database.getInstance();
+    private Map<User, Boolean> todaysAttendance = new HashMap<>();
+    private Map<Date, List<User>> rollCallAttendance = attendanceDatabase.getAttendanceMap();
 
 
     private void checkAttendance(Map<User, Boolean> today) throws AttendanceAlreadyUpdated {
         Date todayDate = new Date();
         List<User> hereToday = new ArrayList<>();
         if (!rollCallAttendance.containsKey(todayDate)) {
-            for (Map.Entry<User, Boolean> entry : today.entrySet()) {
-                if (entry.getValue() == true) {
-                    hereToday.add(entry.getKey());
+            today.forEach((key, value) -> {
+                if (value) {
+                    hereToday.add(key);
                 }
-            }
+            });
         } else {
             throw new AttendanceAlreadyUpdated();
         }
@@ -52,5 +52,6 @@ public final class AttendanceService {
             todaysAttendance.put(users.get(i),bools.get(i));
         }
     }
+
 }
 

@@ -16,12 +16,9 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
 
     private List<Solution> solutions = new ArrayList<>();
 
-
-    // visible for testing
-    public Database(){}
-
     private Map<Date,List<User>> rollCallAttendance = new HashMap<>();
 
+    public Database(){}
 
     public static Database getInstance() {
         return instance;
