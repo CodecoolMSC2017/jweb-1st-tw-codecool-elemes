@@ -24,9 +24,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (loginService.isRegistered(req)) {
+        String email = req.getParameter("email");
+        if (loginService.isRegistered(email)) {
             try {
-                User user = Database.getInstance().getUser(req.getParameter("email"));
+                User user = Database.getInstance().getUser(email);
                 HttpSession session = req.getSession();
                 session.setAttribute("loggedin", user );
                 resp.sendRedirect("userpage");

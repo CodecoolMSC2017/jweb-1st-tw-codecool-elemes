@@ -44,4 +44,12 @@ public class AssignmentService {
             }
         }
     }
+
+    public void addAssignment(HttpServletRequest req) {
+        String question = req.getParameter("question");
+        int score = Integer.parseInt(req.getParameter("score"));
+        Assignment assignment = new Assignment(question, score);
+
+
+    }
 }

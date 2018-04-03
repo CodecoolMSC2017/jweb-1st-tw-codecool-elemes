@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public final class LoginService {
 
-    public boolean isRegistered(HttpServletRequest req) {
-        String email = req.getParameter("email");
+    public boolean isRegistered(String email) {
         for(User user : Database.getInstance().getAllUser()) {
             if (user.geteMail().equals(email)) {
                 return true;
@@ -18,10 +17,9 @@ public final class LoginService {
         return false;
     }
 
-    public User createUser(HttpServletRequest req) {
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String role = req.getParameter("role");
-        return new User(name, email, Role.valueOf(role));
+    public User createUser(String name, String email, Role role) {
+        User user = new User(name, email, role);
+        Database.getInstance().add(user);
+        return user;
     }
 }

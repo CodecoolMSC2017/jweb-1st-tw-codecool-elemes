@@ -1,6 +1,7 @@
 package com.codecool.elemes.servlet;
 
 import com.codecool.elemes.model.Database;
+import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.LoginService;
 import javax.servlet.ServletException;
@@ -23,9 +24,13 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!loginService.isRegistered(req)) {
-            User user = loginService.createUser(req);
-            Database.getInstance().add(user);
+        String email = req.getParameter("email");
+        String name = req.getParameter("name");
+        String role = req.getParameter("role");
+
+        if(!loginService.isRegistered(email)) {
+            User user = loginService.createUser(name, email, Role.valueOf(role));
+
             HttpSession session = req.getSession();
             session.setAttribute("loggedin", user );
             req.setAttribute("user", user);
