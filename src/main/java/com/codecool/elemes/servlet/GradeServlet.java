@@ -31,14 +31,18 @@ public class GradeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String id = req.getParameter("id");
             Database database = Database.getInstance();
+            Solution solution = null;
         try {
-            Solution solution = database.getSolution(Integer.parseInt(id));
+            solution = database.getSolution(Integer.parseInt(id));
             int grade = Integer.parseInt(req.getParameter("grade"));
             solution.getAssignment().grade(grade);
             req.setAttribute("solution", solution);
             req.setAttribute("message", "Grade saved");
         } catch (NoSuchSolutionException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            req.setAttribute("message", "Invalid input");
+            req.setAttribute("solution", solution);
         }
         req.getRequestDispatcher("grading.jsp").forward(req, resp);
     }
