@@ -10,25 +10,11 @@
 <body>
 <h1>Attendance</h1>
 <a href="userpage">Go back</a>
-    <table>
-        <tr><th>Name</th><th>attendance</th></tr>
-        <c:forEach var="u" items="${users}">
-                    tr>
-                        <td><c:out value = "${u.name}"/><p></td>
-                        <td><form action="pages" method="post">
-                                                        <input type="radio" name="${t.title}" value="true" <c:if test = "${t.isPublished}">
-                                                                                                                      checked
-                                                                                                                   </c:if> > Publish<br>
-                                                        <input type="radio" name="${t.title}" value="false" <c:if test = "${!t.isPublished}">
-                                                                                                                     checked
-                                                                                                                    </c:if> > Unpublish<br>
-                                                        <input type="submit" value="Submit">
-                                                        </form></td>
-
-
-
-                    </tr>
+    <form action="attendance" method = "get">
+        <c:forEach var = "s" items = "${students}">
+            <input type="checkbox" name="${s.eMail}" value="true">${s.name}<br>
         </c:forEach>
-    </table>
+        <input type = "submit" value = "Submit" width = 6em;>
+    </form>
 </body>
 </html>
