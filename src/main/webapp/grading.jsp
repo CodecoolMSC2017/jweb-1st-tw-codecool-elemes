@@ -9,17 +9,14 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
+
 <body>
-<form method="get" action= "pages">
-    <input type = "submit" value = "Go back" style = "width:8%; align : left;">
-</form>
-
-<div class = "textbox">
-   <p>
-   <c:forEach var="t" items="${content}">
-        <c:out value="${t}"/><br>
-   </c:forEach>
-   </p>
-</div>
-
+     <p><c:out value="${solution.assignment.question}"/></p>
+     <p>Answer: <c:out value="${solution.assignment.answear}"/>
+            <form action="grade" method="post">
+                <input type = "text" name="grade">
+                <input type="hidden" name="id" value="${solution.id}">
+                <input type="submit" value="submit">
+            </form>
+     <p><c:out value="${message}"/></p>
 </body>

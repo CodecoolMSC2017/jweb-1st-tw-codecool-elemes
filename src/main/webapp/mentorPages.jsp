@@ -11,13 +11,7 @@
 </head>
 <body>
 <h1>Pages</h1>
-<div class = "goBack">
-    <form method="get" action= "userpage">
-        <input type = "submit" value = "Go back" style = "width:8%; align : left;">
-    </form>
-</div>
-
-
+<a href="userpage">Go back</a>
 <div class = "sidenav">
 
 <ul>
@@ -39,7 +33,7 @@
 <form class="addcontent" action="addcontent" method="post">
     <p>Add content</p>
     <input type="text" name ="title" placeholder = "Title"><br><br>
-    <textarea name = "content" rows = "20" cols = "100" placeholder = "Write here..."></textarea><br>
+    <textarea name = "content"  rows = "20" cols = "100" wrap="hard" placeholder = "Write here..."></textarea><br>
     <input type="submit" value="Submit">
 </form>
     <p><c:out value="${message}" /></p>
