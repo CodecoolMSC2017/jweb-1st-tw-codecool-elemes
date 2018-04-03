@@ -5,7 +5,7 @@
 <ul>
 <c:forEach var="t" items="${solutions}">
     <li>
-    <a href="listsolutions?id=<c:out value='${t.id}'/>"><c:out value="${t.assignment.question}"/></a>
+    <a href="grade?id=<c:out value='${t.id}'/>"><c:out value="${t.assignment.question}"/></a>
     <p>Subbmitted by <c:out value="${t.user.name}"/></p>
     </li>
 </c:forEach>
