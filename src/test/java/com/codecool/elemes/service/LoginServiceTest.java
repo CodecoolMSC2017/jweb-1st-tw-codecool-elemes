@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoginServiceTest {
-    Database database = new Database();
+     private Database database = new Database();
 
 
     @BeforeEach
@@ -21,8 +21,8 @@ class LoginServiceTest {
     @Test
     void isRegistered() {
         //given
-        String email1 = "peter@gamil.fr";
-        String email2 = "asdasd@gmail.com";
+        //String email1 = "peter@gamil.fr";
+        //String email2 = "asdasd@gmail.com";
 
 
         assertThrows(NoSuchUserException.class, () -> {
