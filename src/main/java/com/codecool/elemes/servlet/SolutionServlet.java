@@ -29,6 +29,11 @@ public class SolutionServlet extends HttpServlet {
         Solution solution = null;
         try {
             solution = solutionSubmissionService.getUsersSolution(user, req.getParameter("id"));
+            if (solution.getAssignment().getAnswear() == null){
+                req.setAttribute("question", solution.getAssignment().getQuestion());
+                req.getRequestDispatcher("solution.jsp").forward(req,resp);
+            }
+
         } catch (NoSuchAssignmentException e) {
             e.printStackTrace();
         } catch (NoSuchSolutionException e) {
@@ -42,7 +47,7 @@ public class SolutionServlet extends HttpServlet {
         try {
             req.setAttribute("grade", solution.getAssignment().getGrade());
         } catch (NotGradedYetException e) {
-            e.printStackTrace();
+            req.setAttribute("grade", "not graded yet");
         }
         req.getRequestDispatcher("solution.jsp").forward(req,resp);
     }
