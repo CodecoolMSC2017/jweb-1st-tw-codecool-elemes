@@ -20,10 +20,9 @@
   </c:forEach>
   </ul>
 <form class="addassignment" action="addassignment" method="post">
-  <p>Question</p>
-  <input type="text" name ="question" placeholder = "Question"><br><br>
-  <p>Score</p>
-  <input type="text" name ="score" placeholder = "Score"><br><br>
+  <p>Add assignment</p><br>
+  <input type="text" name ="question" placeholder = "Question"><br>
+  <input type="text" name ="score" placeholder = "Score"><br>
   <input type="submit" value="Submit">
 </form>
 </body>
