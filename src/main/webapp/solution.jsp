@@ -14,5 +14,16 @@
            </form>
    </p>
 </c:if>
-<p><c:out value="${backmessage}"/></p>
+    <c:if test="${not empty quest}">
+        <p>Question: <c:out value="${quest}"/></p>
+        <p>Your Answear: <c:out value="${answer}"/></p>
+        <p>Grade:
+            <c:if test="${not empty grade}">
+                <c:out value="${grade}"/></p>
+            </c:if>
+            <c:if test="${empty grade}">
+                <c:out value="not yet graded"/></p>
+            </c:if>
+    </c:if>
+    <p><c:out value="${backmessage}"/></p>
 </body>

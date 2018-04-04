@@ -1,6 +1,8 @@
 package com.codecool.elemes.servlet;
 
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
+import com.codecool.elemes.exceptions.NoSuchSolutionException;
+import com.codecool.elemes.exceptions.NotGradedYetException;
 import com.codecool.elemes.exceptions.SubmissionAlreadyAddedException;
 import com.codecool.elemes.model.Assignment;
 import com.codecool.elemes.model.Database;
@@ -22,14 +24,26 @@ public class SolutionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        Assignment assignment= null;
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("loggedin");
+        Solution solution = null;
         try {
-            assignment= Database.getInstance().getAssignment(id);
+            solution = solutionSubmissionService.getUsersSolution(user, req.getParameter("id"));
         } catch (NoSuchAssignmentException e) {
             e.printStackTrace();
+        } catch (NoSuchSolutionException e) {
+            Assignment assignment = solutionSubmissionService.getAssignmnet(req.getParameter("id"));
+            solutionSubmissionService.createUserSolution(user, assignment);
+            req.setAttribute("question", assignment.getQuestion());
+            req.getRequestDispatcher("solution.jsp").forward(req,resp);
         }
-        req.setAttribute("question",assignment.getQuestion());
+        req.setAttribute("quest", solution.getAssignment().getQuestion());
+        req.setAttribute("answer", solution.getAssignment().getAnswear());
+        try {
+            req.setAttribute("grade", solution.getAssignment().getGrade());
+        } catch (NotGradedYetException e) {
+            e.printStackTrace();
+        }
         req.getRequestDispatcher("solution.jsp").forward(req,resp);
     }
 
@@ -51,4 +65,5 @@ public class SolutionServlet extends HttpServlet {
         req.setAttribute("backmessage", backMessage);
         req.getRequestDispatcher("solution.jsp").forward(req, resp);
     }
+
 }
