@@ -1,4 +1,4 @@
-/*package com.codecool.elemes.service;
+package com.codecool.elemes.service;
 
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginServiceTest {
      private Database database = new Database();
 
+     LoginService service = new LoginService();
+
 
     @BeforeEach
     void setUp() {
@@ -20,18 +22,24 @@ class LoginServiceTest {
 
     @Test
     void isRegistered() {
-        //given
-        //String email1 = "peter@gamil.fr";
-        //String email2 = "asdasd@gmail.com";
 
+        assertFalse(service.isRegistered("peter@gamil.com"));
+        assertFalse(service.isRegistered("laci@gmail.ch"));
+        //assertTrue(service.isRegistered("peter@gamil.fr"));
 
         assertThrows(NoSuchUserException.class, () -> {
-            database.getUser("peter@gamil.fr").geteMail();
+            database.getUser("peter@gamil.hu").geteMail();
         });
+
     }
 
     @Test
     void createUser() {
+        int counter = database.getAllUser().size();
+        database.add(new User("csubakka", "csubakka@tatuin.com",Role.STUDENT));
+        assertEquals(counter+1, database.getAllUser().size());
+        assertThrows(NoSuchUserException.class, () -> {
+            database.getUser("peter@gamil.com").geteMail();});
 
     }
-}*/
+}
