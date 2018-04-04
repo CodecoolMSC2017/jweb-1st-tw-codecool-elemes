@@ -30,6 +30,9 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user =(User) session.getAttribute("loggedin");
 
+        if (name.equals("")) {
+            name = user.getName();
+        }
 
         try {
             Database.getInstance().getUser(user.geteMail()).setName(name);
