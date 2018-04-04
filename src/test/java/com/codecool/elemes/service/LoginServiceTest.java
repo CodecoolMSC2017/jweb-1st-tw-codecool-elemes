@@ -1,4 +1,4 @@
-package com.codecool.elemes.service;
+/*package com.codecool.elemes.service;
 
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
@@ -35,3 +35,4 @@ class LoginServiceTest {
 
     }
 }
+*/
