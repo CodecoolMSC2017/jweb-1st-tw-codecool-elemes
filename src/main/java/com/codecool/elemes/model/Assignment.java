@@ -34,11 +34,23 @@ public class Assignment {
         isComplete = true;
     }
 
-    public boolean isComplete() {
+    public boolean getIsComplete() {
         return isComplete;
     }
 
-    public boolean isCorrected() {
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public Boolean getCorrected() {
+        return isCorrected;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public boolean getIsCorrected() {
         return isCorrected;
     }
 

@@ -15,7 +15,7 @@
 
     <form action="userprofile" method="post">
 		Change name or role:<br>
-		<input type="text" name="name"><br>
+		<input type="text" name="name" value="${user.name}"><br>
 		<br>
 		<input type="radio" name="role" value="STUDENT" checked> Student<br>
 		<input type="radio" name="role" value="MENTOR"> Mentor<br>
