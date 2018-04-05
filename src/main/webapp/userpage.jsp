@@ -18,6 +18,7 @@
         <a href="pages">PAGES</a>
         <a href="userlist">USERS</a>
         <a href="attendance">ATTENDANCE</a>
+        <a href="statistics">STATISTICS</a>
     </div>
 </body>
 </html>
