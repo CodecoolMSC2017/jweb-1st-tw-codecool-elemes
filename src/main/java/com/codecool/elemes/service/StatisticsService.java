@@ -27,9 +27,9 @@ public class StatisticsService {
                 for (Solution solution : solutions) {
                     if (solution.getUser().geteMail().equals(user.geteMail())) {
                         try {
-                            count++;
                             int grade = 0;
                             grade = solution.getAssignment().getGrade();
+                            count++;
                             percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
                         } catch (NotGradedYetException e) {
                         }
@@ -37,6 +37,9 @@ public class StatisticsService {
                 }
                 performance = percentage / count * 100;
                 performance = Math.floor(performance * 100) / 100;
+                if (percentage == 0.0) {
+                    performance = null;
+                }
                 result.put(user, performance);
             }
         }

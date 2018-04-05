@@ -17,8 +17,10 @@
         <p>Student Name<a href="statistics?email=<c:out value='${s.key.eMail}'/>">
             <c:out value="${s.key.name}"/>
         </a>
-            <c:out value="${s.value}"/>
-            %
+            <c:if test="${not empty s.value}">
+                <c:out value="${s.value}"/>
+                %
+            </c:if>
         <p>
 
     </c:forEach>
