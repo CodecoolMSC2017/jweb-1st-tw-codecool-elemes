@@ -5,6 +5,7 @@ import com.codecool.elemes.exceptions.NotGradedYetException;
 import com.codecool.elemes.model.*;
 
 import javax.swing.text.Document;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class StatisticsService {
                     }
                 }
                 performance = percentage / count * 100;
+                performance = Math.floor(performance * 100) / 100;
                 result.put(user, performance);
             }
         }
@@ -50,7 +52,8 @@ public class StatisticsService {
                 try {
                     grade = solution.getAssignment().getGrade();
                     percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
-                    result.put(solution.getAssignment().getQuestion(), percentage);
+                    percentage = Math.floor(percentage * 100) / 100;
+                    result.put(solution.getAssignment().getQuestion(),percentage);
                 } catch (NotGradedYetException e) { }
             }
         }
