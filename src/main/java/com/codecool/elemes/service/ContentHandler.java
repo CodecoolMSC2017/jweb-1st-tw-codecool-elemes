@@ -9,7 +9,7 @@ public class ContentHandler {
     private TextDatabase database = Database.getInstance();
 
     public void addNewTextContent(String title, String content) throws InvalidInputException {
-        if (title == "" || content == "") {
+        if (title.equals("") || content.equals("")) {
             throw new InvalidInputException();
         }
         Text text = new Text(title, false);

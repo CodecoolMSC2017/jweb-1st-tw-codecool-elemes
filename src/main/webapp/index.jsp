@@ -20,7 +20,7 @@
         </header>
         <p>${login_error}</p>
         <form action="login" method="post">
-            <input type="text" name="email" placeholder = "e-mail" size ="20"><br>
+            <input type="email" name="email" placeholder = "e-mail" size ="20"><br>
             <input type="submit" value="Login" style = "width:150px;">
         </form>
         <p>${message}</p><br>

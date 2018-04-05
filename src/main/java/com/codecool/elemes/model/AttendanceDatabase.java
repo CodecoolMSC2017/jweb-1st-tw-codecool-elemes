@@ -10,6 +10,7 @@ public interface AttendanceDatabase {
 
     Map<Date,List<User>> getAttendanceMap();
 
+    List<Map<Date,List<User>>> missingStudents() throws Exception;
 
     List<Date> getMissedDays(String eMail) throws NoSuchUserException;
 
