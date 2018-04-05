@@ -57,5 +57,29 @@ public final class AttendanceService {
         }
     }
 
+    public Map<User,Boolean> editAtt(String stringDate) throws Exception {
+        List<User> users = new ArrayList<>();
+        List<Boolean> booleans = new ArrayList<>();
+        Map<User,Boolean> attendanceMap = new HashMap<>();
+        Date date = new SimpleDateFormat("MM/dd/yyyy").parse(stringDate);
+        if(!rollCallAttendance.containsKey(date)){
+            throw new Exception();
+        }
+        List<User> editableUsers = rollCallAttendance.get(date);
+        for(User user : database.getOnlyStudents(database.getAllUser())){
+           if(editableUsers.contains(user)){
+               users.add(user);
+               booleans.add(true);
+           }else{
+               users.add(user);
+               booleans.add(false);
+           }
+        }
+        for (int i = 0; i <booleans.size() ; i++) {
+            attendanceMap.put(users.get(i),booleans.get(i));
+        }
+        return attendanceMap;
+    }
+
 }
 

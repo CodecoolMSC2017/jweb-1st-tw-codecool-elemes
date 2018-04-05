@@ -30,10 +30,7 @@ public class AttendanceServlet extends HttpServlet {
         req.getAttribute("users");
 
         req.setAttribute("AllOverAttendance",database.getAttendanceMap());
-        for(Map.Entry<Date,List<User>> entry : database.getAttendanceMap().entrySet()){
-            System.out.println(entry.getKey()+"  "+entry.getValue().size());
-        }
-        req.getRequestDispatcher("attendance.jsp").forward(req, resp);
+        req.getRequestDispatcher("attendance.jsp").forward(req,resp);
     }
 
     @Override
