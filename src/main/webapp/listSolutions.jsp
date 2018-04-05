@@ -39,8 +39,5 @@
                     </p>
                 </li>
             </c:forEach>
-    <p>
-        <a href="userpage">Go back</a>
-    </p>
 </div>
 </body>

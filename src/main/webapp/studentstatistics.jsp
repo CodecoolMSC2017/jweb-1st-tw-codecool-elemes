@@ -21,8 +21,10 @@
         <p>
     </c:forEach>
     <p>Summary:
-        <c:out value="${summary}"/>
-        %
+        <c:if test="${not empty summary}">
+            <c:out value="${summary}"/>
+            %
+        </c:if>
     </p>
 </div>
 </body>

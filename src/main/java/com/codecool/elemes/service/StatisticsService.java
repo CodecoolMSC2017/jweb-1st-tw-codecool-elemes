@@ -37,6 +37,9 @@ public class StatisticsService {
                 }
                 performance = percentage / count * 100;
                 performance = Math.floor(performance * 100) / 100;
+                if (percentage == 0.0) {
+                    performance = null;
+                }
                 result.put(user, performance);
             }
         }
