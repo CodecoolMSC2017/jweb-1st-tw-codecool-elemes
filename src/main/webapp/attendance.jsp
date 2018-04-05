@@ -14,10 +14,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
   $( function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker({minDate : -60, maxDate:"+0D"});
   } );
   </script>
 </head>
+<%@ include file = "userpage.jsp" %>
+
 <body>
 <h1>Attendance</h1>
 <a href="userpage">Go back</a>
