@@ -45,6 +45,9 @@
         </tr>
     </c:forEach>
 </table>
+<form action = "editAttendance" method = "get" style="text-align:right;">
+    <input type = "submit" value = "edit" style=" margin-right:5%;">
+</form>
 
 </html>
 </body>
