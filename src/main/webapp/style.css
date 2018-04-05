@@ -203,24 +203,25 @@ textarea {
     border:1px solid #ccc;
 }
 
- .pageContent {
-     position: fixed;
-     z-index: 1;
-     top:10%;
-     left: 30%;
-     background-color: white;
-     overflow-x: hidden;
-     padding: 8px 0;
-     border:1px solid #ccc;
+.pageContent {
+ position: fixed;
+ z-index: 1;
+ top:10%;
+ left: 30%;
+ background-color: white;
+ overflow-x: hidden;
+ padding: 8px 0;
+ border:1px solid #ccc;
 }
- .pageContent a {
-     padding: 6px 10px 6px 16px;
-     text-decoration: none;
-     font-size: 20px;
-     color: grey;
-     display: block;
-     font-family: 'Roboto', sans-serif;
+.pageContent a {
+ text-align: center
+ padding: 6px 10px 6px 16px;
+ text-decoration: none;
+ font-size: 20px;
+ color: grey;
+ display: block;
+ font-family: 'Roboto', sans-serif;
 }
- .pageContent a:hover {
-     color: black;
+.pageContent a:hover {
+ color: black;
 }
