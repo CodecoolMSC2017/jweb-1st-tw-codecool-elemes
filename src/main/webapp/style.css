@@ -150,11 +150,14 @@
      float:right
 }
 /*USERLIST*/
-.users{
- border:1px solid #ccc;
- background-color: #b1e0ed;
- width:200px;
- margin-bottom : 5px;
+ .users{
+     position: fixed;
+     left: 30%;
+     right: 10em;
+     border:1px solid #ccc;
+     background-color: #b1e0ed;
+     width:200px;
+     margin-bottom : 5px;
 }
 .addcontent {
     position: fixed;
@@ -224,4 +227,18 @@ textarea {
 }
 .pageContent a:hover {
  color: black;
+}
+
+.listSolutions {
+    position: fixed;
+    left: 30%;
+    right: 10em;
+
+}
+
+.statistics {
+    position: fixed;
+    left: 30%;
+    right: 10em;
+
 }

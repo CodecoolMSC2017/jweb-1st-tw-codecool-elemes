@@ -19,7 +19,7 @@ public class StatisticsService {
 
         Map<User, Double> result = new HashMap<>();
 
-        for (User user:users) {
+        for (User user : users) {
             if (user.getRole().equals(Role.STUDENT)) {
                 Double performance = 0.0;
                 Double percentage = 0.0;
@@ -43,18 +43,19 @@ public class StatisticsService {
         return result;
     }
 
-    public Map<String, Double>  getDetailedStudentStatistics(User user) {
+    public Map<String, Double> getDetailedStudentStatistics(User user) {
         Map<String, Double> result = new HashMap<>();
         int grade;
-        for(Solution solution : database.getAllSolutions()) {
+        for (Solution solution : database.getAllSolutions()) {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
                 try {
                     grade = solution.getAssignment().getGrade();
                     percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
                     percentage = Math.floor(percentage * 100) / 100;
-                    result.put(solution.getAssignment().getQuestion(),percentage);
-                } catch (NotGradedYetException e) { }
+                    result.put(solution.getAssignment().getQuestion(), percentage);
+                } catch (NotGradedYetException e) {
+                }
             }
         }
         return result;
@@ -63,21 +64,5 @@ public class StatisticsService {
     public User getUser(String email) throws NoSuchUserException {
         return database.getUser(email);
     }
-
-    public static void main(String[] args) throws NotGradedYetException, NoSuchUserException {
-
-        StatisticsService s = new StatisticsService();
-        Assignment ass = new Assignment("asd", 10);
-        Assignment as = new Assignment("asdasd", 12);
-        ass.grade(10);
-        as.grade(11);
-        s.database.add(new User("Lili", "lili@live.it", Role.STUDENT));
-        s.database.add(new User("Lili", "lili@live.i", Role.STUDENT));
-        Solution solution = new Solution(ass, s.database.getUser("lili@live.it"));
-        Solution solution2 = new Solution(as, s.database.getUser("lili@live.i"));
-        s.database.addSolution(solution);
-        s.database.addSolution(solution2);
-        System.out.println(s.getDetailedStudentStatistics(new User("Lili", "lili@live.it", Role.STUDENT)));
-        System.out.println(s.getSummerizeStudentStatistics());
-    }
+    
 }
