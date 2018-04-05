@@ -166,6 +166,17 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
+    public List<Map<Date,List<User>>> missingStudents() throws Exception {
+        List<Map<Date,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
+        for(Map.Entry<Date,List<User>>entry : rollCallAttendance.entrySet()){
+            if(entry.getValue().size() != getOnlyStudents(getAllUser()).size()){
+                daysWhereSomeoneIsMissing.add((Map<Date, List<User>>) entry);
+            }
+        }
+        return daysWhereSomeoneIsMissing;
+    }
+
+    @Override
     public List<Date> getMissedDays(String eMail) throws NoSuchUserException {
         List<Date> missedDates = new ArrayList<>();
         for(User user:getOnlyStudents(getAllUser())){
@@ -179,6 +190,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
                 }
             }
         }
+        System.out.println(missedDates.size());
         return missedDates;
     }
 
