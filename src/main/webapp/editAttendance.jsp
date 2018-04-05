@@ -15,18 +15,20 @@
   } );
   </script>
 </head>
-
-<body>
 <%@ include file = "userpage.jsp" %>
+<body>
 <form action="editAttendance" method="post">
     <p>Date: <input type="text" id="datepicker" name = "editableDate">
         <input type = "submit" value = "submit" width="6em">
     </p><br><br>
     <c:forEach var="s" items="${editAttendanceMap}">
-        <input type="checkbox" name="${s.key.eMail}" value="true"<c:if test = "${s.value}">checked</c:if>>${s.name}<br>
-        <p>value</p>
+        <input type="checkbox" name="${s.key.eMail}" value="true"
+            <c:if test = "${s.value}">
+                checked
+            </c:if>
+        >
+        ${s.key.name}<br>
     </c:forEach>
-    <input type="submit" value="Submit" width="6em" />
 </form>
 </body>
 </html>

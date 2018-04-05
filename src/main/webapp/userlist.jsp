@@ -13,7 +13,6 @@
 <body>
 <div class="users">
     <h1>Users</h1>
-    <a href="userpage">Go back</a>
     <c:forEach var="u" items="${users}">
 
         <p>Name:
