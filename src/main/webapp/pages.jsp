@@ -12,14 +12,13 @@
 
 <body>
 <%@ include file = "userpage.jsp" %>
-<div class = "pageContent" align = "center" >
-
-<ul>
-<c:forEach var="t" items="${texts}">
-    <li>
-    <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a>
-    </li>
-</c:forEach>
-</ul>
+<div class = "pageContent" align = 30% >
+    <ul>
+        <c:forEach var="t" items="${texts}">
+            <li>
+            <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a><br>
+            </li>
+        </c:forEach>
+    </ul>
 </div>
 </body>

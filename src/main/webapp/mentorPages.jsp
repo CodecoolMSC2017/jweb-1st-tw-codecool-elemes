@@ -11,24 +11,18 @@
 </head>
 <body>
 <%@ include file = "userpage.jsp" %>
-<h1>Pages</h1>
-<a href="userpage">Go back</a>
 <div class = "pageContent" style="align:center;">
-
 <ul>
   <form action="pages" method="post">
       <c:forEach var="t" items="${texts}">
           <li>
-      <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a>
-
-      <input type="radio" name="${t.title}" value="true" <c:if test = "${t.isPublished}">
-                                                                    checked
-                                                                 </c:if> > Publish<br>
-      <input type="radio" name="${t.title}" value="false" <c:if test = "${!t.isPublished}">
-                                                                   checked
-                                                                  </c:if> > Unpublish<br>
-
-
+              <a href="content?id=<c:out value='${t.id}'/>"><c:out value="${t.title}"/></a><br>
+              <input type="radio" name="${t.title}" value="true" <c:if test = "${t.isPublished}">
+                                                                            checked
+                                                                         </c:if> > Publish<br>
+              <input type="radio" name="${t.title}" value="false" <c:if test = "${!t.isPublished}">
+                                                                           checked
+                                                                          </c:if> > Unpublish<br>
         </li>
       </c:forEach>
       <input type="submit" value="Submit" style ="width: 6em;">

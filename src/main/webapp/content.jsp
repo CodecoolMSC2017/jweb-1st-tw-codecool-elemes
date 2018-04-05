@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+<%@ include file = "userpage.jsp" %>
 <form method="get" action= "pages">
     <input type = "submit" value = "Go back" style = "width:8%; align : left;">
 </form>
