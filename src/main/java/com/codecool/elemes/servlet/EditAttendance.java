@@ -22,12 +22,12 @@ public class EditAttendance extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             req.setAttribute("editAttendanceMap",attendanceService.editAtt(req.getParameter("editableDate")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("editAttendance");
+        req.getRequestDispatcher("editAttendance.jsp").forward(req, resp);
     }
 }

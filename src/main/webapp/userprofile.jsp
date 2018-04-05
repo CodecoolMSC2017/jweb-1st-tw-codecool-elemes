@@ -14,7 +14,6 @@
     <input type = "submit" value = "Logout" style=" margin-right:5%;">
 </form>
 <div class = "usercss">
-<h1>User Profile</h1>
 <p>Current profile<p>
 <p>Name: <c:out value="${user.name}"/><br>Email: <c:out value="${user.eMail}"/><br>Role: <c:out value="${user.role}"/><p>
     <form action="userprofile" method="post">

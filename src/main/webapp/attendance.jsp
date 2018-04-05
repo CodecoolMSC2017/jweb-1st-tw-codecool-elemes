@@ -21,7 +21,6 @@
 <%@ include file = "userpage.jsp" %>
 
 <body>
-<h1>Attendance</h1>
 <a href="userpage">Go back</a>
 <form action="attendance" method="post">
     <p>Date: <input type="text" id="datepicker" name = "attendanceDate"></p>
