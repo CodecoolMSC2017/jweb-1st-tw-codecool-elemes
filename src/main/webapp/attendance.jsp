@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <head>
@@ -25,13 +26,13 @@
     <c:forEach var="s" items="${students}">
         <input type="checkbox" name="${s.eMail}" value="true">${s.name}<br>
     </c:forEach>
-    <input type="submit" value="Submit" width=6em; onclick="alert('Rollcall Attendance Submitted!')">
+    <input type="submit" value="Submit" width=6em; />
 </form>
 <table>
     <tr><th>Days</th><th>People</th></tr>
     <c:forEach var="attendance" items="${AllOverAttendance}">
         <tr>
-            <td>${attendance.key}</td>
+            <td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${attendance.key}" /></td>
             <td>
                 <ul>
                     <c:forEach items="${attendance.value}" var = "user">
