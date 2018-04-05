@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+
 @WebServlet("/editAttendance")
 public class EditAttendance extends HttpServlet {
     Database database = Database.getInstance();
@@ -26,6 +28,11 @@ public class EditAttendance extends HttpServlet {
         try {
             req.setAttribute("editAttendanceMap",attendanceService.editAtt(req.getParameter("editableDate")));
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            attendanceService.rewriteAttendance(req);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         req.getRequestDispatcher("editAttendance.jsp").forward(req, resp);

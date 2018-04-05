@@ -80,6 +80,31 @@ public final class AttendanceService {
         }
         return attendanceMap;
     }
+    public void rewriteAttendance(HttpServletRequest req) throws ParseException {
+        List<User> usersHere = new ArrayList<>();
+        List<Boolean> isHere = new ArrayList<>();
+        List<User> users = new ArrayList<>();
+        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(req.getParameter("editableDate"));
+        String booleanString;
+        Map<User,Boolean> map = (Map<User, Boolean>) req.getAttribute("editAttendanceMap");
+        for(Map.Entry<User,Boolean> entry: map.entrySet()){
+            usersHere.add(entry.getKey());
+            booleanString = req.getParameter(entry.getKey().geteMail());
+            if(booleanString != null){
+                isHere.add(true);
+
+            }else{
+                isHere.add(false);
+            }
+        }
+        for (int i = 0; i <isHere.size() ; i++) {
+            if(isHere.get(i)){
+                users.add(usersHere.get(i));
+            }
+        }
+        attendanceDatabase.getAttendanceMap().put(formattedDate,users);
+
+    }
 
 }
 
