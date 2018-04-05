@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+<%@ include file = "userpage.jsp" %>
 <body>
 <h1>Users</h1>
 <a href="userpage">Go back</a>

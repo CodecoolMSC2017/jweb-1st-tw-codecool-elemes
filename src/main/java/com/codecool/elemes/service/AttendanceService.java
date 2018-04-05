@@ -17,15 +17,10 @@ public final class AttendanceService {
     private AttendanceDatabase attendanceDatabase = Database.getInstance();
     private Map<User, Boolean> todaysAttendance = new HashMap<>();
     private Map<Date, List<User>> rollCallAttendance = attendanceDatabase.getAttendanceMap();
-    private String pattern = "MM/dd/yyyy";
-    private SimpleDateFormat smpl = new SimpleDateFormat(pattern);
-
-
 
     private void checkAttendance(Map<User, Boolean> today,Date date) throws AttendanceAlreadyUpdated {
-        Date todayDate = date;
         List<User> hereToday = new ArrayList<>();
-        if (!rollCallAttendance.containsKey(todayDate)) {
+        if (!rollCallAttendance.containsKey(date)) {
             today.forEach((key, value) -> {
                 if (value) {
                     hereToday.add(key);
@@ -34,13 +29,14 @@ public final class AttendanceService {
         } else {
             throw new AttendanceAlreadyUpdated();
         }
-        rollCallAttendance.put(todayDate, hereToday);
-        System.out.println(attendanceDatabase.getAttendanceMap().size());
+        rollCallAttendance.put(date, hereToday);
     }
     public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException {
         List<Boolean> isHere = new ArrayList<>();
         List<User> usersHere = new ArrayList<>();
         String booleanString;
+        String date = req.getParameter("attendanceDate");
+        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(date);
         for(User user: database.getOnlyStudents(database.getAllUser())){
             usersHere.add(user);
             booleanString = req.getParameter(user.geteMail());
@@ -52,7 +48,7 @@ public final class AttendanceService {
             }
         }
         organizeAttendance(usersHere,isHere);
-        checkAttendance(todaysAttendance,smpl.parse(req.getParameter("attendanceDate")));
+        checkAttendance(todaysAttendance, formattedDate);
     }
 
     private void organizeAttendance(List<User> users ,List<Boolean> bools){

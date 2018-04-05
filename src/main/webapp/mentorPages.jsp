@@ -10,9 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+<%@ include file = "userpage.jsp" %>
 <h1>Pages</h1>
 <a href="userpage">Go back</a>
-<div class = "sidenav">
+<div class = "pageContent" style="align:center;">
 
 <ul>
   <form action="pages" method="post">
@@ -30,11 +31,11 @@
 
         </li>
       </c:forEach>
-      <input type="submit" value="Submit" width: 6em;>
+      <input type="submit" value="Submit" style ="width: 6em;">
   </form >
 </ul>
 </div>
-<form class="addcontent" action="addcontent" method="post">
+<form class="addcontent" action="addcontent" method="post" align = "center">
     <p>Add content</p>
     <input type="text" name ="title" placeholder = "Title"><br><br>
     <textarea name = "content"  rows = "20" cols = "100" wrap="hard" placeholder = "Write here..."></textarea><br>

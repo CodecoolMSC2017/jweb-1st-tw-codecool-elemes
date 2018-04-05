@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<%@ include file = "userpage.jsp" %>
 <p><c:out value="${solution.assignment.question}"/></p>
 <p>Max Score: <c:out value="${solution.assignment.maxScore}"/></p>
 <p>Answer: <c:out value="${solution.assignment.answear}"/>

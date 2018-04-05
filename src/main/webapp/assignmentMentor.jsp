@@ -3,6 +3,8 @@
 <body>
 <h1>Assignments</h1>
 <a href="userpage">Go back</a>
+
+<div class = "sidenav">
   <ul>
   <c:forEach var="t" items="${assignments}">
       <li>
@@ -19,6 +21,7 @@
       </li>
   </c:forEach>
   </ul>
+</div>
 <form class="addassignment" action="addassignment" method="post">
   <p>Add assignment</p><br>
   <input type="text" name ="question" placeholder = "Question"><br>
