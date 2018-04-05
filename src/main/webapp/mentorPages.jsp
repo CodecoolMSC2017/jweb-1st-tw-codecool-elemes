@@ -23,13 +23,13 @@
               <input type="radio" name="${t.title}" value="false" <c:if test = "${!t.isPublished}">
                                                                            checked
                                                                           </c:if> > Unpublish<br>
-        </li>
+        </li><br>
       </c:forEach>
       <input type="submit" value="Submit" style ="width: 6em;">
   </form >
 </ul>
 </div>
-<form class="addcontent" action="addcontent" method="post" align = "center">
+<form class="addcontent" action="addcontent" method="post">
     <p>Add content</p>
     <input type="text" name ="title" placeholder = "Title"><br><br>
     <textarea name = "content"  rows = "20" cols = "100" wrap="hard" placeholder = "Write here..."></textarea><br>

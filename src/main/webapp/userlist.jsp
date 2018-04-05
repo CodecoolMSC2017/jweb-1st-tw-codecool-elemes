@@ -11,12 +11,12 @@
 </head>
 <%@ include file = "userpage.jsp" %>
 <body>
-<h1>Users</h1>
-<a href="userpage">Go back</a>
-<c:forEach var="u" items="${users}">
-    <div class = "users">
-        <p>Name: <c:out value="${u.name}"/><br>Email: <c:out value="${u.eMail}"/><br>Role: <c:out value="${u.role}"/><p>
-    </div>
-</c:forEach>
+<div style="align: center">
+    <c:forEach var="u" items="${users}">
+        <div class = "users">
+            <p>Name: <c:out value="${u.name}"/><br>Email: <c:out value="${u.eMail}"/><br>Role: <c:out value="${u.role}"/><p>
+        </div>
+    </c:forEach>
+</div>
 </body>
 </html>

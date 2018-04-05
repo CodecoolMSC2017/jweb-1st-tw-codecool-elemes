@@ -150,11 +150,11 @@
      float:right
 }
 /*USERLIST*/
- .users{
-     border:1px solid #ccc;
-     background-color: #b1e0ed;
-     width:200px;
-     margin-bottom : 5px;
+.users{
+ border:1px solid #ccc;
+ background-color: #b1e0ed;
+ width:200px;
+ margin-bottom : 5px;
 }
 .addcontent {
     position: fixed;
