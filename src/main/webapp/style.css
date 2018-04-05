@@ -151,6 +151,9 @@
 }
 /*USERLIST*/
  .users{
+     position: fixed;
+     left: 30%;
+     right: 10em;
      border:1px solid #ccc;
      background-color: #b1e0ed;
      width:200px;
@@ -224,4 +227,18 @@ textarea {
 }
 .pageContent a:hover {
  color: black;
+}
+
+.listSolutions {
+    position: fixed;
+    left: 30%;
+    right: 10em;
+
+}
+
+.statistics {
+    position: fixed;
+    left: 30%;
+    right: 10em;
+
 }

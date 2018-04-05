@@ -5,18 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UserList</title>
+    <title>Studentstatistics</title>
     <link rel="stylesheet" href="style.css">
-
+    <%@ include file = "userpage.jsp" %>
 </head>
 <body>
-<h1>Student Statistics</h1>
-<a href="userpage">Go back</a>
-<c:forEach var="s" items="${stats}">
-    <div class = "statistics">
-        <p>Question: <c:out value="${s.key}"/> <c:out value="${s.value}"/>%<p>
-    </div>
-</c:forEach>
-<p>Summary: <c:out value="${summary}"/>%</p>
+<div class="statistics">
+    <h1>Student Statistics</h1>
+    <c:forEach var="s" items="${stats}">
+
+        <p>Question:
+            <c:out value="${s.key}"/>
+            <c:out value="${s.value}"/>
+            %
+        <p>
+    </c:forEach>
+    <p>Summary:
+        <c:out value="${summary}"/>
+        %
+    </p>
+</div>
 </body>
 </html>
