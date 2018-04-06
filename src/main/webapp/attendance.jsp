@@ -29,7 +29,7 @@
     <input type="submit" value="Submit" width=6em; />
 </form>
 <table>
-    <tr><th>Days</th><th>People</th></tr>
+    <br><br><tr><th>Days</th><th>People</th></tr>
     <c:forEach var="attendance" items="${AllOverAttendance}">
         <tr>
             <td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${attendance.key}" /></td>
