@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UserList</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -18,7 +20,7 @@
 <%@ include file = "userpage.jsp" %>
 <body>
 <form action="editAttendance" method="post">
-    <p>Date: <input type="text" id="datepicker" name = "editableDate">
+    <p>Date: <input type="text" id="datepicker" value="${defaultDate}" name = "editableDate">
         <input type = "submit" value = "submit" width="6em">
     </p><br><br>
     <c:forEach var="s" items="${editAttendanceMap}">

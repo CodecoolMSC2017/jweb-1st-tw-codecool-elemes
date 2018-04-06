@@ -21,7 +21,6 @@
 <%@ include file = "userpage.jsp" %>
 
 <body>
-<a href="userpage">Go back</a>
 <form action="attendance" method="post">
     <p>Date: <input type="text" id="datepicker" name = "attendanceDate"></p>
     <c:forEach var="s" items="${students}">

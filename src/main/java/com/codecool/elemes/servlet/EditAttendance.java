@@ -25,8 +25,10 @@ public class EditAttendance extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
         try {
             req.setAttribute("editAttendanceMap",attendanceService.editAtt(req.getParameter("editableDate")));
+            req.setAttribute("defaultDate", req.getParameter("editableDate"));
         } catch (Exception e) {
             e.printStackTrace();
         }
