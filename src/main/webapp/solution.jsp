@@ -2,8 +2,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ include file =  "userpage.jsp" %>
 <body>
-<h1>Solution Page</h1>
-<a href="assignment">Go back</a>
 <ul>
 <c:if test="${not empty question}">
    <p>
@@ -27,4 +25,5 @@
             </c:if>
     </c:if>
     <p><c:out value="${backmessage}"/></p>
+</ul>
 </body>
