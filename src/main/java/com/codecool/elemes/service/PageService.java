@@ -4,15 +4,20 @@ import com.codecool.elemes.dao.TextDatabase;
 import com.codecool.elemes.model.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class PageService {
 
-    TextDatabase database = Database.getInstance();
+    TextDatabase database;
 
-    public List<Text> getTexts(User user) {
-        Database database = Database.getInstance();
+    public PageService(TextDatabase database) {
+        this.database = database;
+    }
+
+    public List<Text> getTexts(User user) throws SQLException {
+
         List<Text> texts = new ArrayList<>();
         if (user.getRole().equals(Role.STUDENT)) {
             for (Text text : database.getTexts()) {
@@ -33,7 +38,7 @@ public final class PageService {
         return "mentorPages.jsp";
     }
 
-    public void handlePublish(HttpServletRequest req) {
+    public void handlePublish(HttpServletRequest req) throws SQLException {
         String condition;
        for (Text text :database.getTexts()) {
            if (req.getParameter(text.getTitle())!= null) {
