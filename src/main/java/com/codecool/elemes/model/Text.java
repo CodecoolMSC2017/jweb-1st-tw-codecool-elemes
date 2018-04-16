@@ -8,12 +8,11 @@ public class Text {
     private String content;
     private int id;
 
-    public Text(String title, boolean isPublished) {
+
+    public Text(String title, boolean isPublished, String content) {
         this.title = title;
         this.isPublished = isPublished;
-        Random random = new Random();
-        id = random.nextInt(1000000);
-        content = "default content";
+        this.content = content;
     }
 
     public void publish() {
