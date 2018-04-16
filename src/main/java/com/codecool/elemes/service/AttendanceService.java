@@ -7,6 +7,7 @@ import com.codecool.elemes.model.User;
 import com.codecool.elemes.dao.UserDataBase;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,7 +32,7 @@ public final class AttendanceService {
         }
         rollCallAttendance.put(date, hereToday);
     }
-    public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException {
+    public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException, SQLException {
         List<Boolean> isHere = new ArrayList<>();
         List<User> usersHere = new ArrayList<>();
         String booleanString;

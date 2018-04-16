@@ -37,7 +37,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         return users;
     }
 
-    @Override
+    /*@Override
     public void deleteUser(String email) throws NoSuchUserException {
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
@@ -47,7 +47,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
             }
         }
         throw new NoSuchUserException();
-    }
+    }*/
 
     @Override
     public User getUser(String email) throws NoSuchUserException {
@@ -70,7 +70,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         return students;
     }
 
-    @Override
+    /*@Override
     public User getUserByEmail(String eMail) throws NoSuchUserException {
         for(User user: getAllUser()){
             if(user.geteMail().equals(eMail)){
@@ -78,7 +78,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
             }
         }
         throw new NoSuchUserException();
-    }
+    }*/
 
 
     @Override
@@ -122,7 +122,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         assignments.add(assignment);
     }
 
-    @Override
+    /*@Override
     public void deleteAssignment(Assignment assignment) throws NoSuchAssignmentException {
         for (Assignment assignmentInDatabase: assignments) {
             if (assignment.getQuestion().equals(assignmentInDatabase.getQuestion())) {
@@ -131,7 +131,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
             }
         }
         throw new NoSuchAssignmentException();
-    }
+    }*/
 
     @Override
     public List<Solution> getAllSolutions() {

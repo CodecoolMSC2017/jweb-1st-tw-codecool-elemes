@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +41,9 @@ public class AttendanceServlet extends HttpServlet {
         } catch (AttendanceAlreadyUpdated attendanceAlreadyUpdated) {
             attendanceAlreadyUpdated.getMessage();
         } catch (ParseException e) {
+            e.printStackTrace();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         resp.sendRedirect("attendance");
