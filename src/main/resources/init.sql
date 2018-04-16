@@ -50,9 +50,9 @@ CREATE TABLE solutions (
 );
 
 INSERT INTO users (email, role, name) VALUES
-	('laci@gmail.ch','mentor', 'laci'), -- 1
-	('peter@gmail.ch','student', 'peti'), -- 2
-	('lili@live.it', 'student', 'lili'); -- 3
+	('laci@gmail.ch','MENTOR', 'laci'), -- 1
+	('peter@gmail.ch','STUDENT', 'peti'), -- 2
+	('lili@live.it', 'STUDENT', 'lili'); -- 3
 
 INSERT INTO texts (title, content, is_published) VALUES
 	('Hello World is Python','default contnent', true),   -- 1

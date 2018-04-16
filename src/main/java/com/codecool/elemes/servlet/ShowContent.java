@@ -30,8 +30,9 @@ public class ShowContent extends AbstractServlet {
             req.setAttribute("content",asd);
             req.getRequestDispatcher("content.jsp").forward(req, resp);
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("content", e.getMessage());
         }
+        req.getRequestDispatcher("content.jsp").forward(req, resp);
 
     }
 }

@@ -59,13 +59,17 @@ public class TextDao extends AbstractDao implements TextDatabase {
     @Override
     public Text getText(int id) throws TextNotFoundException, SQLException {
         String sql = "SELECT * FROM texts WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery(sql)) {
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1,id);
-            boolean isPublished = resultSet.getBoolean("is_published");
-            String title = resultSet.getString("title");
-            String content = resultSet.getString("content");
-            return new Text(title,isPublished,id,content);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    boolean isPublished = resultSet.getBoolean("is_published");
+                    String title = resultSet.getString("title");
+                    String content = resultSet.getString("content");
+                    return new Text(title, isPublished, id, content);
+                }
+                else throw new TextNotFoundException();
+            }
         }
     }
 }
