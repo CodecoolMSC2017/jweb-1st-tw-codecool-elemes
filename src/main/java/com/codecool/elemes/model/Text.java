@@ -15,6 +15,13 @@ public class Text {
         this.content = content;
     }
 
+    public Text(String title, boolean isPublished,int id, String content) {
+        this.title = title;
+        this.isPublished = isPublished;
+        this.content = content;
+        this.id = id;
+    }
+
     public void publish() {
         isPublished = true;
     }
