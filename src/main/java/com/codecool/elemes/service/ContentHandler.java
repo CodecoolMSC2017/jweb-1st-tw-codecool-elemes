@@ -3,7 +3,7 @@ package com.codecool.elemes.service;
 import com.codecool.elemes.exceptions.InvalidInputException;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Text;
-import com.codecool.elemes.model.TextDatabase;
+import com.codecool.elemes.dao.TextDatabase;
 
 public class ContentHandler {
     private TextDatabase database = Database.getInstance();

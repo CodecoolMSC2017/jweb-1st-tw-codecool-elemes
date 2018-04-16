@@ -10,7 +10,5 @@ public interface AssigmentDatabase {
 
     void addAssignment(Assignment assignment);
 
-    void deleteAssignment(Assignment assignment) throws NoSuchAssignmentException;
-
     Assignment getAssignment(int id) throws NoSuchAssignmentException;
 }

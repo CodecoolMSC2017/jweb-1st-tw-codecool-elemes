@@ -1,5 +1,8 @@
 package com.codecool.elemes.model;
 
+import com.codecool.elemes.dao.AttendanceDatabase;
+import com.codecool.elemes.dao.TextDatabase;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.*;
 
 import java.util.*;

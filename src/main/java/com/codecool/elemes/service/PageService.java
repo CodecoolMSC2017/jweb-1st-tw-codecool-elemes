@@ -1,5 +1,6 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.TextDatabase;
 import com.codecool.elemes.model.*;
 
 import javax.servlet.http.HttpServletRequest;

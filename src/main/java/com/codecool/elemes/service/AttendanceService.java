@@ -1,10 +1,10 @@
 package com.codecool.elemes.service;
 
 import com.codecool.elemes.exceptions.AttendanceAlreadyUpdated;
-import com.codecool.elemes.model.AttendanceDatabase;
+import com.codecool.elemes.dao.AttendanceDatabase;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;
-import com.codecool.elemes.model.UserDataBase;
+import com.codecool.elemes.dao.UserDataBase;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;

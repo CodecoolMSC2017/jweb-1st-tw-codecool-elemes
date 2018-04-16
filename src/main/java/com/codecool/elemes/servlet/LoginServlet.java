@@ -1,9 +1,8 @@
 package com.codecool.elemes.servlet;
 
 import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;
-import com.codecool.elemes.service.LoginService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
-
-    private final LoginService loginService = new LoginService();
+public class LoginServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,10 +21,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
+
+
         if (loginService.isRegistered(email)) {
             try {
-                User user = Database.getInstance().getUser(email);
+                String email = req.getParameter("email");
+                User user = loginService.getUser(email);
                 HttpSession session = req.getSession();
                 session.setAttribute("loggedin", user );
                 resp.sendRedirect("userpage");
