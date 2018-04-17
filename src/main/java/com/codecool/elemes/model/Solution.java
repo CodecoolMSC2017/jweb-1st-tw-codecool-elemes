@@ -11,9 +11,13 @@ public class Solution {
     public Solution(Assignment assignment, User user) {
         this.assignment = assignment;
         this.user = user;
-        Random random = new Random();
-        id = random.nextInt(1000000);
 
+    }
+
+    public Solution(Assignment assignment, User user, int id) {
+        this.assignment = assignment;
+        this.user = user;
+        this.id = id;
     }
 
     public Assignment getAssignment() {
