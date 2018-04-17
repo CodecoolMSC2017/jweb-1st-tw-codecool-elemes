@@ -1,5 +1,6 @@
 package com.codecool.elemes.model;
 
+import com.codecool.elemes.dao.AssigmentDatabase;
 import com.codecool.elemes.dao.AttendanceDatabase;
 import com.codecool.elemes.dao.TextDatabase;
 import com.codecool.elemes.dao.UserDataBase;

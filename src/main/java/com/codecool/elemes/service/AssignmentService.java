@@ -1,13 +1,20 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.AssigmentDatabase;
+import com.codecool.elemes.exceptions.NotGradedYetException;
 import com.codecool.elemes.model.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentService {
-    private AssigmentDatabase database = Database.getInstance();
+    private AssigmentDatabase database;
+
+    public AssignmentService(AssigmentDatabase database) {
+        this.database = database;
+    }
 
     public String getPage(User user) {
         if (user.getRole().equals(Role.STUDENT)) {
@@ -16,7 +23,7 @@ public class AssignmentService {
         return "assignmentMentor.jsp";
     }
 
-    public List<Assignment> getAssigments(User user) {
+    public List<Assignment> getAssigments(User user) throws SQLException {
         List<Assignment> assignments = new ArrayList<>();
         if (user.getRole().equals(Role.STUDENT)) {
             for (Assignment assignment : database.getAllAssignments()) {
@@ -30,16 +37,18 @@ public class AssignmentService {
         return assignments;
     }
 
-    public void handlePublish(HttpServletRequest req) {
+    public void handlePublish(HttpServletRequest req) throws SQLException, NotGradedYetException {
         String condition;
         for (Assignment assignment :database.getAllAssignments()) {
             if (req.getParameter(assignment.getQuestion())!= null) {
                 condition = req.getParameter(assignment.getQuestion());
                 if (condition.equals("true")) {
                     assignment.publish();
+                    database.update(assignment);
                 }
                 else {
                     assignment.unPublish();
+                    database.update(assignment);
                 }
             }
         }
@@ -49,7 +58,7 @@ public class AssignmentService {
         return new Assignment(question, maxScore);
 
     }
-    public void addAssignment(Assignment assignment) {
+    public void addAssignment(Assignment assignment) throws NotGradedYetException, SQLException {
         database.addAssignment(assignment);
     }
 }
