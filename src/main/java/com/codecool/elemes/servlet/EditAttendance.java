@@ -9,12 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 @WebServlet("/editAttendance")
 public class EditAttendance extends HttpServlet {
     Database database = Database.getInstance();
-    AttendanceService attendanceService = new AttendanceService();
+    AttendanceService attendanceService;
+
+    {
+        try {
+            attendanceService = new AttendanceService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -35,6 +44,8 @@ public class EditAttendance extends HttpServlet {
         try {
             attendanceService.rewriteAttendance(req);
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         req.getRequestDispatcher("editAttendance.jsp").forward(req, resp);

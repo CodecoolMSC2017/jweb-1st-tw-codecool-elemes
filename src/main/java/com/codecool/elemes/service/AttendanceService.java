@@ -1,7 +1,9 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.AttendanceDao;
 import com.codecool.elemes.exceptions.AttendanceAlreadyUpdated;
 import com.codecool.elemes.dao.AttendanceDatabase;
+import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.dao.UserDataBase;
@@ -14,14 +16,18 @@ import java.util.*;
 
 public final class AttendanceService {
 
-    private UserDataBase database = Database.getInstance();
-    private AttendanceDatabase attendanceDatabase = Database.getInstance();
-    private Map<User, Boolean> todaysAttendance = new HashMap<>();
-    private Map<Date, List<User>> rollCallAttendance = attendanceDatabase.getAttendanceMap();
+    AttendanceDatabase attendanceDatabase;
+    UserDataBase userDataBase;
 
-    private void checkAttendance(Map<User, Boolean> today,Date date) throws AttendanceAlreadyUpdated {
+    public AttendanceService(AttendanceDatabase attendanceDatabase,UserDataBase userDataBase) {
+        this.attendanceDatabase = attendanceDatabase;
+        this.userDataBase = userDataBase;
+    }
+    private Map<User,Boolean> todaysAttendance = new HashMap<>();
+
+    private void checkAttendance(Map<User, Boolean> today,Date date) throws AttendanceAlreadyUpdated, SQLException, NoSuchUserException {
         List<User> hereToday = new ArrayList<>();
-        if (!rollCallAttendance.containsKey(date)) {
+        if (!attendanceDatabase.getAttendanceMap().containsKey(date)) {
             today.forEach((key, value) -> {
                 if (value) {
                     hereToday.add(key);
@@ -30,15 +36,15 @@ public final class AttendanceService {
         } else {
             throw new AttendanceAlreadyUpdated();
         }
-        rollCallAttendance.put(date, hereToday);
+        attendanceDatabase.getAttendanceMap().put(date, hereToday);
     }
-    public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException, SQLException {
+    public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException, SQLException, NoSuchUserException {
         List<Boolean> isHere = new ArrayList<>();
         List<User> usersHere = new ArrayList<>();
         String booleanString;
         String date = req.getParameter("attendanceDate");
         Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(date);
-        for(User user: database.getOnlyStudents(database.getAllUser())){
+        for(User user: userDataBase.getOnlyStudents()){
             usersHere.add(user);
             booleanString = req.getParameter(user.geteMail());
             if(booleanString != null){
@@ -63,11 +69,11 @@ public final class AttendanceService {
         List<Boolean> booleans = new ArrayList<>();
         Map<User,Boolean> attendanceMap = new HashMap<>();
         Date date = new SimpleDateFormat("MM/dd/yyyy").parse(stringDate);
-        if(!rollCallAttendance.containsKey(date)){
+        if(!attendanceDatabase.getAttendanceMap().containsKey(date)){
             throw new Exception();
         }
-        List<User> editableUsers = rollCallAttendance.get(date);
-        for(User user : database.getOnlyStudents(database.getAllUser())){
+        List<User> editableUsers = attendanceDatabase.getAttendanceMap().get(date);
+        for(User user : userDataBase.getOnlyStudents()){
            if(editableUsers.contains(user)){
                users.add(user);
                booleans.add(true);
@@ -81,7 +87,7 @@ public final class AttendanceService {
         }
         return attendanceMap;
     }
-    public void rewriteAttendance(HttpServletRequest req) throws ParseException {
+    public void rewriteAttendance(HttpServletRequest req) throws ParseException, SQLException, NoSuchUserException {
         List<User> usersHere = new ArrayList<>();
         List<Boolean> isHere = new ArrayList<>();
         List<User> users = new ArrayList<>();
