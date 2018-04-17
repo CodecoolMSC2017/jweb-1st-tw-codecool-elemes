@@ -61,7 +61,7 @@ public class UserDao extends AbstractDao implements UserDataBase {
     @Override
     public List<User> getOnlyStudents() throws SQLException {
         List<User> onlyStudents = getAllUser();
-        String sql = "SELECT email, name, role FROM users WHERE role = student";
+        String sql = "SELECT email, name, role FROM users WHERE role = 'STUDENT'";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
