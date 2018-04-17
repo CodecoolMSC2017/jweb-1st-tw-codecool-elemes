@@ -45,9 +45,11 @@ public final class PageService {
                 condition = req.getParameter(text.getTitle());
                 if (condition.equals("true")) {
                     text.publish();
+                    database.update(text);
                 }
                 else {
                     text.unPublish();
+                    database.update(text);
                 }
            }
        }
