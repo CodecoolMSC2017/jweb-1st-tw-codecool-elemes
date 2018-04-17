@@ -16,4 +16,6 @@ public interface AttendanceDatabase {
 
     List<Date> getMissedDays(String eMail) throws NoSuchUserException, SQLException;
 
+    void writeAttendance(Date date,List<User> users) throws SQLException;
+
 }

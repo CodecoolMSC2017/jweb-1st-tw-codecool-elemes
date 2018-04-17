@@ -35,7 +35,7 @@ public final class AttendanceService {
         } else {
             throw new AttendanceAlreadyUpdated();
         }
-        attendanceDatabase.getAttendanceMap().put(date, hereToday);
+        attendanceDatabase.writeAttendance(date,hereToday);
     }
     public void handleAttendance(HttpServletRequest req) throws AttendanceAlreadyUpdated, ParseException, SQLException, NoSuchUserException {
         List<Boolean> isHere = new ArrayList<>();

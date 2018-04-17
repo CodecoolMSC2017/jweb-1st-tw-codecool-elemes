@@ -3,11 +3,9 @@ package com.codecool.elemes.dao;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     public AttendanceDao(Connection connection) {
@@ -18,7 +16,7 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     @Override
     public Map<Date, List<User>> getAttendanceMap() throws SQLException, NoSuchUserException {
         Map<Date,List<User>> attendanceMap = new HashMap<>();
-        List<User> tempList;
+        List<User> tempList = new ArrayList<>();
         String sql = "SELECT date,user_email FROM attendance";
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
@@ -26,7 +24,7 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
                 Date date = resultSet.getDate("date");
                 User user = new UserDao(connection).getUser(resultSet.getString("user_email"));
                 if(attendanceMap.containsKey(date)){
-                    tempList = attendanceMap.get(date);
+                    tempList.addAll(attendanceMap.get(date));
                     tempList.add(user);
                     attendanceMap.put(date,tempList);
                 }
@@ -67,5 +65,25 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
             }
         }
         return missedDates;
+    }
+    @Override
+    public void writeAttendance(Date date,List<User> users) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO attendance(date,user_email) VALUES(?,?)";
+        try(PreparedStatement statement = connection.prepareStatement(sql)){
+            for(User user : users) {
+                statement.setDate(1, (java.sql.Date) date);
+                statement.setString(2,user.geteMail());
+                statement.executeUpdate();
+            }
+            connection.commit();
+        }catch (SQLException ex){
+            connection.rollback();
+            throw ex;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
+
     }
 }
