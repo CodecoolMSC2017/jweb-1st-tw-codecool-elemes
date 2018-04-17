@@ -107,7 +107,8 @@ public final class AttendanceService {
                 users.add(usersHere.get(i));
             }
         }
-        attendanceDatabase.getAttendanceMap().put(formattedDate,users);
+        attendanceDatabase.deleteAttendance(formattedDate);
+        attendanceDatabase.writeAttendance(formattedDate,users);
 
     }
 

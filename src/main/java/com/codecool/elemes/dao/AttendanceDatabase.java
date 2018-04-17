@@ -18,4 +18,6 @@ public interface AttendanceDatabase {
 
     void writeAttendance(Date date,List<User> users) throws SQLException;
 
+    void deleteAttendance(Date date) throws SQLException;
+
 }

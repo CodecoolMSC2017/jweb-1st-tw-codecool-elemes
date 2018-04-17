@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS assignments;
 DROP TABLE IF EXISTS texts;
 DROP TABLE IF EXISTS users;
 
+SET datestyle to 'dmy';
 CREATE TABLE users (
     email TEXT PRIMARY KEY NOT NULL,
     role TEXT NOT NULL,

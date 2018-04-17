@@ -220,4 +220,14 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         return missedDates;
     }
 
+    @Override
+    public void writeAttendance(Date date, List<User> users) throws SQLException {
+
+    }
+
+    @Override
+    public void deleteAttendance(Date date) throws SQLException {
+
+    }
+
 }
