@@ -70,10 +70,11 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     public void writeAttendance(Date date,List<User> users) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         String sql = "INSERT INTO attendance(date,user_email) VALUES(?,?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             for(User user : users) {
-                statement.setDate(1, (java.sql.Date) date);
+                statement.setDate(1, (sqlDate));
                 statement.setString(2,user.geteMail());
                 statement.executeUpdate();
             }
@@ -85,5 +86,22 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
             connection.setAutoCommit(autoCommit);
         }
 
+    }
+    @Override
+    public void deleteAttendance(Date date)throws SQLException{
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        String sql = "DELETE FROM attendance WHERE date = ?";
+        try(PreparedStatement statement = connection.prepareStatement(sql)){
+                statement.setDate(1, (sqlDate));
+                statement.executeUpdate();
+                connection.commit();
+        }catch (SQLException ex){
+            connection.rollback();
+            throw ex;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
     }
 }

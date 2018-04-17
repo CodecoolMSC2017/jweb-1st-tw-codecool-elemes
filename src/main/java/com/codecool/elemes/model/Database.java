@@ -227,4 +227,9 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
 
     }
 
+    @Override
+    public void deleteAttendance(Date date) throws SQLException {
+
+    }
+
 }
