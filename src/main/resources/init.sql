@@ -66,6 +66,11 @@ INSERT INTO assignments (question, max_score, is_published) VALUES
 	('Do you like Pandas?', 10, false);          -- 3
 	     -- 5
 
+INSERT INTO attendance(date, user_email) VALUES
+ ('10/03/2018', 'lili@live.it'),
+ ('11/03/2018', 'peter@gmail.ch'),
+('11/03/2018', 'lili@live.it');
+
 INSERT INTO solutions (assignment_id, user_email) VALUES
     (1, 'peter@gmail.ch'), -- 1
     (1, 'lili@live.it');  -- 2

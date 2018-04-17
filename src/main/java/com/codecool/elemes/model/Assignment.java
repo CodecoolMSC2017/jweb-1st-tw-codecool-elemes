@@ -14,6 +14,17 @@ public class Assignment {
     private int id;
     private int maxScore;
 
+    public Assignment(Boolean isComplete, Boolean isCorrected, Boolean isPublished, String question, String answear, Integer grade, int id, int maxScore) {
+        this.isComplete = isComplete;
+        this.isCorrected = isCorrected;
+        this.isPublished = isPublished;
+        this.question = question;
+        this.answear = answear;
+        this.grade = grade;
+        this.id = id;
+        this.maxScore = maxScore;
+    }
+
     public Assignment(String question, int maxScore) {
         this.question = question;
         isComplete = false;
