@@ -1,10 +1,7 @@
 
 package com.codecool.elemes.model;
 
-import com.codecool.elemes.dao.AssigmentDatabase;
-import com.codecool.elemes.dao.AttendanceDatabase;
-import com.codecool.elemes.dao.TextDatabase;
-import com.codecool.elemes.dao.UserDataBase;
+import com.codecool.elemes.dao.*;
 import com.codecool.elemes.exceptions.*;
 
 import java.sql.SQLException;
@@ -172,6 +169,11 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
+    public void update(Solution solution) {
+
+    }
+
+    @Override
     public Assignment getAssignment(int id) throws NoSuchAssignmentException {
         for (Assignment assignment: assignments) {
             if(assignment.getId()== id) {
@@ -218,6 +220,11 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
         }
         System.out.println(missedDates.size());
         return missedDates;
+    }
+
+    @Override
+    public void writeAttendance(Date date, List<User> users) throws SQLException {
+
     }
 
 }
