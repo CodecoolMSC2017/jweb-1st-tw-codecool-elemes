@@ -1,5 +1,6 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
 import com.codecool.elemes.exceptions.NoSuchSolutionException;
 import com.codecool.elemes.exceptions.SubmissionAlreadyAddedException;
@@ -14,7 +15,12 @@ import javax.servlet.http.HttpSession;
 
 public class SolutionSubmissionService {
 
-    Database database = Database.getInstance();
+    SolutionDatabase database;
+
+    public SolutionSubmissionService(SolutionDatabase database) {
+        this.database = database;
+    }
+
 
     public void handleSubmission(String question, String answer, User user) throws SubmissionAlreadyAddedException {
         for (Solution solution: database.getAllSolutions()) {
