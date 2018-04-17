@@ -1,53 +1,54 @@
 package com.codecool.elemes.servlet;
 
+import com.codecool.elemes.dao.AttendanceDao;
+import com.codecool.elemes.dao.AttendanceDatabase;
+import com.codecool.elemes.dao.UserDao;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.AttendanceAlreadyUpdated;
 import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.AttendanceService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @WebServlet("/attendance")
-public class AttendanceServlet extends HttpServlet {
-
-    AttendanceService attendanceService = new AttendanceService();
-    Database database = Database.getInstance();
+public class AttendanceServlet extends AbstractServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("students", database.getOnlyStudents(database.getAllUser()));
-        req.getAttribute("users");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            AttendanceDatabase attendanceDatabase = new AttendanceDao(connection);
+            UserDataBase userDataBase = new UserDao(connection);
+            req.setAttribute("students", userDataBase.getOnlyStudents());
+            req.getAttribute("users");
 
-        req.setAttribute("AllOverAttendance",database.getAttendanceMap());
-        req.getRequestDispatcher("attendance.jsp").forward(req,resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            attendanceService.handleAttendance(req);
-        } catch (AttendanceAlreadyUpdated attendanceAlreadyUpdated) {
-            attendanceAlreadyUpdated.getMessage();
-        } catch (ParseException e) {
-            e.printStackTrace();
-
-        } catch (SQLException e) {
+            req.setAttribute("AllOverAttendance", attendanceDatabase.getAttendanceMap());
+            req.getRequestDispatcher("attendance.jsp").forward(req, resp);
+        } catch (SQLException | IOException | NoSuchUserException | ServletException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("attendance");
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            AttendanceDatabase attendanceDatabase = new AttendanceDao(connection);
+            UserDataBase userDataBase = new UserDao(connection);
+            AttendanceService attendanceService = new AttendanceService(attendanceDatabase, userDataBase);
+            attendanceService.handleAttendance(req);
+            resp.sendRedirect("attendance");
+
+        } catch (SQLException | NoSuchUserException | AttendanceAlreadyUpdated | IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }

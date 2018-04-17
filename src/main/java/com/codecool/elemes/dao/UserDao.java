@@ -59,8 +59,8 @@ public class UserDao extends AbstractDao implements UserDataBase {
     }
 
     @Override
-    public List<User> getOnlyStudents(List<User> users) throws SQLException {
-        List<User> onlyStudents = new ArrayList<>();
+    public List<User> getOnlyStudents() throws SQLException {
+        List<User> onlyStudents = getAllUser();
         String sql = "SELECT email, name, role FROM users WHERE role = student";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
@@ -71,6 +71,26 @@ public class UserDao extends AbstractDao implements UserDataBase {
         }
 
 
+    }
+
+    @Override
+    public void editUsername(String email, String username) throws NoSuchUserException, SQLException {
+        String sql = "UPDATE users SET name = ? WHERE name = ?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,getUser(email).getName());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void editRole(String email, String role) throws NoSuchUserException, SQLException {
+        String sql = "UPDATE users SET name = ? WHERE name = ?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,role);
+            preparedStatement.setString(2,getUser(email).getRole().toString());
+            preparedStatement.executeUpdate();
+        }
     }
 
     private User fetchUser(ResultSet resultSet) throws SQLException {

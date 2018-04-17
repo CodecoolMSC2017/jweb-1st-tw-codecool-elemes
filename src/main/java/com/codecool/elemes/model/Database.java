@@ -1,3 +1,4 @@
+
 package com.codecool.elemes.model;
 
 import com.codecool.elemes.dao.AssigmentDatabase;
@@ -62,7 +63,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
-    public List<User> getOnlyStudents(List<User> users) {
+    public List<User> getOnlyStudents() {
         List<User> students = new ArrayList<>();
         for (User user:users) {
             if((user.getRole() == Role.STUDENT)){
@@ -70,6 +71,16 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
             }
         }
         return students;
+    }
+
+    @Override
+    public void editUsername(String email, String username) throws NoSuchUserException, SQLException {
+
+    }
+
+    @Override
+    public void editRole(String email, String role) throws NoSuchUserException, SQLException {
+
     }
 
     /*@Override
@@ -181,10 +192,10 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
-    public List<Map<Date,List<User>>> missingStudents() throws Exception {
+    public List<Map<Date,List<User>>> missingStudents() throws SQLException {
         List<Map<Date,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
         for(Map.Entry<Date,List<User>>entry : rollCallAttendance.entrySet()){
-            if(entry.getValue().size() != getOnlyStudents(getAllUser()).size()){
+            if(entry.getValue().size() != getOnlyStudents().size()){
                 daysWhereSomeoneIsMissing.add((Map<Date, List<User>>) entry);
             }
         }
@@ -194,7 +205,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     @Override
     public List<Date> getMissedDays(String eMail) throws NoSuchUserException {
         List<Date> missedDates = new ArrayList<>();
-        for(User user:getOnlyStudents(getAllUser())){
+        for(User user:getOnlyStudents()){
             if(user.geteMail().equals(eMail)){
                 for(Map.Entry<Date,List<User>> entry : rollCallAttendance.entrySet()){
                     for(User loggedInUser:entry.getValue()){
