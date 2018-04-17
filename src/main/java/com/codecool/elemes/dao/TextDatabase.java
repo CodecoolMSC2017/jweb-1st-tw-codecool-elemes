@@ -16,4 +16,6 @@ public interface TextDatabase {
     void deleteText(Text text) throws NoSuchTextException;
 
     Text getText(int id) throws TextNotFoundException, SQLException;
+
+    void update (Text text) throws SQLException;
 }

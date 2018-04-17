@@ -43,9 +43,9 @@ public class TextDao extends AbstractDao implements TextDatabase {
         String title = text.getTitle();
         String content = text.getContent();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1,title);
-            preparedStatement.setString(2,content);
-            preparedStatement.setBoolean(3,isPublished);
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, content);
+            preparedStatement.setBoolean(3, isPublished);
             preparedStatement.executeQuery();
         }
 
@@ -60,16 +60,25 @@ public class TextDao extends AbstractDao implements TextDatabase {
     public Text getText(int id) throws TextNotFoundException, SQLException {
         String sql = "SELECT * FROM texts WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1,id);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     boolean isPublished = resultSet.getBoolean("is_published");
                     String title = resultSet.getString("title");
                     String content = resultSet.getString("content");
                     return new Text(title, isPublished, id, content);
-                }
-                else throw new TextNotFoundException();
+                } else throw new TextNotFoundException();
             }
+        }
+    }
+
+    @Override
+    public void update(Text text) throws SQLException {
+        String sql = String.format("UPDATE texts SET title = '%s', content = '%s', is_published = %s WHERE id = %s",
+                    text.getTitle(), text.getContent(), text.getisPublished(), text.getId());
+        try (Statement statement = connection.createStatement()){
+            statement.executeQuery(sql);
+
         }
     }
 }

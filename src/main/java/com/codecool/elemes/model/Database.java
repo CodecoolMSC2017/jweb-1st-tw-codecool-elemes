@@ -5,6 +5,7 @@ import com.codecool.elemes.dao.TextDatabase;
 import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, SolutionDatabase, AttendanceDatabase {
@@ -113,6 +114,11 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
+    public void update(Text text) throws SQLException {
+
+    }
+
+    @Override
     public List<Assignment> getAllAssignments() {
         return assignments;
     }
@@ -161,6 +167,11 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
             }
         }
         throw new NoSuchAssignmentException();
+    }
+
+    @Override
+    public void update(Assignment assignment) {
+
     }
 
     @Override
