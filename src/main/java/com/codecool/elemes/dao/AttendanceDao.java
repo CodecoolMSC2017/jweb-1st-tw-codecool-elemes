@@ -18,7 +18,7 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     @Override
     public Map<Date, List<User>> getAttendanceMap() throws SQLException, NoSuchUserException {
         Map<Date,List<User>> attendanceMap = new HashMap<>();
-        List<User> tempList;
+        List<User> tempList = new ArrayList<>();
         String sql = "SELECT date,user_email FROM attendance";
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
@@ -26,7 +26,7 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
                 Date date = resultSet.getDate("date");
                 User user = new UserDao(connection).getUser(resultSet.getString("user_email"));
                 if(attendanceMap.containsKey(date)){
-                    tempList = attendanceMap.get(date);
+                    tempList.addAll(attendanceMap.get(date));
                     tempList.add(user);
                     attendanceMap.put(date,tempList);
                 }
