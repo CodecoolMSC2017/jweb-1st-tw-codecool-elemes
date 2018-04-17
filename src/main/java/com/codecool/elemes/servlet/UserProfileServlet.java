@@ -18,11 +18,17 @@ public class UserProfileServlet extends AbstractServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("loggedin");
-        req.setAttribute("user", user);
-        req.getRequestDispatcher("userprofile.jsp").forward(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
+        try(Connection connection = getConnection(req.getServletContext())){
+            UserDataBase userDataBase = new UserDao(connection);
+            HttpSession session = req.getSession();
+            User user = (User) session.getAttribute("loggedin");
+            req.setAttribute("user", userDataBase.getUser(user.geteMail()));
+            req.getRequestDispatcher("userprofile.jsp").forward(req, resp);
+        } catch (SQLException | IOException | ServletException | NoSuchUserException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
