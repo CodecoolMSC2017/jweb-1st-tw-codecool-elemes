@@ -75,20 +75,20 @@ public class UserDao extends AbstractDao implements UserDataBase {
 
     @Override
     public void editUsername(String email, String username) throws NoSuchUserException, SQLException {
-        String sql = "UPDATE users SET name = ? WHERE name = ?";
+        String sql = "UPDATE users SET name = ? WHERE email = ?";
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1,username);
-            preparedStatement.setString(2,getUser(email).getName());
+            preparedStatement.setString(2,email);
             preparedStatement.executeUpdate();
         }
     }
 
     @Override
     public void editRole(String email, String role) throws NoSuchUserException, SQLException {
-        String sql = "UPDATE users SET name = ? WHERE name = ?";
+        String sql = "UPDATE users SET role = ? WHERE email = ?";
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1,role);
-            preparedStatement.setString(2,getUser(email).getRole().toString());
+            preparedStatement.setString(1,role.toUpperCase());
+            preparedStatement.setString(2,email);
             preparedStatement.executeUpdate();
         }
     }
