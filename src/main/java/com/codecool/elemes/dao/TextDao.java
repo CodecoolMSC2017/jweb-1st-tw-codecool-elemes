@@ -74,10 +74,13 @@ public class TextDao extends AbstractDao implements TextDatabase {
 
     @Override
     public void update(Text text) throws SQLException {
-        String sql = String.format("UPDATE texts SET title = '%s', content = '%s', is_published = %s WHERE id = %s",
-                    text.getTitle(), text.getContent(), text.getisPublished(), text.getId());
-        try (Statement statement = connection.createStatement()){
-            statement.executeQuery(sql);
+        String sql = "UPDATE texts SET title = ?, content = ?, is_published = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setString(1,text.getTitle());
+            statement.setString(2,text.getContent());
+            statement.setBoolean(3,text.getisPublished());
+            statement.setInt(4,text.getId());
+            statement.executeUpdate();
 
         }
     }

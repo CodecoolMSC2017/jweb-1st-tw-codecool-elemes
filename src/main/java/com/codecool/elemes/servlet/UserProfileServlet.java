@@ -1,5 +1,7 @@
 package com.codecool.elemes.servlet;
 
+import com.codecool.elemes.dao.UserDao;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Role;
@@ -12,9 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 @WebServlet("/userprofile")
-public class UserProfileServlet extends HttpServlet {
+public class UserProfileServlet extends AbstractServlet {
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -25,6 +31,8 @@ public class UserProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        try(Connection connection = getConnection(req.getServletContext())) {
+            UserDataBase userDataBase = new UserDao(connection);
         String name = req.getParameter("name");
         String role = req.getParameter("role");
         HttpSession session = req.getSession();
@@ -33,11 +41,12 @@ public class UserProfileServlet extends HttpServlet {
         if (name.equals("")) {
             name = user.getName();
         }
-
-        try {
-            Database.getInstance().getUser(user.geteMail()).setName(name);
-            Database.getInstance().getUser(user.geteMail()).setRole(Role.valueOf(role));
-        } catch (NoSuchUserException e) {
+            userDataBase.editUsername(user.geteMail(),name);
+            userDataBase.editRole(user.geteMail(),role);
+        }catch (NoSuchUserException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         resp.sendRedirect("userprofile");
