@@ -2,14 +2,11 @@ package com.codecool.elemes.servlet;
 
 import com.codecool.elemes.dao.UserDao;
 import com.codecool.elemes.dao.UserDataBase;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.LoginService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,8 +32,7 @@ public class RegisterServlet extends AbstractServlet {
             String name = req.getParameter("name");
             String role = req.getParameter("role");
             if (!loginService.isRegistered(email)) {
-                User user = null;
-                user = loginService.createUser(name, email, Role.valueOf(role));
+                User user = loginService.createUser(name, email, Role.valueOf(role));
                 HttpSession session = req.getSession();
                 session.setAttribute("loggedin", user);
                 req.setAttribute("user", user);

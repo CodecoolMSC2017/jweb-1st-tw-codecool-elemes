@@ -1,10 +1,9 @@
 package com.codecool.elemes.service;
 
-import com.codecool.elemes.dao.AttendanceDao;
+
 import com.codecool.elemes.exceptions.AttendanceAlreadyUpdated;
 import com.codecool.elemes.dao.AttendanceDatabase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.dao.UserDataBase;
 
@@ -16,8 +15,8 @@ import java.util.*;
 
 public final class AttendanceService {
 
-    AttendanceDatabase attendanceDatabase;
-    UserDataBase userDataBase;
+    private AttendanceDatabase attendanceDatabase;
+    private UserDataBase userDataBase;
 
     public AttendanceService(AttendanceDatabase attendanceDatabase,UserDataBase userDataBase) {
         this.attendanceDatabase = attendanceDatabase;
@@ -64,13 +63,13 @@ public final class AttendanceService {
         }
     }
 
-    public Map<User,Boolean> editAtt(String stringDate) throws Exception {
+    public Map<User,Boolean> editAttendance(String stringDate) throws ParseException, SQLException, NoSuchUserException {
         List<User> users = new ArrayList<>();
         List<Boolean> booleans = new ArrayList<>();
         Map<User,Boolean> attendanceMap = new HashMap<>();
         Date date = new SimpleDateFormat("MM/dd/yyyy").parse(stringDate);
         if(!attendanceDatabase.getAttendanceMap().containsKey(date)){
-            throw new Exception();
+            throw new NoSuchUserException();
         }
         List<User> editableUsers = attendanceDatabase.getAttendanceMap().get(date);
         for(User user : userDataBase.getOnlyStudents()){
@@ -87,14 +86,13 @@ public final class AttendanceService {
         }
         return attendanceMap;
     }
-    public void rewriteAttendance(HttpServletRequest req) throws ParseException, SQLException, NoSuchUserException {
+    public void rewriteAttendance(String date,Map<User,Boolean> edit,HttpServletRequest req) throws ParseException, SQLException, NoSuchUserException {
         List<User> usersHere = new ArrayList<>();
         List<Boolean> isHere = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(req.getParameter("editableDate"));
+        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(date);
         String booleanString;
-        Map<User,Boolean> map = (Map<User, Boolean>) req.getAttribute("editAttendanceMap");
-        for(Map.Entry<User,Boolean> entry: map.entrySet()){
+        for(Map.Entry<User,Boolean> entry: edit.entrySet()){
             usersHere.add(entry.getKey());
             booleanString = req.getParameter(entry.getKey().geteMail());
             if(booleanString != null){
