@@ -29,7 +29,6 @@ public class AttendanceServlet extends AbstractServlet {
             UserDataBase userDataBase = new UserDao(connection);
             req.setAttribute("students", userDataBase.getOnlyStudents());
             req.getAttribute("users");
-
             req.setAttribute("AllOverAttendance", attendanceDatabase.getAttendanceMap());
             req.getRequestDispatcher("attendance.jsp").forward(req, resp);
         } catch (SQLException | IOException | NoSuchUserException | ServletException e) {
@@ -46,7 +45,6 @@ public class AttendanceServlet extends AbstractServlet {
             AttendanceService attendanceService = new AttendanceService(attendanceDatabase, userDataBase);
             attendanceService.handleAttendance(req);
             resp.sendRedirect("attendance");
-
         } catch (SQLException | NoSuchUserException | AttendanceAlreadyUpdated | IOException | ParseException e) {
             e.printStackTrace();
         }
