@@ -68,8 +68,7 @@ public final class AttendanceService {
         List<Boolean> booleans = new ArrayList<>();
         Map<User,Boolean> attendanceMap = new HashMap<>();
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        if(!attendanceDatabase.getAttendanceMap().containsKey(sqlDate)){
+        if(!attendanceDatabase.getAttendanceMap().containsKey(date)){
             throw new NoSuchUserException();
         }
         List<User> editableUsers = attendanceDatabase.getAttendanceMap().get(date);
