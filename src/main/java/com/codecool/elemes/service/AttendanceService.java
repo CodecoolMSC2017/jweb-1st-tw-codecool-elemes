@@ -42,7 +42,7 @@ public final class AttendanceService {
         List<User> usersHere = new ArrayList<>();
         String booleanString;
         String date = req.getParameter("attendanceDate");
-        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        Date formattedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         for(User user: userDataBase.getOnlyStudents()){
             usersHere.add(user);
             booleanString = req.getParameter(user.geteMail());
@@ -67,8 +67,9 @@ public final class AttendanceService {
         List<User> users = new ArrayList<>();
         List<Boolean> booleans = new ArrayList<>();
         Map<User,Boolean> attendanceMap = new HashMap<>();
-        Date date = new SimpleDateFormat("MM/dd/yyyy").parse(stringDate);
-        if(!attendanceDatabase.getAttendanceMap().containsKey(date)){
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        if(!attendanceDatabase.getAttendanceMap().containsKey(sqlDate)){
             throw new NoSuchUserException();
         }
         List<User> editableUsers = attendanceDatabase.getAttendanceMap().get(date);
@@ -90,7 +91,7 @@ public final class AttendanceService {
         List<User> usersHere = new ArrayList<>();
         List<Boolean> isHere = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        Date formattedDate = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        Date formattedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         String booleanString;
         for(Map.Entry<User,Boolean> entry: edit.entrySet()){
             usersHere.add(entry.getKey());
