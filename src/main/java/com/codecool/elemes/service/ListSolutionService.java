@@ -2,6 +2,7 @@ package com.codecool.elemes.service;
 
 import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
+import com.codecool.elemes.exceptions.NoSuchSolutionException;
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Solution;
 
@@ -22,12 +23,16 @@ public class ListSolutionService {
         return database.getAllSolutions();
     }
 
-    public List<Solution> getGradedSolutions(String assignmentId) {
-       return database.getGradedSolutions(String assignmentId);
+    public List<Solution> getGradedSolutions(String assignmentId) throws SQLException {
+       return database.getGradedSolutions(Integer.parseInt(assignmentId));
     }
 
-    public List<Solution> getSolutionsToGrade(String assignmentId) {
-        return database.getGradedSolutions(String assignmentId);
+    public List<Solution> getSolutionsToGrade(String assignmentId) throws SQLException {
+        return database.getSolutionsToGrade(Integer.parseInt(assignmentId));
+    }
+
+    public Solution getSolution(String id) throws SQLException, NoSuchSolutionException {
+        return database.getSolution(Integer.parseInt(id));
     }
 
 

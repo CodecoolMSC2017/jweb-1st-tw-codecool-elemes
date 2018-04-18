@@ -54,8 +54,6 @@ public class AssignmentServlet extends AbstractServlet {
             req.getRequestDispatcher(assignmentService.getPage(user)).forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NotGradedYetException e) {
-            e.printStackTrace();
         }
     }
 }

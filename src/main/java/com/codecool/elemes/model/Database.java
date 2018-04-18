@@ -1,10 +1,7 @@
 
 package com.codecool.elemes.model;
 
-import com.codecool.elemes.dao.AssigmentDatabase;
-import com.codecool.elemes.dao.AttendanceDatabase;
-import com.codecool.elemes.dao.TextDatabase;
-import com.codecool.elemes.dao.UserDataBase;
+import com.codecool.elemes.dao.*;
 import com.codecool.elemes.exceptions.*;
 
 import java.sql.SQLException;
@@ -169,6 +166,16 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     @Override
     public void addSolution(Solution solution) {
         solutions.add(solution);
+    }
+
+    @Override
+    public List<Solution> getGradedSolutions(int assignmentId) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException {
+        return null;
     }
 
     @Override

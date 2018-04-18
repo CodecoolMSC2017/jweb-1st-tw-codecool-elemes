@@ -40,7 +40,8 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
                 grade = resultSet.getInt("grade");
                 maxScore = resultSet.getInt("max_score");
 
-                assignments.add(new Assignment(isComplete, isCorrected, isPublished, question, answear, grade, id, maxScore));
+                assignments.add(new Assignment(isComplete, isCorrected, isPublished,
+                        question, answear, grade, id, maxScore));
             }
 
         }
@@ -48,7 +49,7 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
     }
 
     @Override
-    public void addAssignment(Assignment assignment) throws SQLException, NotGradedYetException {
+    public void addAssignment(Assignment assignment) throws SQLException {
         String sql = "INSERT INTO assignments (is_published, is_corrected, is_complete, answer, question, grade, max_score) VALUES (?,?,?,?,?,?,?)";
         Boolean isComplete = assignment.getIsComplete();
         Boolean isCorrected = assignment.getIsCorrected();
@@ -65,7 +66,7 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
             preparedStatement.setString(5, question);
             preparedStatement.setInt(6, grade);
             preparedStatement.setInt(7, maxScore);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         }
     }
 
@@ -105,11 +106,8 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
         String question = assignment.getQuestion();
         String answear = assignment.getAnswear();
         Integer grade;
-        try {
-            grade = assignment.getGrade();
-        } catch (NotGradedYetException e) {
-            grade = 0;
-        }
+        grade = assignment.getGrade();
+
 
         int maxScore = assignment.getMaxScore();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){

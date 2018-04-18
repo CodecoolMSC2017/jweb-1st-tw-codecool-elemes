@@ -41,8 +41,6 @@ public class AddAssignmentServlet extends AbstractServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NotGradedYetException e) {
-            e.printStackTrace();
         }
 
 

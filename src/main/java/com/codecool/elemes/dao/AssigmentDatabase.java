@@ -11,9 +11,9 @@ public interface AssigmentDatabase {
 
     List<Assignment> getAllAssignments() throws SQLException;
 
-    void addAssignment(Assignment assignment) throws SQLException, NotGradedYetException;
+    void addAssignment(Assignment assignment) throws SQLException;
 
     Assignment getAssignment(int id) throws NoSuchAssignmentException, SQLException;
 
-    void update(Assignment assignment) throws SQLException, NotGradedYetException;
+    void update(Assignment assignment) throws SQLException;
 }

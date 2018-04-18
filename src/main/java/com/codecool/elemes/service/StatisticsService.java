@@ -26,13 +26,11 @@ public class StatisticsService {
                 int count = 0;
                 for (Solution solution : solutions) {
                     if (solution.getUser().geteMail().equals(user.geteMail())) {
-                        try {
-                            int grade = 0;
-                            grade = solution.getAssignment().getGrade();
-                            count++;
-                            percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
-                        } catch (NotGradedYetException e) {
-                        }
+                        int grade = 0;
+                        grade = solution.getAssignment().getGrade();
+                        count++;
+                        percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
+
                     }
                 }
                 performance = percentage / count * 100;
@@ -52,13 +50,10 @@ public class StatisticsService {
         for (Solution solution : database.getAllSolutions()) {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
-                try {
-                    grade = solution.getAssignment().getGrade();
-                    percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
-                    percentage = Math.floor(percentage * 100) / 100;
-                    result.put(solution.getAssignment().getQuestion(), percentage);
-                } catch (NotGradedYetException e) {
-                }
+                grade = solution.getAssignment().getGrade();
+                percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
+                percentage = Math.floor(percentage * 100) / 100;
+                result.put(solution.getAssignment().getQuestion(), percentage);
             }
         }
         return result;
