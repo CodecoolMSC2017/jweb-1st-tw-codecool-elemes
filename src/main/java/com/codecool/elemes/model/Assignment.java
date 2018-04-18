@@ -5,77 +5,21 @@ import com.codecool.elemes.exceptions.NotGradedYetException;
 import java.util.Random;
 
 public class Assignment {
-    private Boolean isComplete;
-    private Boolean isCorrected;
     private Boolean isPublished;
     private String question;
-    private String answear;
-    private Integer grade;
     private int id;
     private int maxScore;
 
-    public Assignment(Boolean isComplete, Boolean isCorrected, Boolean isPublished, String question, String answear, Integer grade, int id, int maxScore) {
-        this.isComplete = isComplete;
-        this.isCorrected = isCorrected;
+    public Assignment(Boolean isPublished, String question, int id, int maxScore) {
+
         this.isPublished = isPublished;
         this.question = question;
-        this.answear = answear;
-        this.grade = grade;
         this.id = id;
         this.maxScore = maxScore;
     }
 
-    public Assignment(String question, int maxScore) {
-        this.question = question;
-        isComplete = false;
-        isCorrected = false;
-        isPublished = false;
-        grade = null;
-        Random random = new Random();
-        id = random.nextInt(1000000);
-        this.maxScore = maxScore;
-    }
-
-    public String getAnswear() {
-        return answear;
-    }
-
-    public void setAnswear(String answear) {
-        this.answear = answear;
-        isComplete = true;
-    }
-
-    public boolean getIsComplete() {
-        return isComplete;
-    }
-
-    public Boolean getComplete() {
-        return isComplete;
-    }
-
-    public Boolean getCorrected() {
-        return isCorrected;
-    }
-
     public Boolean getPublished() {
         return isPublished;
-    }
-
-    public boolean getIsCorrected() {
-        return isCorrected;
-    }
-
-    public void grade(int grade) {
-        isCorrected = true;
-        this.grade = grade;
-    }
-
-    public int getGrade() throws NotGradedYetException {
-        if (isCorrected) {
-            return grade;
-        } else {
-            throw new NotGradedYetException();
-        }
     }
 
     public String getQuestion() {
@@ -104,5 +48,11 @@ public class Assignment {
 
     public int getMaxScore() {
         return maxScore;
+    }
+
+    public Assignment(String question, int maxScore) {
+        this.question = question;
+        this.maxScore = maxScore;
+        this.isPublished = false;
     }
 }

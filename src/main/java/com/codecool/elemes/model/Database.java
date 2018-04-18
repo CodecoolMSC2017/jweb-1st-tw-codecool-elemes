@@ -2,6 +2,7 @@
 package com.codecool.elemes.model;
 
 import com.codecool.elemes.dao.*;
+import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.*;
 
 import java.sql.SQLException;
@@ -176,6 +177,16 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     @Override
     public List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException {
         return null;
+    }
+
+    @Override
+    public Solution getUserSolutionsAtAssignmentId(String userEmail, int assignmentId) throws SQLException, NoSuchSolutionException {
+        return null;
+    }
+
+    @Override
+    public void update(Solution solution) throws SQLException {
+
     }
 
     @Override

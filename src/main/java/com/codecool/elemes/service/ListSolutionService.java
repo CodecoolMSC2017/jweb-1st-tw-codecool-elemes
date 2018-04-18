@@ -1,13 +1,10 @@
 package com.codecool.elemes.service;
 
 import com.codecool.elemes.dao.SolutionDatabase;
-import com.codecool.elemes.exceptions.NoSuchAssignmentException;
 import com.codecool.elemes.exceptions.NoSuchSolutionException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Solution;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListSolutionService {
@@ -33,6 +30,10 @@ public class ListSolutionService {
 
     public Solution getSolution(String id) throws SQLException, NoSuchSolutionException {
         return database.getSolution(Integer.parseInt(id));
+    }
+
+    public void updtadeSolution(Solution solution) throws SQLException {
+        database.update(solution);
     }
 
 

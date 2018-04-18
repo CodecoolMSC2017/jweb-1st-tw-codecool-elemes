@@ -18,4 +18,7 @@ public interface SolutionDatabase {
 
     List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException;
 
+    Solution getUserSolutionsAtAssignmentId(String userEmail, int assignmentId) throws SQLException, NoSuchSolutionException;
+
+    void update(Solution solution) throws SQLException;
 }

@@ -7,12 +7,14 @@ public class Solution {
     private User user;
     private int result;
     private int id;
+    private String answer;
 
-    public Solution(Assignment assignment, User user) {
+    public Solution(Assignment assignment, User user, String answer, int id) {
         this.assignment = assignment;
         this.user = user;
-        Random random = new Random();
-        id = random.nextInt(1000000);
+        this.answer = answer;
+        this.id = id;
+
 
     }
 
@@ -36,6 +38,19 @@ public class Solution {
         this.result = result;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public Solution(Assignment assignment, User user) {
+        this.assignment = assignment;
+        this.user = user;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+
+    }
 
     public boolean equals(Solution solution) {
         if (solution.getAssignment().getQuestion().equals(this.getAssignment().getQuestion()) && solution.getUser().getName().equals(this.getUser().getName())) {

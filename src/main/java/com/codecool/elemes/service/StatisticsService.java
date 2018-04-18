@@ -27,7 +27,7 @@ public class StatisticsService {
                 for (Solution solution : solutions) {
                     if (solution.getUser().geteMail().equals(user.geteMail())) {
                         int grade = 0;
-                        grade = solution.getAssignment().getGrade();
+                        grade = solution.getResult();
                         count++;
                         percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
 
@@ -50,7 +50,7 @@ public class StatisticsService {
         for (Solution solution : database.getAllSolutions()) {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
-                grade = solution.getAssignment().getGrade();
+                grade = solution.getResult();
                 percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
                 percentage = Math.floor(percentage * 100) / 100;
                 result.put(solution.getAssignment().getQuestion(), percentage);

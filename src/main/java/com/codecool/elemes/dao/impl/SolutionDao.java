@@ -1,5 +1,6 @@
-package com.codecool.elemes.dao;
+package com.codecool.elemes.dao.impl;
 
+import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.NoSuchSolutionException;
 import com.codecool.elemes.model.Assignment;
 import com.codecool.elemes.model.Role;
@@ -27,31 +28,25 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         ResultSet resultSet = statement.executeQuery(sql);
         Assignment assignment;
         User user;
-        Boolean isComplete;
-        Boolean isCorrected;
         Boolean isPublished;
         String question;
-        String answear;
-        Integer grade;
         int id;
         int maxScore;
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             id = resultSet.getInt("id");
             isPublished = resultSet.getBoolean("is_published");
-            isComplete = resultSet.getBoolean("is_complete");
-            isCorrected = resultSet.getBoolean("is_corrected");
+
             question = resultSet.getString("question");
-            answear = resultSet.getString("answer");
-            grade = resultSet.getInt("grade");
+            String answer = resultSet.getString("answer");
             maxScore = resultSet.getInt("max_score");
-            assignment = new Assignment(isComplete, isCorrected, isPublished,
-                                    question, answear, grade, id, maxScore);
+            assignment = new Assignment(isPublished,
+                    question, id, maxScore);
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
             Role role = Role.valueOf(resultSet.getString("role"));
             user = new User(name, email, role);
-            solutions.add(new Solution(assignment, user));
+            solutions.add(new Solution(assignment, user, answer, id));
         }
         return solutions;
     }
@@ -75,40 +70,38 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         int maxScore;
         if (resultSet.next()) {
             isPublished = resultSet.getBoolean("is_published");
-            isComplete = resultSet.getBoolean("is_complete");
-            isCorrected = resultSet.getBoolean("is_corrected");
+
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
-            grade = resultSet.getInt("grade");
             maxScore = resultSet.getInt("max_score");
-            assignment = new Assignment(isComplete, isCorrected, isPublished,
-                    question, answear, grade, id, maxScore);
+            assignment = new Assignment(isPublished,
+                    question, id, maxScore);
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
             Role role = Role.valueOf(resultSet.getString("role"));
             user = new User(name, email, role);
-            return new Solution(assignment, user);
+            return new Solution(assignment, user, answear, id);
         }
         throw new SQLException();
     }
 
     @Override
     public void addSolution(Solution solution) throws SQLException {
-            String sql = "insert into solutions (user_email, assignment_id, result) values (?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, solution.getUser().geteMail());
-            preparedStatement.setInt(2, solution.getAssignment().getId());
-            preparedStatement.setInt(3, solution.getResult());
-            preparedStatement.executeUpdate();
+        String sql = "insert into solutions (user_email, assignment_id, result) values (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, solution.getUser().geteMail());
+        preparedStatement.setInt(2, solution.getAssignment().getId());
+        preparedStatement.setInt(3, solution.getResult());
+        preparedStatement.executeUpdate();
     }
 
     @Override
     public List<Solution> getGradedSolutions(int assignmentId) throws SQLException {
         List<Solution> solutions = new ArrayList<>();
-        String sql ="select * from solutions\n" +
-                "join users on solutions.user_email = users.email\n" +
-                "join assignments on solutions.assignment_id = assignments.id\n" +
-                "where result <> null and assignment_id = ?";
+        String sql = "select * from solutions \n" +
+                "join users on solutions.user_email = users.email \n" +
+                "join assignments on solutions.assignment_id = assignments.id \n" +
+                "where result > 0 and assignment_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, assignmentId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -123,22 +116,21 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         int id;
         int maxScore;
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             id = resultSet.getInt("id");
             isPublished = resultSet.getBoolean("is_published");
-            isComplete = resultSet.getBoolean("is_complete");
-            isCorrected = resultSet.getBoolean("is_corrected");
+
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
-            grade = resultSet.getInt("grade");
+
             maxScore = resultSet.getInt("max_score");
-            assignment = new Assignment(isComplete, isCorrected, isPublished,
-                    question, answear, grade, id, maxScore);
+            assignment = new Assignment(isPublished,
+                    question, id, maxScore);
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
             Role role = Role.valueOf(resultSet.getString("role"));
             user = new User(name, email, role);
-            solutions.add(new Solution(assignment, user));
+            solutions.add(new Solution(assignment, user, answear, id));
         }
         return solutions;
     }
@@ -146,10 +138,10 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
     @Override
     public List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException {
         List<Solution> solutions = new ArrayList<>();
-        String sql ="select * from solutions\n" +
-                "join users on solutions.user_email = users.email\n" +
-                "join assignments on solutions.assignment_id = assignments.id\n" +
-                "where result is null and assignment_id = ?";
+        String sql = "select * from solutions \n" +
+                "join users on solutions.user_email = users.email \n" +
+                "join assignments on solutions.assignment_id = assignments.id \n" +
+                "where result = 0 and assignment_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, assignmentId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -164,24 +156,76 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         int id;
         int maxScore;
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             id = resultSet.getInt("id");
             isPublished = resultSet.getBoolean("is_published");
-            isComplete = resultSet.getBoolean("is_complete");
-            isCorrected = resultSet.getBoolean("is_corrected");
+
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
-            grade = resultSet.getInt("grade");
             maxScore = resultSet.getInt("max_score");
-            assignment = new Assignment(isComplete, isCorrected, isPublished,
-                    question, answear, grade, id, maxScore);
+            assignment = new Assignment(isPublished,
+                    question, id, maxScore);
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
             Role role = Role.valueOf(resultSet.getString("role"));
             user = new User(name, email, role);
-            solutions.add(new Solution(assignment, user));
+            solutions.add(new Solution(assignment, user, answear, id));
         }
         return solutions;
+    }
+
+    @Override
+    public Solution getUserSolutionsAtAssignmentId(String userEmail, int assignmentId) throws SQLException, NoSuchSolutionException {
+        String sql = "select * from solutions \n" +
+                "join users on solutions.user_email = users.email \n" +
+                "join assignments on solutions.assignment_id = assignments.id " +
+                "where users.email = ? and assignment_id =?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, userEmail);
+            preparedStatement.setInt(2, assignmentId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                Assignment assignment;
+                User user;
+                Boolean isPublished;
+                String question;
+                String answear;
+                Integer grade;
+                int id;
+                int maxScore;
+
+                if (resultSet.next()) {
+                    id = resultSet.getInt("assignment_id");
+                    isPublished = resultSet.getBoolean("is_published");
+
+                    question = resultSet.getString("question");
+                    answear = resultSet.getString("answer");
+
+                    maxScore = resultSet.getInt("max_score");
+                    assignment = new Assignment(isPublished,
+                            question, id, maxScore);
+                    String email = resultSet.getString("email");
+                    String name = resultSet.getString("name");
+                    Role role = Role.valueOf(resultSet.getString("role"));
+                    user = new User(name, email, role);
+                    return new Solution(assignment, user, answear, id);
+                } else {
+                    throw new NoSuchSolutionException();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void update(Solution solution) throws SQLException {
+        String sql = "update solutions \n" +
+                "set result = ?, answer = ? \n" +
+                "where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, solution.getResult());
+            preparedStatement.setString(2, solution.getAnswer());
+            preparedStatement.setInt(3, solution.getId());
+            preparedStatement.executeUpdate();
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.user;
 
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Database;

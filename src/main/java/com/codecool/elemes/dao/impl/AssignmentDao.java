@@ -1,10 +1,8 @@
-package com.codecool.elemes.dao;
+package com.codecool.elemes.dao.impl;
 
+import com.codecool.elemes.dao.AssigmentDatabase;
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
-import com.codecool.elemes.exceptions.NotGradedYetException;
-import com.codecool.elemes.exceptions.TextNotFoundException;
 import com.codecool.elemes.model.Assignment;
-import com.codecool.elemes.model.Text;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,15 +31,11 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
                 isPublished = resultSet.getBoolean("is_published");
-                isComplete = resultSet.getBoolean("is_complete");
-                isCorrected = resultSet.getBoolean("is_corrected");
                 question = resultSet.getString("question");
-                answear = resultSet.getString("answer");
-                grade = resultSet.getInt("grade");
                 maxScore = resultSet.getInt("max_score");
 
-                assignments.add(new Assignment(isComplete, isCorrected, isPublished,
-                        question, answear, grade, id, maxScore));
+                assignments.add(new Assignment(isPublished,
+                        question, id, maxScore));
             }
 
         }
@@ -50,22 +44,14 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
 
     @Override
     public void addAssignment(Assignment assignment) throws SQLException {
-        String sql = "INSERT INTO assignments (is_published, is_corrected, is_complete, answer, question, grade, max_score) VALUES (?,?,?,?,?,?,?)";
-        Boolean isComplete = assignment.getIsComplete();
-        Boolean isCorrected = assignment.getIsCorrected();
+        String sql = "INSERT INTO assignments (is_published, question, max_score) VALUES (?,?,?)";
         Boolean isPublished = assignment.getisPublished();
         String question = assignment.getQuestion();
-        String answear = assignment.getAnswear();
-        Integer grade = assignment.getGrade();
         int maxScore = assignment.getMaxScore();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, isPublished);
-            preparedStatement.setBoolean(2, isCorrected);
-            preparedStatement.setBoolean(3, isComplete);
-            preparedStatement.setString(4, answear);
-            preparedStatement.setString(5, question);
-            preparedStatement.setInt(6, grade);
-            preparedStatement.setInt(7, maxScore);
+            preparedStatement.setString(2, question);
+            preparedStatement.setInt(3, maxScore);
             preparedStatement.executeUpdate();
         }
     }
@@ -85,40 +71,32 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
                 int maxScore;
                 if (resultSet.next()) {
                     isPublished = resultSet.getBoolean("is_published");
-                    isComplete = resultSet.getBoolean("is_complete");
-                    isCorrected = resultSet.getBoolean("is_corrected");
                     question = resultSet.getString("question");
-                    answear = resultSet.getString("answer");
-                    grade = resultSet.getInt("grade");
                     maxScore = resultSet.getInt("max_score");
-                    return new Assignment(isComplete, isCorrected, isPublished, question, answear, grade, id, maxScore);
-                } else throw new NoSuchAssignmentException();
+                    return new Assignment(isPublished, question, id, maxScore);
+                }
+
             }
+            throw new NoSuchAssignmentException();
         }
     }
 
     @Override
     public void update(Assignment assignment) throws SQLException {
-        String sql = "UPDATE assignments SET is_published = ?, is_corrected = ?, is_complete = ?, answer = ?, question = ?, grade = ?, max_score = ? WHERE id = ?";
-        Boolean isComplete = assignment.getIsComplete();
-        Boolean isCorrected = assignment.getIsCorrected();
+        String sql = "UPDATE assignments SET is_published = ?,question = ?,max_score = ? WHERE id = ?";
+
         Boolean isPublished = assignment.getisPublished();
         String question = assignment.getQuestion();
-        String answear = assignment.getAnswear();
-        Integer grade;
-        grade = assignment.getGrade();
 
 
         int maxScore = assignment.getMaxScore();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, isPublished);
-            preparedStatement.setBoolean(2, isCorrected);
-            preparedStatement.setBoolean(3, isComplete);
-            preparedStatement.setString(4, answear);
-            preparedStatement.setString(5, question);
-            preparedStatement.setInt(6, grade);
-            preparedStatement.setInt(7, maxScore);
-            preparedStatement.setInt(8, assignment.getId());
+
+            preparedStatement.setString(2, question);
+
+            preparedStatement.setInt(3, maxScore);
+            preparedStatement.setInt(4, assignment.getId());
             preparedStatement.executeUpdate();
 
         }

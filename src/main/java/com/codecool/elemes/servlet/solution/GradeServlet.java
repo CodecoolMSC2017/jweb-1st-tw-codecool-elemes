@@ -1,16 +1,16 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.solution;
 
-import com.codecool.elemes.dao.SolutionDao;
+import com.codecool.elemes.dao.impl.AssignmentDao;
+import com.codecool.elemes.dao.impl.SolutionDao;
 import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.NoSuchSolutionException;
-import com.codecool.elemes.exceptions.NotGradedYetException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Solution;
 import com.codecool.elemes.service.ListSolutionService;
+import com.codecool.elemes.service.SolutionSubmissionService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,10 +42,10 @@ public class GradeServlet extends AbstractServlet {
         try (Connection connection = getConnection(req.getServletContext())){
             SolutionDatabase solutionDatabase = new SolutionDao(connection);
             ListSolutionService listSolutionService = new ListSolutionService(solutionDatabase);
-
             solution = listSolutionService.getSolution(id);
             int grade = Integer.parseInt(req.getParameter("grade"));
-            solution.getAssignment().grade(grade);
+            solution.setResult(grade);
+            listSolutionService.updtadeSolution(solution);
             if (solution.getAssignment().getMaxScore() < grade) {
                 throw  new NumberFormatException();
             }

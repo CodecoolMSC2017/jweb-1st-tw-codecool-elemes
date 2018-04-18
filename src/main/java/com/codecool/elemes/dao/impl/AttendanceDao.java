@@ -1,5 +1,7 @@
-package com.codecool.elemes.dao;
+package com.codecool.elemes.dao.impl;
 
+import com.codecool.elemes.dao.AttendanceDatabase;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
 

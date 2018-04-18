@@ -1,20 +1,17 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.solution;
 
-import com.codecool.elemes.dao.SolutionDao;
+import com.codecool.elemes.dao.impl.SolutionDao;
 import com.codecool.elemes.dao.SolutionDatabase;
-import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.Solution;
 import com.codecool.elemes.service.ListSolutionService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/listsolutions")
 public class ListSolutionsServlet extends AbstractServlet {
