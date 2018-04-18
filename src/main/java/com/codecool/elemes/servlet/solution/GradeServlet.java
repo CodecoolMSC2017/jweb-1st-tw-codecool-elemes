@@ -38,17 +38,14 @@ public class GradeServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String id = req.getParameter("id");
+            String grade = req.getParameter("grade");
             Solution solution = null;
         try (Connection connection = getConnection(req.getServletContext())){
             SolutionDatabase solutionDatabase = new SolutionDao(connection);
             ListSolutionService listSolutionService = new ListSolutionService(solutionDatabase);
             solution = listSolutionService.getSolution(id);
-            int grade = Integer.parseInt(req.getParameter("grade"));
-            solution.setResult(grade);
-            listSolutionService.updtadeSolution(solution);
-            if (solution.getAssignment().getMaxScore() < grade) {
-                throw  new NumberFormatException();
-            }
+            listSolutionService.handleGrading(id, grade);
+
             req.setAttribute("solution", solution);
             req.setAttribute("message", "Grade saved");
         } catch (NoSuchSolutionException e) {

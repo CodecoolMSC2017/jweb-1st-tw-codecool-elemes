@@ -199,7 +199,7 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
 
                     question = resultSet.getString("question");
                     answear = resultSet.getString("answer");
-
+                    int result = resultSet.getInt("result");
                     maxScore = resultSet.getInt("max_score");
                     assignment = new Assignment(isPublished,
                             question, id, maxScore);
@@ -207,7 +207,7 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
                     String name = resultSet.getString("name");
                     Role role = Role.valueOf(resultSet.getString("role"));
                     user = new User(name, email, role);
-                    return new Solution(assignment, user, answear, id);
+                    return new Solution(assignment, user, answear, id, result);
                 } else {
                     throw new NoSuchSolutionException();
                 }

@@ -36,5 +36,11 @@ public class ListSolutionService {
         database.update(solution);
     }
 
+    public void handleGrading(String solutionId, String grade) throws SQLException, NoSuchSolutionException {
+        Solution s = getSolution(solutionId);
+        s.setResult(Integer.parseInt(grade));
+        database.update(s);
+    }
+
 
 }

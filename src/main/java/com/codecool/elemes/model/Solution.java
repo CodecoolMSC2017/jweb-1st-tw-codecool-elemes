@@ -9,11 +9,20 @@ public class Solution {
     private int id;
     private String answer;
 
+    public Solution(Assignment assignment, User user, String answer, int id, int result ) {
+        this.assignment = assignment;
+        this.user = user;
+        this.result = result;
+        this.id = id;
+        this.answer = answer;
+    }
+
     public Solution(Assignment assignment, User user, String answer, int id) {
         this.assignment = assignment;
         this.user = user;
         this.answer = answer;
         this.id = id;
+
 
 
     }
