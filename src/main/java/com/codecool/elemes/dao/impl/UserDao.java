@@ -96,11 +96,4 @@ public class UserDao extends AbstractDao implements UserDataBase {
             preparedStatement.executeUpdate();
         }
     }
-
-    private User fetchUser(ResultSet resultSet) throws SQLException {
-        String email = resultSet.getString("email");
-        String name = resultSet.getString("name");
-        Role role = Role.valueOf(resultSet.getString("role"));
-        return new User(name, email, role);
-    }
 }

@@ -23,30 +23,17 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         String sql = "select * from solutions\n" +
                 "join users on solutions.user_email = users.email\n" +
                 "join assignments on solutions.assignment_id = assignments.id";
-
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         Assignment assignment;
         User user;
-        Boolean isPublished;
-        String question;
         int id;
-        int maxScore;
-
         while (resultSet.next()) {
             id = resultSet.getInt("id");
-            isPublished = resultSet.getBoolean("is_published");
-
-            question = resultSet.getString("question");
             String answer = resultSet.getString("answer");
-            maxScore = resultSet.getInt("max_score");
-            assignment = new Assignment(isPublished,
-                    question, id, maxScore);
-            String email = resultSet.getString("email");
-            String name = resultSet.getString("name");
             int result = resultSet.getInt("result");
-            Role role = Role.valueOf(resultSet.getString("role"));
-            user = new User(name, email, role);
+            assignment = fetchAssignment(resultSet);
+            user = fetchUser(resultSet);
             solutions.add(new Solution(assignment, user, answer, id, result));
         }
         return solutions;
@@ -62,16 +49,12 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         ResultSet resultSet = preparedStatement.executeQuery();
         Assignment assignment;
         User user;
-        Boolean isComplete;
-        Boolean isCorrected;
         Boolean isPublished;
         String question;
         String answear;
-        Integer grade;
         int maxScore;
         if (resultSet.next()) {
             isPublished = resultSet.getBoolean("is_published");
-
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
             maxScore = resultSet.getInt("max_score");
@@ -94,8 +77,7 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         preparedStatement.setInt(2, solution.getAssignment().getId());
         if (solution.getResult() == null) {
             preparedStatement.setNull(3, java.sql.Types.INTEGER);
-        }
-        else {
+        } else {
             preparedStatement.setInt(3, solution.getResult());
         }
         preparedStatement.executeUpdate();
@@ -113,22 +95,17 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         ResultSet resultSet = preparedStatement.executeQuery();
         Assignment assignment;
         User user;
-        Boolean isComplete;
-        Boolean isCorrected;
         Boolean isPublished;
         String question;
         String answear;
-        Integer grade;
         int id;
         int maxScore;
 
         while (resultSet.next()) {
             id = resultSet.getInt("id");
             isPublished = resultSet.getBoolean("is_published");
-
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
-
             maxScore = resultSet.getInt("max_score");
             assignment = new Assignment(isPublished,
                     question, id, maxScore);
@@ -153,19 +130,15 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         ResultSet resultSet = preparedStatement.executeQuery();
         Assignment assignment;
         User user;
-        Boolean isComplete;
-        Boolean isCorrected;
         Boolean isPublished;
         String question;
         String answear;
-        Integer grade;
         int id;
         int maxScore;
 
         while (resultSet.next()) {
             id = resultSet.getInt("id");
             isPublished = resultSet.getBoolean("is_published");
-
             question = resultSet.getString("question");
             answear = resultSet.getString("answer");
             maxScore = resultSet.getInt("max_score");
@@ -195,14 +168,11 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
                 Boolean isPublished;
                 String question;
                 String answear;
-                Integer grade;
                 int id;
                 int maxScore;
-
                 if (resultSet.next()) {
                     id = resultSet.getInt("assignment_id");
                     isPublished = resultSet.getBoolean("is_published");
-
                     question = resultSet.getString("question");
                     answear = resultSet.getString("answer");
                     Integer result = resultSet.getInt("result");
@@ -233,6 +203,4 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
             preparedStatement.executeUpdate();
         }
     }
-
-
 }
