@@ -21,9 +21,11 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
             while (resultSet.next()){
-                Date date = resultSet.getDate("date");
+                Date sqlDate = resultSet.getDate("date");
+                Date date = new Date(sqlDate.getTime());
                 User user = new UserDao(connection).getUser(resultSet.getString("user_email"));
                 if(attendanceMap.containsKey(date)){
+                    tempList.clear();
                     tempList.addAll(attendanceMap.get(date));
                     tempList.add(user);
                     attendanceMap.put(date,tempList);
