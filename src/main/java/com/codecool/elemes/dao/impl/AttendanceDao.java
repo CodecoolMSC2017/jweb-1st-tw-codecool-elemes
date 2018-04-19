@@ -6,6 +6,8 @@ import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
@@ -16,24 +18,29 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     UserDataBase userDataBase = new UserDao(connection);
 
     @Override
-    public Map<Date, List<User>> getAttendanceMap() throws SQLException, NoSuchUserException {
-        Map<Date,List<User>> attendanceMap = new HashMap<>();
+    public Map<String, List<User>> getAttendanceMap() throws SQLException, NoSuchUserException {
+        Map<String,List<User>> attendanceMap = new HashMap<>();
         List<User> tempList = new ArrayList<>();
         String sql = "SELECT date,user_email FROM attendance";
         try(Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
             while (resultSet.next()){
-                Date sqlDate = resultSet.getDate("date");
-                Date date = new Date(sqlDate.getTime());
+                String today = resultSet.getString("date");
                 User user = new UserDao(connection).getUser(resultSet.getString("user_email"));
-                if(attendanceMap.containsKey(date)){
+                if(attendanceMap.containsKey(today)){
                     tempList.clear();
-                    tempList.addAll(attendanceMap.get(date));
+                    tempList.addAll(attendanceMap.get(today));
                     tempList.add(user);
-                    attendanceMap.put(date,tempList);
+                    attendanceMap.put(today,tempList);
+                }
+                else if (!attendanceMap.containsKey(today) && user == null) {
+                    attendanceMap.put(today,new ArrayList<User>());
+                }
+                else if (attendanceMap.containsKey(today) && user == null) {
+                    attendanceMap.put(today, new ArrayList<User>());
                 }
                 else{
-                    attendanceMap.put(date,Arrays.asList(user));
+                    attendanceMap.put(today,Arrays.asList(user));
                 }
             }
         }
@@ -42,24 +49,22 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     }
 
     @Override
-    public List<Map<Date, List<User>>> missingStudents() throws SQLException, NoSuchUserException {
-        List<Map<Date,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
-        for(Map.Entry<Date,List<User>>entry : getAttendanceMap().entrySet()){
+    public List<Map<String, List<User>>> missingStudents() throws SQLException, NoSuchUserException {
+        List<Map<String,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
+        for(Map.Entry<String,List<User>>entry : getAttendanceMap().entrySet()){
             if(entry.getValue().size() != userDataBase.getOnlyStudents().size()){
-                daysWhereSomeoneIsMissing.add((Map<Date, List<User>>) entry);
+                daysWhereSomeoneIsMissing.add((Map<String, List<User>>) entry);
             }
         }
         return daysWhereSomeoneIsMissing;
-
-
 }
 
     @Override
-    public List<Date> getMissedDays(String eMail) throws NoSuchUserException, SQLException {
-        List<Date> missedDates = new ArrayList<>();
+    public List<String> getMissedDays(String eMail) throws NoSuchUserException, SQLException {
+        List<String> missedDates = new ArrayList<>();
         for(User user:userDataBase.getOnlyStudents()){
             if(user.geteMail().equals(eMail)){
-                for(Map.Entry<Date,List<User>> entry : getAttendanceMap().entrySet()){
+                for(Map.Entry<String,List<User>> entry : getAttendanceMap().entrySet()){
                     for(User loggedInUser:entry.getValue()){
                         if(loggedInUser.geteMail().equals(eMail)){
                             missedDates.add(entry.getKey());
@@ -71,14 +76,13 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
         return missedDates;
     }
     @Override
-    public void writeAttendance(Date date,List<User> users) throws SQLException {
+    public void writeAttendance(String date,List<User> users) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         String sql = "INSERT INTO attendance(date,user_email) VALUES(?,?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             for(User user : users) {
-                statement.setDate(1, (sqlDate));
+                statement.setString(1, (date));
                 statement.setString(2,user.geteMail());
                 statement.executeUpdate();
             }
@@ -89,16 +93,15 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
         }finally {
             connection.setAutoCommit(autoCommit);
         }
-
     }
+
     @Override
-    public void deleteAttendance(Date date)throws SQLException{
+    public void deleteAttendance(String date)throws SQLException{
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        String sql = "DELETE FROM attendance WHERE date = ?";
+        String sql = "UPDATE attendance SET user_email = NULL where date = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
-                statement.setDate(1, (sqlDate));
+                statement.setString(1, (date));
                 statement.executeUpdate();
                 connection.commit();
         }catch (SQLException ex){

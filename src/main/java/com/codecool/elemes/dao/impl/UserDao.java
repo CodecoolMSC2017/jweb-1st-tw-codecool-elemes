@@ -48,6 +48,9 @@ public class UserDao extends AbstractDao implements UserDataBase {
 
     @Override
     public User getUser(String email) throws NoSuchUserException, SQLException {
+        if (email == null) {
+            return null;
+        }
         String sql = "SELECT email,name,role FROM users WHERE email = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, email);

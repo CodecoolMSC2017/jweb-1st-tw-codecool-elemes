@@ -32,7 +32,7 @@ CREATE TABLE texts (
 );
 
 CREATE TABLE attendance (
-    date DATE NOT NULL,
+    date TEXT NOT NULL,
     user_email TEXT,
     FOREIGN KEY (user_email) REFERENCES users(email)
 );
@@ -65,9 +65,9 @@ INSERT INTO assignments (question, max_score, is_published) VALUES
 	     -- 5
 
 INSERT INTO attendance(date, user_email) VALUES
- ('10/03/2018', 'lili@live.it'),
- ('11/03/2018', 'peter@gmail.ch'),
-('11/03/2018', 'lili@live.it');
+ ('2018-03-10', 'lili@live.it'),
+ ('2018-03-11', 'peter@gmail.ch'),
+('2018-03-11', 'lili@live.it');
 
 INSERT INTO solutions (assignment_id, user_email, answer) VALUES
     (1, 'peter@gmail.ch', 'of course'), -- 1

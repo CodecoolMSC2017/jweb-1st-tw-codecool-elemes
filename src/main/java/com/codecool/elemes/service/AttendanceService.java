@@ -24,7 +24,7 @@ public final class AttendanceService {
     }
     private Map<User,Boolean> todaysAttendance = new HashMap<>();
 
-    private void checkAttendance(Map<User, Boolean> today,Date date) throws AttendanceAlreadyUpdated, SQLException, NoSuchUserException {
+    private void checkAttendance(Map<User, Boolean> today, String date) throws AttendanceAlreadyUpdated, SQLException, NoSuchUserException {
         List<User> hereToday = new ArrayList<>();
         if (!attendanceDatabase.getAttendanceMap().containsKey(date)) {
             today.forEach((key, value) -> {
@@ -42,7 +42,6 @@ public final class AttendanceService {
         List<User> usersHere = new ArrayList<>();
         String booleanString;
         String date = req.getParameter("attendanceDate");
-        Date formattedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         for(User user: userDataBase.getOnlyStudents()){
             usersHere.add(user);
             booleanString = req.getParameter(user.geteMail());
@@ -54,7 +53,7 @@ public final class AttendanceService {
             }
         }
         organizeAttendance(usersHere,isHere);
-        checkAttendance(todaysAttendance, formattedDate);
+        checkAttendance(todaysAttendance, date);
     }
 
     private void organizeAttendance(List<User> users ,List<Boolean> bools){
@@ -63,11 +62,10 @@ public final class AttendanceService {
         }
     }
 
-    public Map<User,Boolean> editAttendance(String stringDate) throws ParseException, SQLException, NoSuchUserException {
+    public Map<User,Boolean> editAttendance(String date) throws ParseException, SQLException, NoSuchUserException {
         List<User> users = new ArrayList<>();
         List<Boolean> booleans = new ArrayList<>();
         Map<User,Boolean> attendanceMap = new HashMap<>();
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
         if(!attendanceDatabase.getAttendanceMap().containsKey(date)){
             throw new NoSuchUserException();
         }
@@ -86,11 +84,13 @@ public final class AttendanceService {
         }
         return attendanceMap;
     }
-    public void rewriteAttendance(String date,Map<User,Boolean> edit,HttpServletRequest req) throws ParseException, SQLException, NoSuchUserException {
+    public void rewriteAttendance(String date,Map<User,Boolean> edit,HttpServletRequest req) throws SQLException {
+        if (edit == null) {
+            return;
+        }
         List<User> usersHere = new ArrayList<>();
         List<Boolean> isHere = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        Date formattedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         String booleanString;
         for(Map.Entry<User,Boolean> entry: edit.entrySet()){
             usersHere.add(entry.getKey());
@@ -107,10 +107,8 @@ public final class AttendanceService {
                 users.add(usersHere.get(i));
             }
         }
-        attendanceDatabase.deleteAttendance(formattedDate);
-        attendanceDatabase.writeAttendance(formattedDate,users);
-
+        attendanceDatabase.deleteAttendance(date);
+        attendanceDatabase.writeAttendance(date,users);
     }
-
 }
 
