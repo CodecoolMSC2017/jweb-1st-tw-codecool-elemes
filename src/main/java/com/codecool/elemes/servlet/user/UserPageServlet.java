@@ -1,4 +1,4 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.user;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

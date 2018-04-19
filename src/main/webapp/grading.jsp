@@ -14,7 +14,7 @@
 <%@ include file = "userpage.jsp" %>
 <p><c:out value="${solution.assignment.question}"/></p>
 <p>Max Score: <c:out value="${solution.assignment.maxScore}"/></p>
-<p>Answer: <c:out value="${solution.assignment.answear}"/>
+<p>Answer: <c:out value="${solution.answer}"/>
 <form action="grade" method="post">
   <input type = "text" name="grade">
   <input type="hidden" name="id" value="${solution.id}">

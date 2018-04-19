@@ -1,4 +1,4 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

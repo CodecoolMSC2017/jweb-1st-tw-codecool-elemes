@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
   $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' },{minDate : -60, maxDate:"+0D"});
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', minDate : -60, maxDate:"+0D" });
   } );
   </script>
 </head>
@@ -32,7 +32,7 @@
     <br><br><tr><th>Days</th><th>People</th></tr>
     <c:forEach var="attendance" items="${AllOverAttendance}">
         <tr>
-            <td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${attendance.key}" /></td>
+            <td>${attendance.key}</td>
             <td>
                 <ul>
                     <c:forEach items="${attendance.value}" var = "user">

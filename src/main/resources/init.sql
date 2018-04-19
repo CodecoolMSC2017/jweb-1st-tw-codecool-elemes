@@ -20,10 +20,6 @@ CREATE TABLE users (
 CREATE TABLE assignments (
     id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
-    answer TEXT,
-    grade INTEGER,
-    is_complete BOOLEAN default false,
-    is_corrected BOOLEAN default false,
     is_published BOOLEAN default false,
     max_score INTEGER NOT NULL
 );
@@ -36,7 +32,7 @@ CREATE TABLE texts (
 );
 
 CREATE TABLE attendance (
-    date DATE NOT NULL,
+    date TEXT NOT NULL,
     user_email TEXT,
     FOREIGN KEY (user_email) REFERENCES users(email)
 );
@@ -46,6 +42,7 @@ CREATE TABLE solutions (
     user_email TEXT NOT NULL,
     assignment_id INTEGER NOT NULL,
     result INTEGER,
+    answer TEXT,
     FOREIGN KEY (user_email) REFERENCES users(email),
     FOREIGN KEY (assignment_id) REFERENCES assignments(id)
 );
@@ -68,10 +65,10 @@ INSERT INTO assignments (question, max_score, is_published) VALUES
 	     -- 5
 
 INSERT INTO attendance(date, user_email) VALUES
- ('10/03/2018', 'lili@live.it'),
- ('11/03/2018', 'peter@gmail.ch'),
-('11/03/2018', 'lili@live.it');
+ ('2018-03-10', 'lili@live.it'),
+ ('2018-03-11', 'peter@gmail.ch'),
+('2018-03-11', 'lili@live.it');
 
-INSERT INTO solutions (assignment_id, user_email) VALUES
-    (1, 'peter@gmail.ch'), -- 1
-    (1, 'lili@live.it');  -- 2
+INSERT INTO solutions (assignment_id, user_email, answer) VALUES
+    (1, 'peter@gmail.ch', 'of course'), -- 1
+    (1, 'lili@live.it', 'dunno');  -- 2

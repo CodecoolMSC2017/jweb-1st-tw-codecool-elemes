@@ -2,6 +2,7 @@
 package com.codecool.elemes.model;
 
 import com.codecool.elemes.dao.*;
+import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.*;
 
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
 
     private List<Solution> solutions = new ArrayList<>();
 
-    private Map<Date,List<User>> rollCallAttendance = new HashMap<>();
+    private Map<String,List<User>> rollCallAttendance = new HashMap<>();
 
     public Database(){}
 
@@ -169,7 +170,22 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
-    public void update(Solution solution) {
+    public List<Solution> getGradedSolutions(int assignmentId) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Solution getUserSolutionsAtAssignmentId(String userEmail, int assignmentId) throws SQLException, NoSuchSolutionException {
+        return null;
+    }
+
+    @Override
+    public void update(Solution solution) throws SQLException {
 
     }
 
@@ -189,27 +205,27 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
-    public Map<Date, List<User>> getAttendanceMap() {
+    public Map<String, List<User>> getAttendanceMap() {
         return rollCallAttendance;
     }
 
     @Override
-    public List<Map<Date,List<User>>> missingStudents() throws SQLException {
-        List<Map<Date,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
-        for(Map.Entry<Date,List<User>>entry : rollCallAttendance.entrySet()){
+    public List<Map<String,List<User>>> missingStudents() throws SQLException {
+        List<Map<String,List<User>>> daysWhereSomeoneIsMissing  = new ArrayList<>();
+        for(Map.Entry<String,List<User>>entry : rollCallAttendance.entrySet()){
             if(entry.getValue().size() != getOnlyStudents().size()){
-                daysWhereSomeoneIsMissing.add((Map<Date, List<User>>) entry);
+                daysWhereSomeoneIsMissing.add((Map<String, List<User>>) entry);
             }
         }
         return daysWhereSomeoneIsMissing;
     }
 
     @Override
-    public List<Date> getMissedDays(String eMail) throws NoSuchUserException {
-        List<Date> missedDates = new ArrayList<>();
+    public List<String> getMissedDays(String eMail) throws NoSuchUserException {
+        List<String> missedDates = new ArrayList<>();
         for(User user:getOnlyStudents()){
             if(user.geteMail().equals(eMail)){
-                for(Map.Entry<Date,List<User>> entry : rollCallAttendance.entrySet()){
+                for(Map.Entry<String,List<User>> entry : rollCallAttendance.entrySet()){
                     for(User loggedInUser:entry.getValue()){
                         if(loggedInUser.geteMail().equals(eMail)){
                             missedDates.add(entry.getKey());
@@ -223,12 +239,12 @@ public class Database implements UserDataBase, TextDatabase, AssigmentDatabase, 
     }
 
     @Override
-    public void writeAttendance(Date date, List<User> users) throws SQLException {
+    public void writeAttendance(String date, List<User> users) throws SQLException {
 
     }
 
     @Override
-    public void deleteAttendance(Date date) throws SQLException {
+    public void deleteAttendance(String date) throws SQLException {
 
     }
 

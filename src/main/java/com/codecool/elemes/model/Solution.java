@@ -7,17 +7,24 @@ public class Solution {
     private User user;
     private int result;
     private int id;
+    private String answer;
 
-    public Solution(Assignment assignment, User user) {
+    public Solution(Assignment assignment, User user, String answer, int id, int result ) {
         this.assignment = assignment;
         this.user = user;
-
+        this.result = result;
+        this.id = id;
+        this.answer = answer;
     }
 
-    public Solution(Assignment assignment, User user, int id) {
+    public Solution(Assignment assignment, User user, String answer, int id) {
         this.assignment = assignment;
         this.user = user;
+        this.answer = answer;
         this.id = id;
+
+
+
     }
 
     public Assignment getAssignment() {
@@ -40,6 +47,19 @@ public class Solution {
         this.result = result;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public Solution(Assignment assignment, User user) {
+        this.assignment = assignment;
+        this.user = user;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+
+    }
 
     public boolean equals(Solution solution) {
         if (solution.getAssignment().getQuestion().equals(this.getAssignment().getQuestion()) && solution.getUser().getName().equals(this.getUser().getName())) {

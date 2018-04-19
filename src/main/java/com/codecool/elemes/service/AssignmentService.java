@@ -37,7 +37,7 @@ public class AssignmentService {
         return assignments;
     }
 
-    public void handlePublish(HttpServletRequest req) throws SQLException, NotGradedYetException {
+    public void handlePublish(HttpServletRequest req) throws SQLException {
         String condition;
         for (Assignment assignment :database.getAllAssignments()) {
             if (req.getParameter(assignment.getQuestion())!= null) {
@@ -58,7 +58,7 @@ public class AssignmentService {
         return new Assignment(question, maxScore);
 
     }
-    public void addAssignment(Assignment assignment) throws NotGradedYetException, SQLException {
+    public void addAssignment(Assignment assignment) throws SQLException {
         database.addAssignment(assignment);
     }
 }

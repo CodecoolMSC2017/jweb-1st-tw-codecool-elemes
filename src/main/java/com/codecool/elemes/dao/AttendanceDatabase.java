@@ -10,14 +10,13 @@ import java.util.Map;
 
 public interface AttendanceDatabase {
 
-    Map<Date,List<User>> getAttendanceMap() throws SQLException, NoSuchUserException;
+    Map<String,List<User>> getAttendanceMap() throws SQLException, NoSuchUserException;
 
-    List<Map<Date,List<User>>> missingStudents() throws SQLException, NoSuchUserException;
+    List<Map<String,List<User>>> missingStudents() throws SQLException, NoSuchUserException;
 
-    List<Date> getMissedDays(String eMail) throws NoSuchUserException, SQLException;
+    List<String> getMissedDays(String eMail) throws NoSuchUserException, SQLException;
 
-    void writeAttendance(Date date,List<User> users) throws SQLException;
+    void writeAttendance(String date,List<User> users) throws SQLException;
 
-    void deleteAttendance(Date date) throws SQLException;
-
+    void deleteAttendance(String date) throws SQLException;
 }

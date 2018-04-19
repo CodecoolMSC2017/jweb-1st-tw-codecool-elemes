@@ -12,7 +12,13 @@ public interface SolutionDatabase {
 
     Solution getSolution(int id) throws NoSuchSolutionException, SQLException;
 
-    void addSolution(Solution solution);
+    void addSolution(Solution solution) throws SQLException;
 
-    void update(Solution solution);
+    List<Solution> getGradedSolutions(int assignmentId) throws SQLException;
+
+    List<Solution> getSolutionsToGrade(int assignmentId) throws SQLException;
+
+    Solution getUserSolutionsAtAssignmentId(String userEmail, int assignmentId) throws SQLException, NoSuchSolutionException;
+
+    void update(Solution solution) throws SQLException;
 }

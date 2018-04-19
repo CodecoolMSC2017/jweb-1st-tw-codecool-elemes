@@ -1,4 +1,4 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.user;
 
 import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.User;

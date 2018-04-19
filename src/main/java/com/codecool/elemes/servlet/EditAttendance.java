@@ -1,8 +1,8 @@
 package com.codecool.elemes.servlet;
 
-import com.codecool.elemes.dao.AttendanceDao;
+import com.codecool.elemes.dao.impl.AttendanceDao;
 import com.codecool.elemes.dao.AttendanceDatabase;
-import com.codecool.elemes.dao.UserDao;
+import com.codecool.elemes.dao.impl.UserDao;
 import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
