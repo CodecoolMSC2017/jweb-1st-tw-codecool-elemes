@@ -60,13 +60,13 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
 }
 
     @Override
-    public List<String> getMissedDays(String eMail) throws NoSuchUserException, SQLException {
+    public List<String> getMissedDays(String eMail) throws SQLException {
         List<String> missedDates = new ArrayList<>();
         String sql = "SELECT date FROM attendance WHERE user_email = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,eMail);
             try(ResultSet resultSet = statement.executeQuery()){
-                if(resultSet.next()){
+                while(resultSet.next()){
                     missedDates.add(resultSet.getString("date"));
                 }
             }

@@ -17,15 +17,19 @@ import java.sql.SQLException;
 @WebServlet("/studentAttendance")
 public class StudentAttendanceServlet extends AbstractServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User) req.getSession().getAttribute("loggedin");
         try(Connection connection = getConnection(getServletContext())) {
             AttendanceDatabase attendanceDatabase = new AttendanceDao(connection);
             req.setAttribute("studentAttendance",attendanceDatabase.getMissedDays(user.geteMail()));
-            req.getRequestDispatcher("studentAttendance").forward(req,resp);
+            req.getRequestDispatcher("studentAttendance.jsp").forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NoSuchUserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
             e.printStackTrace();
         }
     }

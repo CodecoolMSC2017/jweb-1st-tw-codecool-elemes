@@ -27,9 +27,8 @@ public class UserPageServlet extends AbstractServlet {
             UserDataBase userDataBase = new UserDao(connection);
             AttendanceService attendanceService = new AttendanceService(attendanceDatabase, userDataBase);
             User user = (User) req.getSession().getAttribute("loggedin");
-            req.setAttribute("redirect", attendanceService.getPage(user));
-            req.getRequestDispatcher("userpage.jsp").forward(req, resp);
-
+            req.getSession().setAttribute("redirect", attendanceService.getPage(user));
+           req.getRequestDispatcher("userpage.jsp").forward(req,resp);
 
         } catch (SQLException e) {
             e.printStackTrace();
