@@ -44,9 +44,10 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
                     question, id, maxScore);
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
+            int result = resultSet.getInt("result");
             Role role = Role.valueOf(resultSet.getString("role"));
             user = new User(name, email, role);
-            solutions.add(new Solution(assignment, user, answer, id));
+            solutions.add(new Solution(assignment, user, answer, id, result));
         }
         return solutions;
     }
@@ -91,7 +92,12 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, solution.getUser().geteMail());
         preparedStatement.setInt(2, solution.getAssignment().getId());
-        preparedStatement.setInt(3, solution.getResult());
+        if (solution.getResult() == null) {
+            preparedStatement.setNull(3, java.sql.Types.INTEGER);
+        }
+        else {
+            preparedStatement.setInt(3, solution.getResult());
+        }
         preparedStatement.executeUpdate();
     }
 
@@ -199,7 +205,7 @@ public class SolutionDao extends AbstractDao implements SolutionDatabase {
 
                     question = resultSet.getString("question");
                     answear = resultSet.getString("answer");
-                    int result = resultSet.getInt("result");
+                    Integer result = resultSet.getInt("result");
                     maxScore = resultSet.getInt("max_score");
                     assignment = new Assignment(isPublished,
                             question, id, maxScore);

@@ -1,5 +1,9 @@
 package com.codecool.elemes.servlet;
 
+import com.codecool.elemes.dao.SolutionDatabase;
+import com.codecool.elemes.dao.UserDataBase;
+import com.codecool.elemes.dao.impl.SolutionDao;
+import com.codecool.elemes.dao.impl.UserDao;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
@@ -12,17 +16,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Map;
 
 @WebServlet("/statistics")
-public class StatisticsServlet extends HttpServlet {
+public class StatisticsServlet extends AbstractServlet {
 
-    private StatisticsService statisticsService = new StatisticsService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("loggedin");
+
+        try(Connection connection = getConnection(req.getServletContext())) {
+            UserDataBase ud = new UserDao(connection);
+            SolutionDatabase sd = new SolutionDao(connection);
+            StatisticsService statisticsService = new StatisticsService(ud, sd);
+
         try {
             User user1 = statisticsService.getUser(req.getParameter("email"));
             user = user1;
@@ -37,5 +48,9 @@ public class StatisticsServlet extends HttpServlet {
             req.setAttribute("summary",stat.get(user));
             req.getRequestDispatcher("studentstatistics.jsp").forward(req,resp);
         }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
