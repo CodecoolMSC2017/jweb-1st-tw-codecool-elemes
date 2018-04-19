@@ -69,6 +69,6 @@ INSERT INTO attendance(date, user_email) VALUES
  ('2018-03-11', 'peter@gmail.ch'),
 ('2018-03-11', 'lili@live.it');
 
-INSERT INTO solutions (assignment_id, user_email, answer) VALUES
-    (1, 'peter@gmail.ch', 'of course'), -- 1
-    (1, 'lili@live.it', 'dunno');  -- 2
+INSERT INTO solutions (assignment_id, user_email, answer, result) VALUES
+    (1, 'peter@gmail.ch', 'of course', 0), -- 1
+    (1, 'lili@live.it', 'dunno', 0);  -- 2
