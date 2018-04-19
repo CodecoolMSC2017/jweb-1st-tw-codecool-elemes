@@ -38,7 +38,12 @@ public class ListSolutionService {
 
     public void handleGrading(String solutionId, String grade) throws SQLException, NoSuchSolutionException {
         Solution s = getSolution(solutionId);
-        s.setResult(Integer.parseInt(grade));
+        int g = Integer.parseInt(grade);
+        int max = s.getAssignment().getMaxScore();
+        if (g > max | g <= 0 ) {
+            throw new NumberFormatException();
+        }
+        s.setResult(g);
         database.update(s);
     }
 

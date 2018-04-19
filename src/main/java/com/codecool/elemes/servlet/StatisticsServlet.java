@@ -34,11 +34,12 @@ public class StatisticsServlet extends AbstractServlet {
             SolutionDatabase sd = new SolutionDao(connection);
             StatisticsService statisticsService = new StatisticsService(ud, sd);
 
-        try {
+        if (req.getParameter("email") != null) {
             User user1 = statisticsService.getUser(req.getParameter("email"));
             user = user1;
-        } catch (NoSuchUserException e) {
         }
+
+
         if (user.getRole().equals(Role.MENTOR)) {
             req.setAttribute("stats", statisticsService.getSummerizeStudentStatistics());
             req.getRequestDispatcher("statistics.jsp").forward(req,resp);
@@ -49,6 +50,8 @@ public class StatisticsServlet extends AbstractServlet {
             req.getRequestDispatcher("studentstatistics.jsp").forward(req,resp);
         }
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchUserException e) {
             e.printStackTrace();
         }
 
