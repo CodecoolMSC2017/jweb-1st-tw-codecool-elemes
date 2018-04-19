@@ -62,14 +62,12 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     @Override
     public List<String> getMissedDays(String eMail) throws NoSuchUserException, SQLException {
         List<String> missedDates = new ArrayList<>();
-        for(User user:userDataBase.getOnlyStudents()){
-            if(user.geteMail().equals(eMail)){
-                for(Map.Entry<String,List<User>> entry : getAttendanceMap().entrySet()){
-                    for(User loggedInUser:entry.getValue()){
-                        if(loggedInUser.geteMail().equals(eMail)){
-                            missedDates.add(entry.getKey());
-                        }
-                    }
+        String sql = "SELECT date FROM attendance WHERE user_email = ?";
+        try(PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setString(1,eMail);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next()){
+                    missedDates.add(resultSet.getString("date"));
                 }
             }
         }
@@ -99,7 +97,7 @@ public class AttendanceDao extends AbstractDao implements AttendanceDatabase {
     public void deleteAttendance(String date)throws SQLException{
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "UPDATE attendance SET user_email = NULL where date = ?";
+        String sql = "DELETE FROM attendance WHERE date = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
                 statement.setString(1, (date));
                 statement.executeUpdate();

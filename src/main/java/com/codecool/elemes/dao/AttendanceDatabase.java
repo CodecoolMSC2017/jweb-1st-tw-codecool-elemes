@@ -4,7 +4,6 @@ import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

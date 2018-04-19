@@ -11,11 +11,6 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-  $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' },{minDate : -60, maxDate:"+0D"});
-  } );
-  </script>
     <style>
         table {
     font-family: arial, sans-serif;
@@ -36,32 +31,17 @@ tr:nth-child(even) {
 </head>
 <%@ include file = "userpage.jsp" %>
 <body>
-<form action="attendance" method="post">
-    <p>Date: <input type="text" id="datepicker" value="${defaultDate}" name = "attendanceDate">
-        <input type = "submit" value = "submit" width="6em">
-    </p>
-    <p align = "center">${saved}</p>
-
+<form action="studentAttendance" method="get">
     <table align = "center">
         <tr>
-            <th>Students</th>
-            <th width="10%">Missing</th>
+            <th>Date</th>
         </tr>
-    <c:forEach var="s" items="${editAttendanceMap}">
+    <c:forEach var="date" items="${studentAttendance}">
         <tr>
-            <td>${s.key.name}</td>
-            <td width="10%"><input type="checkbox" name="${s.key.eMail}" value="true"
-                <c:if test = "${s.value}">
-                    checked
-                </c:if></td>
-
+            <td>${date}</td>
         </tr>
     </c:forEach>
     </table>
-    <form action = "editAttendance" method = "post">
-        <input type = "submit" value = "edit" ailgn = "center">
-    </form>
-    <p>${error}</p>
     </form>
 </body>
 </html>

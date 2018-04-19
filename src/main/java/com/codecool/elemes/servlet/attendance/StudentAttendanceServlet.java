@@ -1,11 +1,9 @@
-package com.codecool.elemes.servlet.user;
+package com.codecool.elemes.servlet.attendance;
 
 import com.codecool.elemes.dao.AttendanceDatabase;
-import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.dao.impl.AttendanceDao;
-import com.codecool.elemes.dao.impl.UserDao;
+import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
-import com.codecool.elemes.service.AttendanceService;
 import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
@@ -16,24 +14,19 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/userpage")
-public class UserPageServlet extends AbstractServlet {
-
+@WebServlet("/studentAttendance")
+public class StudentAttendanceServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        try (Connection connection = getConnection(req.getServletContext())) {
+        User user = (User) req.getSession().getAttribute("loggedin");
+        try(Connection connection = getConnection(getServletContext())) {
             AttendanceDatabase attendanceDatabase = new AttendanceDao(connection);
-            UserDataBase userDataBase = new UserDao(connection);
-            AttendanceService attendanceService = new AttendanceService(attendanceDatabase, userDataBase);
-            User user = (User) req.getSession().getAttribute("loggedin");
-            req.setAttribute("redirect", attendanceService.getPage(user));
-            req.getRequestDispatcher("userpage.jsp").forward(req, resp);
-
-
+            req.setAttribute("studentAttendance",attendanceDatabase.getMissedDays(user.geteMail()));
+            req.getRequestDispatcher("studentAttendance").forward(req,resp);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchUserException e) {
             e.printStackTrace();
         }
     }
 }
-
