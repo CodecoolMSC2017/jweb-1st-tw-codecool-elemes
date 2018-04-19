@@ -3,7 +3,6 @@ package com.codecool.elemes.dao.impl;
 import com.codecool.elemes.dao.AssigmentDatabase;
 import com.codecool.elemes.exceptions.NoSuchAssignmentException;
 import com.codecool.elemes.model.Assignment;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +19,9 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
         String sql = "SELECT * FROM assignments";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
-            Boolean isComplete;
-            Boolean isCorrected;
-            Boolean isPublished;
-            String question;
-            String answear;
-            Integer grade;
-            int id;
-            int maxScore;
             while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                isPublished = resultSet.getBoolean("is_published");
-                question = resultSet.getString("question");
-                maxScore = resultSet.getInt("max_score");
-
-                assignments.add(new Assignment(isPublished,
-                        question, id, maxScore));
+                assignments.add(fetchAssignment(resultSet));
             }
-
         }
         return assignments;
     }
@@ -62,20 +46,9 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                Boolean isComplete;
-                Boolean isCorrected;
-                Boolean isPublished;
-                String question;
-                String answear;
-                Integer grade;
-                int maxScore;
                 if (resultSet.next()) {
-                    isPublished = resultSet.getBoolean("is_published");
-                    question = resultSet.getString("question");
-                    maxScore = resultSet.getInt("max_score");
-                    return new Assignment(isPublished, question, id, maxScore);
+                    return fetchAssignment(resultSet);
                 }
-
             }
             throw new NoSuchAssignmentException();
         }
@@ -84,17 +57,12 @@ public class AssignmentDao extends AbstractDao implements AssigmentDatabase {
     @Override
     public void update(Assignment assignment) throws SQLException {
         String sql = "UPDATE assignments SET is_published = ?,question = ?,max_score = ? WHERE id = ?";
-
         Boolean isPublished = assignment.getisPublished();
         String question = assignment.getQuestion();
-
-
         int maxScore = assignment.getMaxScore();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, isPublished);
-
             preparedStatement.setString(2, question);
-
             preparedStatement.setInt(3, maxScore);
             preparedStatement.setInt(4, assignment.getId());
             preparedStatement.executeUpdate();

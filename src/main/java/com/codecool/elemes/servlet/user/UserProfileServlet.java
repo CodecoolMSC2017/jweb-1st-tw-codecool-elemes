@@ -3,6 +3,7 @@ package com.codecool.elemes.servlet.user;
 import com.codecool.elemes.dao.impl.UserDao;
 import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
+import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.servlet.AbstractServlet;
 
@@ -46,7 +47,9 @@ public class UserProfileServlet extends AbstractServlet {
                 name = user.getName();
             }
             userDataBase.editUsername(user.geteMail(), name);
+            user.setName(name);
             userDataBase.editRole(user.geteMail(), role);
+            user.setRole(Role.valueOf(role));
             resp.sendRedirect("userprofile");
         } catch (NoSuchUserException | SQLException | IOException e) {
             e.printStackTrace();

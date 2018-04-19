@@ -17,10 +17,10 @@
         <p>Question: <c:out value="${quest}"/></p>
         <p>Your Answear: <c:out value="${answer}"/></p>
         <p>Grade:
-            <c:if test="${not empty grade}">
+            <c:if test="${grade gt 0}">
                 <c:out value="${grade}"/></p>
             </c:if>
-            <c:if test="${empty grade}">
+            <c:if test="${grade == 0}">
                 <c:out value="not yet graded"/></p>
             </c:if>
     </c:if>

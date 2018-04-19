@@ -1,21 +1,40 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.SolutionDatabase;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.exceptions.NotGradedYetException;
 import com.codecool.elemes.model.*;
 
 import javax.swing.text.Document;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StatisticsService {
-    private Database database = Database.getInstance();
+    private UserDataBase ud;
+    private SolutionDatabase sd;
 
-    public Map<User, Double> getSummerizeStudentStatistics() {
-        List<User> users = database.getAllUser();
-        List<Solution> solutions = database.getAllSolutions();
+    public StatisticsService(UserDataBase ud, SolutionDatabase sd) {
+        this.ud = ud;
+        this.sd = sd;
+    }
+
+    public Double getCucc(User user) throws SQLException {
+        Map<User, Double> map = getSummerizeStudentStatistics();
+        for (User u: map.keySet()) {
+            if (u.geteMail().equals(user.geteMail())) {
+                return map.get(u);
+            }
+        }
+        return null;
+    }
+
+    public Map<User, Double> getSummerizeStudentStatistics() throws SQLException {
+        List<User> users = ud.getAllUser();
+        List<Solution> solutions = sd.getAllSolutions();
 
         Map<User, Double> result = new HashMap<>();
 
@@ -28,9 +47,10 @@ public class StatisticsService {
                     if (solution.getUser().geteMail().equals(user.geteMail())) {
                         int grade = 0;
                         grade = solution.getResult();
-                        count++;
-                        percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
-
+                        if (grade > 0) {
+                            count++;
+                            percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
+                        }
                     }
                 }
                 performance = percentage / count * 100;
@@ -44,23 +64,25 @@ public class StatisticsService {
         return result;
     }
 
-    public Map<String, Double> getDetailedStudentStatistics(User user) {
+    public Map<String, Double> getDetailedStudentStatistics(User user) throws SQLException {
         Map<String, Double> result = new HashMap<>();
         int grade;
-        for (Solution solution : database.getAllSolutions()) {
+        for (Solution solution : sd.getAllSolutions()) {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
                 grade = solution.getResult();
-                percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
-                percentage = Math.floor(percentage * 100) / 100;
-                result.put(solution.getAssignment().getQuestion(), percentage);
+                if (grade > 0) {
+                    percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
+                    percentage = Math.floor(percentage * 100) / 100;
+                    result.put(solution.getAssignment().getQuestion(), percentage);
+                }
             }
         }
         return result;
     }
 
-    public User getUser(String email) throws NoSuchUserException {
-        return database.getUser(email);
+    public User getUser(String email) throws NoSuchUserException, SQLException {
+        return ud.getUser(email);
     }
     
 }
