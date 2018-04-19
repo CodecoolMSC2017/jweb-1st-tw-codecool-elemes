@@ -39,6 +39,7 @@
     <input type="text" name="score" placeholder="Score"><br>
     <input type="submit" value="Submit">
 </form>
+<jsp:include page="snippets/errorpage.jsp"/>
 </body>
 
 
