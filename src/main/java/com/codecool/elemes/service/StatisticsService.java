@@ -1,21 +1,30 @@
 package com.codecool.elemes.service;
 
+import com.codecool.elemes.dao.SolutionDatabase;
+import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.exceptions.NotGradedYetException;
 import com.codecool.elemes.model.*;
 
 import javax.swing.text.Document;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StatisticsService {
-    private Database database = Database.getInstance();
+    private UserDataBase ud;
+    private SolutionDatabase sd;
 
-    public Map<User, Double> getSummerizeStudentStatistics() {
-        List<User> users = database.getAllUser();
-        List<Solution> solutions = database.getAllSolutions();
+    public StatisticsService(UserDataBase ud, SolutionDatabase sd) {
+        this.ud = ud;
+        this.sd = sd;
+    }
+
+    public Map<User, Double> getSummerizeStudentStatistics() throws SQLException {
+        List<User> users = ud.getAllUser();
+        List<Solution> solutions = sd.getAllSolutions();
 
         Map<User, Double> result = new HashMap<>();
 
@@ -44,10 +53,10 @@ public class StatisticsService {
         return result;
     }
 
-    public Map<String, Double> getDetailedStudentStatistics(User user) {
+    public Map<String, Double> getDetailedStudentStatistics(User user) throws SQLException {
         Map<String, Double> result = new HashMap<>();
         int grade;
-        for (Solution solution : database.getAllSolutions()) {
+        for (Solution solution : sd.getAllSolutions()) {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
                 grade = solution.getResult();
@@ -59,8 +68,8 @@ public class StatisticsService {
         return result;
     }
 
-    public User getUser(String email) throws NoSuchUserException {
-        return database.getUser(email);
+    public User getUser(String email) throws NoSuchUserException, SQLException {
+        return ud.getUser(email);
     }
     
 }
