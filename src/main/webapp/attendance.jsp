@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
   $( function() {
-    $( "#datepicker" ).datepicker({minDate : -60, maxDate:"+0D"});
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' },{minDate : -60, maxDate:"+0D"});
   } );
   </script>
 </head>

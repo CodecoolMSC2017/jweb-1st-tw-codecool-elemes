@@ -42,8 +42,8 @@ public class EditAttendance extends AbstractServlet {
             AttendanceService attendanceService = new AttendanceService(attendanceDatabase, userDataBase);
             req.setAttribute("editAttendanceMap", attendanceService.editAttendance(req.getParameter("editableDate")));
             req.setAttribute("defaultDate", req.getParameter("editableDate"));
-            String date = req.getParameter("editableDate");
             Map<User,Boolean> editableMap = (Map<User, Boolean>) req.getAttribute("editAttendanceMap");
+            String date = req.getParameter("editableDate");
             attendanceService.rewriteAttendance(date,editableMap,req);
             req.getRequestDispatcher("editAttendance.jsp").forward(req, resp);
         } catch (SQLException | IOException | ServletException | ParseException | NoSuchUserException e) {
