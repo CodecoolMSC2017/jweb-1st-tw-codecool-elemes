@@ -1,5 +1,6 @@
-package com.codecool.elemes.dao;
+package com.codecool.elemes.dao.impl;
 
+import com.codecool.elemes.dao.TextDatabase;
 import com.codecool.elemes.exceptions.NoSuchTextException;
 import com.codecool.elemes.exceptions.TextNotFoundException;
 import com.codecool.elemes.model.Text;

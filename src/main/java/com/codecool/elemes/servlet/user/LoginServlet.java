@@ -1,14 +1,14 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.user;
 
-import com.codecool.elemes.dao.UserDao;
+import com.codecool.elemes.dao.impl.UserDao;
 import com.codecool.elemes.dao.UserDataBase;
 import com.codecool.elemes.exceptions.NoSuchUserException;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.LoginService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

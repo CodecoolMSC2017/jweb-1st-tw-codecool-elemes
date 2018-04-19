@@ -1,12 +1,12 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.text;
 
-import com.codecool.elemes.dao.TextDao;
+import com.codecool.elemes.dao.impl.TextDao;
 import com.codecool.elemes.exceptions.InvalidInputException;
 import com.codecool.elemes.service.ContentHandler;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

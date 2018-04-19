@@ -1,19 +1,16 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.text;
 
-import com.codecool.elemes.dao.TextDao;
+import com.codecool.elemes.dao.impl.TextDao;
 import com.codecool.elemes.service.ContentShowService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/content")
 public class ShowContent extends AbstractServlet {

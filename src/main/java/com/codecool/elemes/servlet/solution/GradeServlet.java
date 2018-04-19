@@ -1,27 +1,35 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.solution;
 
+import com.codecool.elemes.dao.impl.AssignmentDao;
+import com.codecool.elemes.dao.impl.SolutionDao;
+import com.codecool.elemes.dao.SolutionDatabase;
 import com.codecool.elemes.exceptions.NoSuchSolutionException;
-import com.codecool.elemes.exceptions.NotGradedYetException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Solution;
+import com.codecool.elemes.service.ListSolutionService;
+import com.codecool.elemes.service.SolutionSubmissionService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 @WebServlet("/grade")
-public class GradeServlet extends HttpServlet {
+public class GradeServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        Database database = Database.getInstance();
-        try {
-            Solution solution = database.getSolution(Integer.parseInt(id));
+        try (Connection connection = getConnection(req.getServletContext())){
+            SolutionDatabase solutionDatabase = new SolutionDao(connection);
+            ListSolutionService listSolutionService = new ListSolutionService(solutionDatabase);
+            Solution solution = listSolutionService.getSolution(id);
             req.setAttribute("solution", solution);
         } catch (NoSuchSolutionException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         req.getRequestDispatcher("grading.jsp").forward(req, resp);
@@ -30,15 +38,14 @@ public class GradeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String id = req.getParameter("id");
-            Database database = Database.getInstance();
+            String grade = req.getParameter("grade");
             Solution solution = null;
-        try {
-            solution = database.getSolution(Integer.parseInt(id));
-            int grade = Integer.parseInt(req.getParameter("grade"));
-            solution.getAssignment().grade(grade);
-            if (solution.getAssignment().getMaxScore() < grade) {
-                throw  new NumberFormatException();
-            }
+        try (Connection connection = getConnection(req.getServletContext())){
+            SolutionDatabase solutionDatabase = new SolutionDao(connection);
+            ListSolutionService listSolutionService = new ListSolutionService(solutionDatabase);
+            solution = listSolutionService.getSolution(id);
+            listSolutionService.handleGrading(id, grade);
+
             req.setAttribute("solution", solution);
             req.setAttribute("message", "Grade saved");
         } catch (NoSuchSolutionException e) {
@@ -46,6 +53,8 @@ public class GradeServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             req.setAttribute("message", "Invalid input");
             req.setAttribute("solution", solution);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         req.getRequestDispatcher("grading.jsp").forward(req, resp);
     }

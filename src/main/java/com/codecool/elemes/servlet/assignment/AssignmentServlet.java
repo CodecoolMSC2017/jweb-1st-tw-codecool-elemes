@@ -1,14 +1,13 @@
-package com.codecool.elemes.servlet;
+package com.codecool.elemes.servlet.assignment;
 
 import com.codecool.elemes.dao.AssigmentDatabase;
-import com.codecool.elemes.dao.AssignmentDao;
-import com.codecool.elemes.exceptions.NotGradedYetException;
+import com.codecool.elemes.dao.impl.AssignmentDao;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.service.AssignmentService;
+import com.codecool.elemes.servlet.AbstractServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -53,8 +52,6 @@ public class AssignmentServlet extends AbstractServlet {
             req.setAttribute("assignments", assignmentService.getAssigments(user));
             req.getRequestDispatcher(assignmentService.getPage(user)).forward(req, resp);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NotGradedYetException e) {
             e.printStackTrace();
         }
     }
