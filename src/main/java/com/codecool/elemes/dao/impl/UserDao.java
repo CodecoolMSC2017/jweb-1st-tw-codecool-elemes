@@ -23,7 +23,7 @@ public class UserDao extends AbstractDao implements UserDataBase {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.geteMail());
             statement.setString(2, user.getName());
-            statement.setString(3, user.getRole().toString());
+            statement.setString(3, user.getRole().toString().toUpperCase());
             executeInsert(statement);
         } finally {
             connection.setAutoCommit(autoCommit);
