@@ -22,6 +22,16 @@ public class StatisticsService {
         this.sd = sd;
     }
 
+    public Double getCucc(User user) throws SQLException {
+        Map<User, Double> map = getSummerizeStudentStatistics();
+        for (User u: map.keySet()) {
+            if (u.geteMail().equals(user.geteMail())) {
+                return map.get(u);
+            }
+        }
+        return null;
+    }
+
     public Map<User, Double> getSummerizeStudentStatistics() throws SQLException {
         List<User> users = ud.getAllUser();
         List<Solution> solutions = sd.getAllSolutions();
@@ -37,9 +47,10 @@ public class StatisticsService {
                     if (solution.getUser().geteMail().equals(user.geteMail())) {
                         int grade = 0;
                         grade = solution.getResult();
-                        count++;
-                        percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
-
+                        if (grade > 0) {
+                            count++;
+                            percentage += grade * 1.0 / solution.getAssignment().getMaxScore();
+                        }
                     }
                 }
                 performance = percentage / count * 100;
@@ -60,9 +71,11 @@ public class StatisticsService {
             Double percentage = 0.0;
             if (solution.getUser().geteMail().equals(user.geteMail())) {
                 grade = solution.getResult();
-                percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
-                percentage = Math.floor(percentage * 100) / 100;
-                result.put(solution.getAssignment().getQuestion(), percentage);
+                if (grade > 0) {
+                    percentage = grade * 100.0 / solution.getAssignment().getMaxScore();
+                    percentage = Math.floor(percentage * 100) / 100;
+                    result.put(solution.getAssignment().getQuestion(), percentage);
+                }
             }
         }
         return result;

@@ -46,7 +46,7 @@ public class StatisticsServlet extends AbstractServlet {
         }else {
             req.setAttribute("stats", statisticsService.getDetailedStudentStatistics(user));
             Map<User,Double> stat = statisticsService.getSummerizeStudentStatistics();
-            req.setAttribute("summary",stat.get(user));
+            req.setAttribute("summary",statisticsService.getCucc(user));
             req.getRequestDispatcher("studentstatistics.jsp").forward(req,resp);
         }
         } catch (SQLException e) {
