@@ -5,11 +5,11 @@ import java.util.Random;
 public class Solution {
     private Assignment assignment;
     private User user;
-    private int result;
+    private Integer result;
     private int id;
     private String answer;
 
-    public Solution(Assignment assignment, User user, String answer, int id, int result ) {
+    public Solution(Assignment assignment, User user, String answer, int id, Integer result ) {
         this.assignment = assignment;
         this.user = user;
         this.result = result;
@@ -31,7 +31,7 @@ public class Solution {
         return assignment;
     }
 
-    public int getResult() {
+    public Integer getResult() {
         return result;
     }
 
