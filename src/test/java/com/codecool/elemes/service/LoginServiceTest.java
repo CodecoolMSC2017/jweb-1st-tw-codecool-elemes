@@ -1,17 +1,7 @@
-package com.codecool.elemes.service;
-
-import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.Role;
-import com.codecool.elemes.model.User;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+/*package com.codecool.elemes.service;
 
 class LoginServiceTest {
      private Database database = new Database();
-/*
      LoginService service = new LoginService();
 
 

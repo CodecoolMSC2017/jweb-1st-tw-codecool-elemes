@@ -1,7 +1,6 @@
 package com.codecool.elemes.service;
 
 import com.codecool.elemes.exceptions.TextNotFoundException;
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Text;
 import com.codecool.elemes.dao.TextDatabase;
 

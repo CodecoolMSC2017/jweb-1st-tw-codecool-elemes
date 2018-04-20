@@ -1,11 +1,5 @@
 package com.codecool.elemes.servlet.user;
 
-import com.codecool.elemes.exceptions.NoSuchUserException;
-import com.codecool.elemes.model.Database;
-import com.codecool.elemes.model.User;
-import com.codecool.elemes.service.LoginService;
-
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

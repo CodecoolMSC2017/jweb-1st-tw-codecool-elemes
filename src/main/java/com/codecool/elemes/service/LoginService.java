@@ -1,6 +1,5 @@
 package com.codecool.elemes.service;
 
-import com.codecool.elemes.model.Database;
 import com.codecool.elemes.model.Role;
 import com.codecool.elemes.model.User;
 import com.codecool.elemes.dao.UserDataBase;
