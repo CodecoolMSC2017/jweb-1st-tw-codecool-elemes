@@ -32,4 +32,3 @@ class LoginServiceTest {
             database.getUser("peter@gamil.com").geteMail();});
 
     }*/
-}

@@ -40,8 +40,6 @@ tr:nth-child(even) {
     <p>Date: <input type="text" id="datepicker" value="${defaultDate}" name = "attendanceDate">
         <input type = "submit" value = "submit" width="6em">
     </p>
-    <p align = "center">${saved}</p>
-
     <table align = "center">
         <tr>
             <th>Students</th>
